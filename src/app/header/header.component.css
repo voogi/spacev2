@@ -1,0 +1,25 @@
+.menuItem {
+  font-size: 22px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.menuItem span {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: inline-block;
+}
+
+.menuItem:hover{
+  cursor: pointer;
+}
+
+.menu-overlay {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.2);
+}
+

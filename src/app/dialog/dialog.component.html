@@ -1,0 +1,26 @@
+<div [@dialog] *ngIf="visible" class="dialog">
+  <div class="dialog-modal">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div class="row justify-content-center align-items-center no-gutters dialog-bottom-border">
+          <div class="col dialog-title">
+            <span>{{title}}</span>
+          </div>
+          <div (click)="close()" class="col dialog-exit"></div>
+        </div>
+      </div>
+      <div class="dialog-body">
+        <ng-content></ng-content>
+      </div>
+      <div class="dialog-footer">
+        <div class="row align-items-center">
+          <div class="col text-right">
+            <div (click)="visible = !visible" class="dialog-button">Close</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [@overlay] *ngIf="visible" class="overlay" (click)="close()"></div>
