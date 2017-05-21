@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef} from '@angular/core';
+import {Component, OnInit, ElementRef, Output, EventEmitter} from '@angular/core';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   private mouseEnter: boolean = false;
   private options: any = {};
   private tmhover:any;
+  @Output() onChange = new EventEmitter<string>();
 
   constructor(private elRef: ElementRef) {
     this.options.inverse = false;
@@ -22,9 +23,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  act(event: MouseEvent) {
+  act(event: MouseEvent, id:string) {
 
-    console.log({ x: event.pageX, y: event.pageY } )
+    this.onChange.emit(id);
 
     let direction = this.getDirection(event.srcElement, { x: event.pageX, y: event.pageY } );
     let styleCSS = this.getStyle( direction );

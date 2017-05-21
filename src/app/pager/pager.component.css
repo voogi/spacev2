@@ -1,0 +1,29 @@
+.pager-content {
+  overflow: hidden;
+  position: absolute;
+  height: auto;
+  /*width: calc(100% - 200px);*/
+  white-space: nowrap;
+  left: 0;
+}
+
+.pager-page {
+  display: inline-block;
+  height: auto;
+  width: 100%;
+  font-size: 0;
+}
+
+.pager-page span {
+  font-size: 40px;
+  background-color: antiquewhite;
+}
+
+.slider {
+  transition: 0.5s all ease;
+}
+
+.panel {
+  background-color: rgba(0,0,0,0.2);
+  font-size: 22px;
+}
