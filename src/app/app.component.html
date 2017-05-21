@@ -1,3 +1,16 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <space-header></space-header>
+    </div>
+  </div>
+
+  <space-dialog [title]="'Spaceship dialog'" [(visible)]="showDialog">
+    <div class="row">
+      <div class="col">
+        popup Content
+      </div>
+    </div>
+  </space-dialog>
+
+</div>
