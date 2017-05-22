@@ -8,19 +8,24 @@ import { HeaderComponent } from './header/header.component';
 import { DialogComponent } from './dialog/dialog.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PagerComponent } from './pager/pager.component';
+import {AppRoutingModule, routedComponents} from "./app-routing.module";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DialogComponent,
-    PagerComponent
+    PagerComponent,
+    routedComponents,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
