@@ -1,3 +1,21 @@
-<p>
-  space works!
-</p>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col">
+      <space-header (onChange)="onMenuChanged($event)"></space-header>
+    </div>
+  </div>
+
+  <div style="margin-top: 40px;" class="row">
+    <div class="col">
+      <space-pager #pager></space-pager>
+    </div>
+  </div>
+
+  <div class="row" style="display: none;">
+    <div class="col">
+
+    </div>
+  </div>
+
+</div>

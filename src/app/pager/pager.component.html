@@ -2,30 +2,30 @@
   <div class="col pager-content">
     <div [style.transform]="translate" class="slider">
       <div id="space" class="pager-page">
-        <div class="row">
+        <div class="row no-gutters">
           <div class="col-md-8 offset-md-2 panel">
-            space
-            <!--<router-outlet></router-outlet>-->
-            <router-outlet name="space"></router-outlet>
+
+            <space-tabs [options]="tabOptions">
+              <space-tab [name]="'starmap'"></space-tab>
+              <space-tab [name]="'player'"></space-tab>
+            </space-tabs>
+
           </div>
         </div>
       </div
       ><div id="player" class="pager-page">
         <div class="col-md-8 offset-md-2 panel">
           player
-          <router-outlet name="player"></router-outlet>
         </div>
       </div
       ><div id="stats" class="pager-page">
         <div class="col-md-8 offset-md-2 panel">
           stats
-          <router-outlet name="stats"></router-outlet>
         </div>
       </div
       ><div id="option" class="pager-page">
         <div class="col-md-8 offset-md-2 panel">
           options
-          <router-outlet name="option"></router-outlet>
         </div>
       </div>
     </div>

@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.menuItem.active span {
+  color: #ffffff;
+}
+
 .menuItem span {
   padding-top: 20px;
   padding-bottom: 20px;

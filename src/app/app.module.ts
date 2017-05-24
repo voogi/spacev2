@@ -10,6 +10,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PagerComponent } from './pager/pager.component';
 import {AppRoutingModule, routedComponents} from "./app-routing.module";
 import { HomeComponent } from './home/home.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { TabComponent } from './tabs/tab/tab.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HomeComponent } from './home/home.component';
     DialogComponent,
     PagerComponent,
     routedComponents,
-    HomeComponent
+    HomeComponent,
+    TabsComponent,
+    TabComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,17 @@
 <div class="row">
-  <div (mouseenter)="act($event, 'space')" (mouseleave)="deact($event)" class="col text-center menuItem">
+  <div [ngClass]="{ 'active' : activePage == 'space' }" (mouseenter)="act($event, 'space')" (mouseleave)="deact($event)" class="col text-center menuItem">
     <span>space</span>
     <div class="menu-overlay"></div>
   </div>
-  <div (mouseenter)="act($event, 'player')" (mouseleave)="deact($event)" class="col text-center menuItem">
+  <div [ngClass]="{ 'active' : activePage == 'player' }" (mouseenter)="act($event, 'player')" (mouseleave)="deact($event)" class="col text-center menuItem">
     <span>player</span>
     <div class="menu-overlay"></div>
   </div>
-  <div (mouseenter)="act($event, 'stats')" (mouseleave)="deact($event)" class="col text-center menuItem">
+  <div [ngClass]="{ 'active' : activePage == 'stats' }" (mouseenter)="act($event, 'stats')" (mouseleave)="deact($event)" class="col text-center menuItem">
     <span>stats</span>
     <div class="menu-overlay"></div>
   </div>
-  <div (mouseenter)="act($event, 'option')" (mouseleave)="deact($event)" class="col text-center menuItem">
+  <div [ngClass]="{ 'active' : activePage == 'option' }" (mouseenter)="act($event, 'option')" (mouseleave)="deact($event)" class="col text-center menuItem">
     <span>options</span>
     <div class="menu-overlay"></div>
   </div>

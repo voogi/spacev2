@@ -1,29 +1,9 @@
-<div class="container-fluid">
+<router-outlet></router-outlet>
 
-  <div class="row">
-    <div class="col">
-      <space-header (onChange)="onMenuChanged($event)"></space-header>
-    </div>
-  </div>
-
-  <div style="margin-top: 40px;" class="row">
-    <div class="col">
-      <space-pager #pager></space-pager>
-    </div>
-  </div>
-
-  <space-dialog [title]="'Spaceship dialog'" [(visible)]="showDialog">
-    <div class="row">
-      <div class="col">
-        popup Content
-      </div>
-    </div>
-  </space-dialog>
-
-  <div class="row" style="display: none;">
-    <div class="col">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-
-</div>
+<!--<space-dialog [title]="'Spaceship dialog'" [(visible)]="showDialog">-->
+<!--<div class="row">-->
+<!--<div class="col">-->
+<!--popup Content-->
+<!--</div>-->
+<!--</div>-->
+<!--</space-dialog>-->

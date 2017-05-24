@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   private mouseEnter: boolean = false;
   private options: any = {};
   private tmhover:any;
+  public activePage: string = "space";
   @Output() onChange = new EventEmitter<string>();
 
   constructor(private elRef: ElementRef) {
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
   act(event: MouseEvent, id:string) {
 
     this.onChange.emit(id);
+    this.activePage = id;
 
     let direction = this.getDirection(event.srcElement, { x: event.pageX, y: event.pageY } );
     let styleCSS = this.getStyle( direction );

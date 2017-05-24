@@ -1,18 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {fadeInAnimation} from "../animations/slide-in-out.animation";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {PagerComponent} from "../pager/pager.component";
 
 @Component({
   selector: 'space-space',
   templateUrl: './space.component.html',
-  styleUrls: ['./space.component.css']/*,
-  animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }*/
+  styleUrls: ['./space.component.css']
 })
 export class SpaceComponent implements OnInit {
 
-  constructor() { }
+  @Input() pageId: string;
+  @ViewChild('pager') pager: PagerComponent;
 
-  ngOnInit() {
+  constructor(){
+
+  }
+
+  ngOnInit(){
+
+  }
+
+  onMenuChanged(id:string){
+    this.pageId = id;
+    this.pager.changePage(this.pageId);
   }
 
 }

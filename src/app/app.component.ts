@@ -1,5 +1,4 @@
-import {Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
-import {PagerComponent} from "./pager/pager.component";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'space-root',
@@ -7,10 +6,6 @@ import {PagerComponent} from "./pager/pager.component";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  showDialog = false;
-
-  @Input() pageId: string;
-  @ViewChild('pager') pager: PagerComponent;
 
   constructor(){
 
@@ -18,11 +13,6 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
 
-  }
-
-  onMenuChanged(id:string){
-    this.pageId = id;
-    this.pager.changePage(this.pageId);
   }
 
 }
