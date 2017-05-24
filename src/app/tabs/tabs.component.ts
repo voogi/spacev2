@@ -19,10 +19,14 @@ export class TabsComponent implements OnInit,AfterContentInit {
 
   ngAfterContentInit(){
     this.activeTab = this.tabs.first.name;
+    this.tabs.first.visible = true;
   }
 
-  select(name:string){
+  select(name:string, tab: TabComponent){
     this.activeTab = name;
+    for(let t of this.tabs.toArray()){
+      t.visible = t == tab;
+    }
   }
 
 }

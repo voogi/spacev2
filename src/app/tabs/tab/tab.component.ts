@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TabComponent implements OnInit {
 
   @Input() name:string;
+  public visible:boolean = false;
 
   constructor() { }
 

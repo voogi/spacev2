@@ -9,6 +9,19 @@ body {
   height: 100vh;
   min-height: 100vh;
   color: rgb(142, 147, 145);
+
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+
+}
+
+
+p {
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
 }
 
 .no-gutters > .col {
