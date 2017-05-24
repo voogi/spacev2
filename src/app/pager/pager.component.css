@@ -20,6 +20,8 @@
 
 .slider {
   transition: 0.5s all ease;
+  position: relative;
+  left: 0;
 }
 
 .panel {

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  public showDialog:boolean = true;
+  public showDialog:boolean = false;
 
   constructor() { }
 

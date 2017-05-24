@@ -38,18 +38,18 @@ export class PagerComponent implements OnInit {
         // self.router.navigate([{ outlets: { 'space' : ['space']} }]);
         break;
       case "player":
-        val = "-100%";
+        val = "-" + window.innerWidth + "px";
         // self.router.navigate([{ outlets: { 'player' : ['player']} }]);
         break;
       case "stats":
-        val = "-200%";
+        val = "-" + window.innerWidth*2 + "px";
         break;
       case "option":
-        val = "-300%";
+        val = "-" + window.innerWidth*3 + "px";
         break;
     }
 
-    this.translate = "translateX("+ val +")";
+    this.translate = val;
   }
 
 }
