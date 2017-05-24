@@ -23,6 +23,11 @@
       ><div id="stats" class="pager-page">
         <div class="col-md-8 offset-md-2 panel">
           stats
+          <div class="col-md-4">
+            <button (click)="bar.start()">start</button>
+            <space-progress-bar [duration]="20" #bar></space-progress-bar>
+          </div>
+
         </div>
       </div
       ><div id="option" class="pager-page">

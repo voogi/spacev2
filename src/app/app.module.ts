@@ -12,6 +12,7 @@ import {AppRoutingModule, routedComponents} from "./app-routing.module";
 import { HomeComponent } from './home/home.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab/tab.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TabComponent } from './tabs/tab/tab.component';
     routedComponents,
     HomeComponent,
     TabsComponent,
-    TabComponent
+    TabComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
