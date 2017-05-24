@@ -2,7 +2,7 @@
   <div class="dialog-modal">
     <div class="dialog-content">
       <div class="dialog-header">
-        <div class="row justify-content-center align-items-center no-gutters dialog-bottom-border">
+        <div class="row justify-content-center align-items-center no-gutters">
           <div class="col dialog-title">
             <span>{{title}}</span>
           </div>
@@ -15,7 +15,7 @@
       <div class="dialog-footer">
         <div class="row align-items-center">
           <div class="col text-right">
-            <div (click)="visible = !visible" class="dialog-button">Close</div>
+            <button (click)="visible = !visible" class="dialog-button">Close</button>
           </div>
         </div>
       </div>

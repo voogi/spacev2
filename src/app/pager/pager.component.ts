@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 })
 export class PagerComponent implements OnInit {
 
-  private translate : string = "";
+  public translate : string = "";
   public activePage: string = "space";
   public tabOptions: any;
 

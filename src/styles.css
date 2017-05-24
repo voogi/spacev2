@@ -17,6 +17,39 @@ body {
 
 }
 
+button {
+  font-size: 14px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  vertical-align: middle;
+  background-color: rgba(31, 47, 56,1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+button:hover {
+  cursor: pointer;
+  /*border: 1px solid rgba(142, 147, 145,0.5);*/
+  color: rgb(142, 147, 145);
+  transition: all 0.3s ease;
+  background-color: rgba(32, 49, 58, 1)
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  outline: none;
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid white;
+}
+
 
 p {
   word-wrap: break-word;
