@@ -8,7 +8,21 @@
 
   <div style="margin-top: 40px;" class="row">
     <div class="col">
-      <space-pager #pager></space-pager>
+      <space-pager #pager>
+        <space-page [id]="'space'">
+
+          <space-tabs [options]="tabOptions">
+            <space-tab [name]="'starmap'">
+              <space-home></space-home>
+            </space-tab>
+            <space-tab [name]="'player'"></space-tab>
+          </space-tabs>
+
+        </space-page>
+        <space-page>player</space-page>
+        <space-page>stats</space-page>
+        <space-page>option</space-page>
+      </space-pager>
     </div>
   </div>
 

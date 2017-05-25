@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ContentChildren, OnInit, QueryList} from '@angular/core';
 import {Router} from "@angular/router";
+import {PageComponent} from "./page/page.component";
 
 @Component({
   selector: 'space-pager',
@@ -9,47 +10,23 @@ import {Router} from "@angular/router";
 export class PagerComponent implements OnInit {
 
   public translate : string = "";
-  public activePage: string = "space";
   public tabOptions: any;
+  @ContentChildren(PageComponent) pages: QueryList<PageComponent>;
 
-  constructor(
-    private router: Router
-  ) {
-
-    this.tabOptions = {
-
-    };
-
+  constructor(private router: Router) {
+    this.tabOptions = {};
   }
 
   ngOnInit() {
 
   }
 
-  changePage(id:string){
+  changePage(id:number){
+    this.translate = id == 0 ? "0" : ("-" + window.innerWidth*id + "px");
+  }
 
-    this.activePage = id;
-
-    let val = "0";
-
-    switch (id){
-      case "space":
-        val = "0";
-        // self.router.navigate([{ outlets: { 'space' : ['space']} }]);
-        break;
-      case "player":
-        val = "-" + window.innerWidth + "px";
-        // self.router.navigate([{ outlets: { 'player' : ['player']} }]);
-        break;
-      case "stats":
-        val = "-" + window.innerWidth*2 + "px";
-        break;
-      case "option":
-        val = "-" + window.innerWidth*3 + "px";
-        break;
-    }
-
-    this.translate = val;
+  onProgressCompleted(){
+    console.log("progress ended")
   }
 
 }

@@ -13,7 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab/tab.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import { CheckboxComponent } from './checkbox/checkbox.component';
+import {PageComponent} from "./pager/page/page.component";
+import {CheckboxComponent} from "./checkbox/checkbox.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
     TabsComponent,
     TabComponent,
     ProgressBarComponent,
+    PageComponent,
     CheckboxComponent
   ],
   imports: [

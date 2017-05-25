@@ -8,7 +8,7 @@ import {PagerComponent} from "../pager/pager.component";
 })
 export class SpaceComponent implements OnInit {
 
-  @Input() pageId: string;
+  @Input() pageId: number;
   @ViewChild('pager') pager: PagerComponent;
 
   constructor(){
@@ -19,7 +19,7 @@ export class SpaceComponent implements OnInit {
 
   }
 
-  onMenuChanged(id:string){
+  onMenuChanged(id:number){
     this.pageId = id;
     this.pager.changePage(this.pageId);
   }

@@ -11,8 +11,8 @@ export class HeaderComponent implements OnInit {
   private mouseEnter: boolean = false;
   private options: any = {};
   private tmhover:any;
-  public activePage: string = "space";
-  @Output() onChange = new EventEmitter<string>();
+  public activePage: number = 0;
+  @Output() onChange = new EventEmitter<number>();
 
   constructor(private elRef: ElementRef) {
     this.options.inverse = false;
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  act(event: MouseEvent, id:string) {
+  act(event: MouseEvent, id:number) {
 
     this.onChange.emit(id);
     this.activePage = id;
