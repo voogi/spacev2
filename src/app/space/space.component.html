@@ -19,14 +19,14 @@
           </space-tabs>
 
         </space-page>
-        <space-page>player</space-page>
-        <space-page>stats
+        <space-page>
           <div class="col-md-4">
             <button (click)="bar.start()">start</button>
             <space-progress-bar [duration]="20" #bar></space-progress-bar>
             <space-checkbox></space-checkbox>
           </div>
         </space-page>
+        <space-page>stats</space-page>
         <space-page>option</space-page>
       </space-pager>
     </div>
