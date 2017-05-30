@@ -10,6 +10,7 @@ export class SpaceComponent implements OnInit {
 
   @Input() pageId: number;
   @ViewChild('pager') pager: PagerComponent;
+  public tabOptions: any;
 
   constructor(){
 

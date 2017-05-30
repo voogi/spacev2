@@ -15,6 +15,8 @@ import { TabComponent } from './tabs/tab/tab.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import {PageComponent} from "./pager/page/page.component";
 import {CheckboxComponent} from "./checkbox/checkbox.component";
+import { SkillTreeComponent } from './skill-tree/skill-tree.component';
+import { PlanetGridComponent } from './components/planet-grid/planet-grid.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {CheckboxComponent} from "./checkbox/checkbox.component";
     TabComponent,
     ProgressBarComponent,
     PageComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    SkillTreeComponent,
+    PlanetGridComponent
   ],
   imports: [
     BrowserModule,

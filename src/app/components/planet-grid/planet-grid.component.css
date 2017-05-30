@@ -1,0 +1,25 @@
+:host /deep/ .tile {
+  height: 60px;
+  width: 60px;
+  background-color: aqua;
+  outline: 1px solid black;
+  line-height: 60px;
+}
+
+:host /deep/ .tile:hover {
+  background-color: cadetblue;
+  cursor: pointer;
+}
+
+:host >>> .grid-row {
+  font-size: 0;
+}
+
+:host >>> .grid-col {
+  display: inline-block;
+  font-size: 0;
+}
+
+.planet-grid-container {
+  text-align: center;
+}

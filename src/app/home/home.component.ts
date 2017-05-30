@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  public showDialog:boolean = false;
+  public gridOptions: any;
 
-  constructor() { }
+
+  constructor() {
+
+    this.gridOptions = {
+      rows : 3,
+      cols : 3
+    };
+
+  }
 
   ngOnInit() {
   }
