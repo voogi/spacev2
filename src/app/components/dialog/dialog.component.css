@@ -58,7 +58,7 @@
 }
 
 .dialog-exit {
-  background: url("../../assets/imgs/x-mark-128.png");
+  background: url("../../../assets/imgs/x-mark-128.png");
   background-repeat: no-repeat;
   background-position: 95% 50%;
   background-size: 16px 16px;

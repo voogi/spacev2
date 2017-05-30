@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {PagerComponent} from "../pager/pager.component";
+import {PagerComponent} from "../components/pager/pager.component";
 
 @Component({
   selector: 'space-space',

@@ -5,18 +5,18 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { PagerComponent } from './pager/pager.component';
 import {AppRoutingModule, routedComponents} from "./app-routing.module";
 import { HomeComponent } from './home/home.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { TabComponent } from './tabs/tab/tab.component';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import {PageComponent} from "./pager/page/page.component";
-import {CheckboxComponent} from "./checkbox/checkbox.component";
-import { SkillTreeComponent } from './skill-tree/skill-tree.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import {CheckboxComponent} from "./components/checkbox/checkbox.component";
+import { SkillTreeComponent } from './components/skill-tree/skill-tree.component';
 import { PlanetGridComponent } from './components/planet-grid/planet-grid.component';
+import {PagerComponent} from "./components/pager/pager.component";
+import {TabsComponent} from "./components/tabs/tabs.component";
+import {TabComponent} from "./components/tabs/tab/tab.component";
+import {PageComponent} from "./components/pager/page/page.component";
 
 @NgModule({
   declarations: [
