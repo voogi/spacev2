@@ -17,6 +17,7 @@ import {PagerComponent} from "./components/pager/pager.component";
 import {TabsComponent} from "./components/tabs/tabs.component";
 import {TabComponent} from "./components/tabs/tab/tab.component";
 import {PageComponent} from "./components/pager/page/page.component";
+import { SolarsystemComponent } from './solarsystem/solarsystem.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {PageComponent} from "./components/pager/page/page.component";
     PageComponent,
     CheckboxComponent,
     SkillTreeComponent,
-    PlanetGridComponent
+    PlanetGridComponent,
+    SolarsystemComponent
   ],
   imports: [
     BrowserModule,
