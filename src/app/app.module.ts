@@ -36,7 +36,7 @@ import { SolarsystemComponent } from './solarsystem/solarsystem.component';
     CheckboxComponent,
     SkillTreeComponent,
     PlanetGridComponent,
-    SolarsystemComponent
+    SolarsystemComponent,
     FooterComponent,
     TableComponent
   ],
