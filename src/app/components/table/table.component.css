@@ -1,0 +1,17 @@
+.head {
+  display: inline-block;
+}
+
+.table {
+  width: 100%;
+}
+
+
+.table-cell {
+  display: inline-block;
+}
+
+.table-row:hover {
+  background-color: rgba(0,0,0,0.2);
+  cursor: pointer;
+}

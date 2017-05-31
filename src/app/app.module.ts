@@ -17,6 +17,8 @@ import {PagerComponent} from "./components/pager/pager.component";
 import {TabsComponent} from "./components/tabs/tabs.component";
 import {TabComponent} from "./components/tabs/tab/tab.component";
 import {PageComponent} from "./components/pager/page/page.component";
+import { FooterComponent } from './footer/footer.component';
+import { TableComponent } from './components/table/table.component';
 import { SolarsystemComponent } from './solarsystem/solarsystem.component';
 
 @NgModule({
@@ -35,6 +37,8 @@ import { SolarsystemComponent } from './solarsystem/solarsystem.component';
     SkillTreeComponent,
     PlanetGridComponent,
     SolarsystemComponent
+    FooterComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

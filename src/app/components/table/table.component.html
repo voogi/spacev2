@@ -1,0 +1,10 @@
+<div class="table">
+  <div class="header row">
+    <div class="head col" *ngFor="let head of options.headers">{{head}}</div>
+  </div>
+  <div class="content">
+    <div class="row table-row" *ngFor="let row of options.data">
+      <div class="table-cell col" *ngFor="let cell of options.keys">{{row[cell]}}</div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,9 @@
             <space-tab [name]="'skill tree'">
               <space-skill-tree></space-skill-tree>
             </space-tab>
+            <space-tab [name]="'development'">
+              <space-table [options]="tableOption"></space-table>
+            </space-tab>
           </space-tabs>
 
         </space-page>
@@ -36,9 +39,9 @@
     </div>
   </div>
 
-  <div class="row" style="display: none;">
+  <div class="row">
     <div class="col">
-
+      <space-footer></space-footer>
     </div>
   </div>
 
