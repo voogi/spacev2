@@ -1,0 +1,7 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+}
