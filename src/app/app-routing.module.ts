@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {SpaceComponent} from "./space/space.component";
 import {PlayerComponent} from "./player/player.component";
+import {BackgroundComponent} from "./components/background/background.component";
 
 const routes: Routes = [
   {
     path: '',
     component: SpaceComponent
   }
-  // ,
-  // {
-  //   path: 'space',
-  //   component: SpaceComponent,
-  //   outlet: "space"
-  // },
+  ,
+  {
+    path: 'space',
+    component: BackgroundComponent
+  },
   // {
   //   path: 'player',
   //   component: PlayerComponent,

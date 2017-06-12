@@ -1,0 +1,5 @@
+.tree-container  {
+  background: url("../../../assets/imgs/solar_system_background.png") no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}

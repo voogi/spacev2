@@ -20,6 +20,8 @@ import {PageComponent} from "./components/pager/page/page.component";
 import { FooterComponent } from './footer/footer.component';
 import { TableComponent } from './components/table/table.component';
 import { SolarsystemComponent } from './solarsystem/solarsystem.component';
+import { ResoucesComponent } from './components/resouces/resouces.component';
+import { BackgroundComponent } from './components/background/background.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { SolarsystemComponent } from './solarsystem/solarsystem.component';
     PlanetGridComponent,
     SolarsystemComponent,
     FooterComponent,
-    TableComponent
+    TableComponent,
+    ResoucesComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,
