@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BackendService} from "../../backend.service";
 import {Resource} from "../../shared/resource";
-import {ResourceType} from "../../shared/resource-type.enum";
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 import {Subscription} from "rxjs/Subscription";
 

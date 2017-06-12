@@ -3,15 +3,21 @@ import {RouterModule, Routes} from "@angular/router";
 import {SpaceComponent} from "./space/space.component";
 import {PlayerComponent} from "./player/player.component";
 import {BackgroundComponent} from "./components/background/background.component";
+import {SolarsystemComponent} from "./solarsystem/solarsystem.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: SpaceComponent
-  }
-  ,
+    pathMatch: 'full',
+    redirectTo : "system/1"
+  },
   {
-    path: 'space',
+    path: 'system/:id',
+    component: SolarsystemComponent
+
+  },
+  {
+    path: 'starmap',
     component: BackgroundComponent
   },
   // {

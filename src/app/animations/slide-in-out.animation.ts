@@ -51,29 +51,43 @@ export const slideInOutAnimation =
   ]);
 
 
+// export const fadeInAnimation =
+//   trigger('fadeInAnimation', [
+//
+//     // state('in', style({
+//     //   opacity : 1
+//     // })),
+//
+//     // route 'enter' transition
+//     transition(':enter', [
+//
+//       // styles at start of transition
+//       style({ transform : 'translateX(-100%)' }),
+//
+//       // animation and styles at end of transition
+//       animate('3s', style({ transform: 'translateX(0)' }))
+//     ]),
+//
+//
+//     transition(':leave', [
+//       // styles at start of transition
+//       style({ transform: 'translateX(0)' }),
+//       // animation and styles at end of transition
+//       animate('3s', style({ transform: 'translateX(-100%)' }))
+//     ])
+//
+//   ]);
+
 export const fadeInAnimation =
   trigger('fadeInAnimation', [
-
-    // state('in', style({
-    //   opacity : 1
-    // })),
-
-    // route 'enter' transition
-    transition(':enter', [
-
-      // styles at start of transition
-      style({ transform : 'translateX(-100%)' }),
-
-      // animation and styles at end of transition
-      animate('3s', style({ transform: 'translateX(0)' }))
+    state('void', style({position:'fixed', width:'100%'}) ),
+    state('*', style({position:'fixed', width:'100%'}) ),
+    transition(':enter', [  // before 2.1: transition('void => *', [
+      style({transform: 'translateX(100%)'}),
+      animate('0.5s ease-in-out', style({transform: 'translateX(0%)'}))
     ]),
-
-
-    transition(':leave', [
-      // styles at start of transition
-      style({ transform: 'translateX(0)' }),
-      // animation and styles at end of transition
-      animate('3s', style({ transform: 'translateX(-100%)' }))
+    transition(':leave', [  // before 2.1: transition('* => void', [
+      style({transform: 'translateX(0%)'}),
+      animate('0.5s ease-in-out', style({transform: 'translateX(-100%)'}))
     ])
-
-  ]);
+]);

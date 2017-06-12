@@ -50,3 +50,8 @@
 .planet-name {
   text-align: center;
 }
+
+
+.system-container {
+  height: 100vh;
+}

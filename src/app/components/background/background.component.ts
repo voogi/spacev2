@@ -1,10 +1,15 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import * as PIXI from 'pixi.js/dist/pixi.js';
+import {Router} from "@angular/router";
+import {ResourceLoaderService} from "../../services/resource-loader.service";
+import {slideInOutAnimation,fadeInAnimation} from "../../animations/slide-in-out.animation";
 
 @Component({
   selector: 'space-background',
   templateUrl: './background.component.html',
-  styleUrls: ['./background.component.css']
+  styleUrls: ['./background.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class BackgroundComponent implements OnInit {
 
@@ -18,10 +23,10 @@ export class BackgroundComponent implements OnInit {
   private loader: PIXI.loader = PIXI.loader;
   private stars: Array<any> = [];
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private router:Router, private resourceLoader: ResourceLoaderService) { }
 
   ngOnInit() {
-    this.loader.add("assets/imgs/starClassK2.png").load(this.init.bind(this));
+    this.resourceLoader.loadResources(this.init.bind(this));
   }
 
   init(){
@@ -166,9 +171,11 @@ export class BackgroundComponent implements OnInit {
     star.y = window.innerHeight/2;
     star.scale.set(0.2);
     this.stage.addChild(star);
-
-
     this.stars.push(star);
+  }
+
+  onNavToSystem(id:number){
+    this.router.navigate(['/system', id]);
   }
 
   static makeParticleGraphic(alpha:number){

@@ -23,6 +23,7 @@ import { SolarsystemComponent } from './solarsystem/solarsystem.component';
 import { BackgroundComponent } from './components/background/background.component';
 import {ResourcesComponent} from "./components/resources/resources.component";
 import {BackendService} from "./backend.service";
+import {ResourceLoaderService} from "./services/resource-loader.service";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import {BackendService} from "./backend.service";
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [BackendService],
+  providers: [BackendService,ResourceLoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
