@@ -20,8 +20,9 @@ import {PageComponent} from "./components/pager/page/page.component";
 import { FooterComponent } from './footer/footer.component';
 import { TableComponent } from './components/table/table.component';
 import { SolarsystemComponent } from './solarsystem/solarsystem.component';
-import { ResoucesComponent } from './components/resouces/resouces.component';
 import { BackgroundComponent } from './components/background/background.component';
+import {ResourcesComponent} from "./components/resources/resources.component";
+import {BackendService} from "./backend.service";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { BackgroundComponent } from './components/background/background.componen
     SolarsystemComponent,
     FooterComponent,
     TableComponent,
-    ResoucesComponent,
+    ResourcesComponent,
     BackgroundComponent
   ],
   imports: [
@@ -51,7 +52,7 @@ import { BackgroundComponent } from './components/background/background.componen
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

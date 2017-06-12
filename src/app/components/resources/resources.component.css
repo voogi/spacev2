@@ -1,0 +1,37 @@
+.background {
+  background-color: rgba(29,45,53,0.7);
+  color: white;
+  height: 30px;
+  line-height: 30px;
+}
+
+.resource-container {
+  display: inline-block;
+}
+
+.resource-label{
+  min-width: 80px;
+  display: inline-block;
+  color: #fffa5c;
+  vertical-align: top;
+  margin-left: 10px;
+}
+
+.resource-label:after{
+  content: ":";
+  vertical-align: top;
+}
+.resource-value{
+  min-width: 80px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.resource-container:after {
+  content: "|";
+  color: #fffa5c;
+  padding-left: 4px;
+  vertical-align: top;
+}
+
+
