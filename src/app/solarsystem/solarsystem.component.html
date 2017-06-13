@@ -1,6 +1,8 @@
 <div class="system-container">
-  <!--<space-resources></space-resources>-->
-  <div class="text-center" (click)="onNavigateToStarMap()"><button>Loading</button></div>
+
+  <space-resources></space-resources>
+  <button (click)="onNavigateToStarMap()">Starmap</button>
+
   <div class="solar-system-background row no-gutters">
     <div class="planet col-md-4" *ngFor="let planet of planets" [class.active]="planet == activePlanet">
       <div class="planet-background" [ngStyle]="getPlanetStyle(planet)" (click)="setActivePlanet(planet)"></div>
@@ -8,8 +10,6 @@
       <div class="planet-buildings glass-container"></div>
     </div>
   </div>
-
-
 
   <space-footer></space-footer>
 </div>

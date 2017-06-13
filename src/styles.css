@@ -50,6 +50,8 @@ button {
   top: 0;
   background-position-y: 1px;
   text-transform: uppercase;
+  margin-left: 52px;
+  margin-right: 52px;
 }
 
 button:before {
