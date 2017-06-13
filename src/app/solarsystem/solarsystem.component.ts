@@ -32,7 +32,7 @@ export class SolarsystemComponent implements OnInit {
   }
 
   onNavigateToStarMap(){
-    this.router.navigate(['/starmap']);
+    //this.router.navigate(['/starmap']);
   }
 
   public getPlanetStyle(planet: Planet) {
