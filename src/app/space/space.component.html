@@ -34,9 +34,13 @@
           </div>
         </space-page>
         <space-page>
-          <space-solarsystem></space-solarsystem>
+          <space-solarsystem #ss></space-solarsystem>
         </space-page>
-        <space-page>option</space-page>
+        <space-page>
+          <div class="col-6">
+            <space-building [planet]="ss.activePlanet"></space-building>
+          </div>
+        </space-page>
       </space-pager>
     </div>
   </div>

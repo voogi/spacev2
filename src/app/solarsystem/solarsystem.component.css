@@ -1,5 +1,5 @@
 .solar-system-background, .glass-container:before {
-  background: url("../../assets/imgs/solar_system_background.png");
+  /*background: url("../../assets/imgs/solar_system_background.png");*/
   background-size: cover;
   height: 100%;
 }

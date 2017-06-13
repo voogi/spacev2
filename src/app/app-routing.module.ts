@@ -4,6 +4,7 @@ import {SpaceComponent} from "./space/space.component";
 import {PlayerComponent} from "./player/player.component";
 import {BackgroundComponent} from "./components/background/background.component";
 import {SolarsystemComponent} from "./solarsystem/solarsystem.component";
+import {PlanetviewComponent} from "./planetview/planetview.component";
 
 const routes: Routes = [
   {
@@ -20,11 +21,10 @@ const routes: Routes = [
     path: 'starmap',
     component: BackgroundComponent
   },
-  // {
-  //   path: 'player',
-  //   component: PlayerComponent,
-  //   outlet: "player"
-  // }
+  {
+    path: 'planet/:id',
+    component: PlanetviewComponent
+  }
 
 ];
 
@@ -38,4 +38,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routedComponents = [SpaceComponent, PlayerComponent];
+export const routedComponents = [SpaceComponent];

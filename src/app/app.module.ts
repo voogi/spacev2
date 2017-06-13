@@ -24,6 +24,9 @@ import { BackgroundComponent } from './components/background/background.componen
 import {ResourcesComponent} from "./components/resources/resources.component";
 import {BackendService} from "./backend.service";
 import {ResourceLoaderService} from "./services/resource-loader.service";
+import { BuildingComponent } from './components/building/building.component';
+import { PlanetviewComponent } from './planetview/planetview.component';
+import {DummyService} from "./services/dummy.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import {ResourceLoaderService} from "./services/resource-loader.service";
     FooterComponent,
     TableComponent,
     ResourcesComponent,
-    BackgroundComponent
+    BackgroundComponent,
+    BuildingComponent,
+    PlanetviewComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,7 @@ import {ResourceLoaderService} from "./services/resource-loader.service";
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [BackendService,ResourceLoaderService],
+  providers: [BackendService,ResourceLoaderService, DummyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
