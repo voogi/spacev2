@@ -1,0 +1,47 @@
+.builder-container {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  height: calc(100vh - 60px);
+  background-color: #363636;
+  color: white;
+}
+
+.builder-container hr {
+  border-top: 1px solid rgba(0,0,0,0.5);
+}
+
+.building {
+  background-image: url("../../../assets/imgs/building.png");
+  height: 60px;
+  width: 60px;
+  background-repeat: no-repeat;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  background-position: center;
+  background-size: 60px 60px;
+}
+
+.button-container {
+  margin: 10px;
+}
+
+.preview-header {
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.builder-header {
+  margin-top: 1rem;
+  font-size: 30px;
+  color: white;
+}
+
+.info-label {
+  padding-left: 10px;
+  min-width: 100px;
+  text-align: left;
+}
+.info-value {
+
+}

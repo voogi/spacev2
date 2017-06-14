@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {SpaceComponent} from "./space/space.component";
-import {PlayerComponent} from "./player/player.component";
 import {BackgroundComponent} from "./components/background/background.component";
 import {SolarsystemComponent} from "./solarsystem/solarsystem.component";
 import {PlanetviewComponent} from "./planetview/planetview.component";
@@ -10,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo : "system/1"
+    redirectTo : "starmap"
   },
   {
     path: 'system/:id',
@@ -38,4 +36,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routedComponents = [SpaceComponent];
+export const routedComponents = [SolarsystemComponent,BackgroundComponent,PlanetviewComponent];

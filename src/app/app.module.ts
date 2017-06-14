@@ -28,6 +28,8 @@ import { BuildingComponent } from './components/building/building.component';
 import { PlanetviewComponent } from './planetview/planetview.component';
 import {DummyService} from "./services/dummy.service";
 import {SimpleNotificationsModule} from "angular2-notifications/dist";
+import {ButtonComponent} from "./components/button/button.component";
+import {BuilderComponent} from "./components/builder/builder.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import {SimpleNotificationsModule} from "angular2-notifications/dist";
     ResourcesComponent,
     BackgroundComponent,
     BuildingComponent,
-    PlanetviewComponent
+    PlanetviewComponent,
+    ButtonComponent,
+    BuilderComponent
   ],
   imports: [
     BrowserModule,

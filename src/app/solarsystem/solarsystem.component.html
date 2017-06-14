@@ -1,7 +1,7 @@
 <div class="system-container">
 
   <space-resources></space-resources>
-  <button (click)="onNavigateToStarMap()">Starmap</button>
+  <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
 
   <div class="solar-system-background row no-gutters">
     <div class="planet col-md-4" *ngFor="let planet of planets" [class.active]="planet == activePlanet">

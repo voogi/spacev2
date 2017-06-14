@@ -1,0 +1,68 @@
+<div class="builder-container">
+
+  <div class="row no-gutters">
+    <div class="col builder-header text-center">
+      Available buildings
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row no-gutters">
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of productBuildings;"
+         class="col-md-2 building"></div>
+  </div>
+
+  <hr>
+
+  <div class="row no-gutters">
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of armyBuildings;"
+         class="col-md-2 building"></div>
+  </div>
+
+  <hr>
+
+  <div class="row no-gutters">
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of defenseBuildings;"
+         class="col-md-2 building"></div>
+  </div>
+
+  <hr>
+
+  <div class="row no-gutters">
+    <div class="col">
+      <div class="row no-gutters preview-header">
+        <span class="col info-label">Building preview</span>
+      </div>
+      <div class="row no-gutters">
+        <span class="col-lg-5 info-label">Name</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding.name}}</span>
+      </div>
+      <div class="row no-gutters">
+        <span class="col-lg-5 info-label">Desc</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding.desc}}</span>
+      </div>
+      <div class="row no-gutters">
+        <span class="col-lg-5 info-label">Time</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding.time}}</span>
+      </div>
+      <div class="row no-gutters">
+        <span class="col-lg-5 info-label">Energy</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding.energy}}</span>
+      </div>
+      <div class="row no-gutters">
+        <span class="col-lg-5 info-label">Plastic</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding.superPlastic}}</span>
+      </div>
+      <div class="row no-gutters">
+        <span class="col-lg-5 info-label">Titanium</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding.titanium}}</span>
+      </div>
+    </div>
+    <div class="col building">
+      <space-button [name]="'Build'"></space-button>
+    </div>
+  </div>
+
+
+</div>
