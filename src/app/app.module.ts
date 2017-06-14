@@ -27,7 +27,6 @@ import {ResourceLoaderService} from "./services/resource-loader.service";
 import { BuildingComponent } from './components/building/building.component';
 import { PlanetviewComponent } from './planetview/planetview.component';
 import {DummyService} from "./services/dummy.service";
-import { NotificationComponent } from './components/notification/notification.component';
 import {SimpleNotificationsModule} from "angular2-notifications/dist";
 
 @NgModule({
@@ -51,8 +50,7 @@ import {SimpleNotificationsModule} from "angular2-notifications/dist";
     ResourcesComponent,
     BackgroundComponent,
     BuildingComponent,
-    PlanetviewComponent,
-    NotificationComponent
+    PlanetviewComponent
   ],
   imports: [
     BrowserModule,
