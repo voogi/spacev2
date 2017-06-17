@@ -5,3 +5,6 @@
     </div>
   </div>
 </div>
+<div class="progress-queue">
+  <space-progress-bar (completed)="onBuildingCompleted()" #progress1 [duration]="building?.time"></space-progress-bar>
+</div>

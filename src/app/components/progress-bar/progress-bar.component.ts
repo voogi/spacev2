@@ -14,7 +14,8 @@ export class ProgressBarComponent implements OnInit,OnDestroy {
   public currentWidth: number = 0;
   @Input() duration:number;
   public remainingTime: number;
-  @Output() completed: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  completed: EventEmitter<boolean> = new EventEmitter<boolean>();
   private ended:boolean = true;
 
   constructor() { }

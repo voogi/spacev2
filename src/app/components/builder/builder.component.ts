@@ -197,6 +197,7 @@ export class BuilderComponent implements OnInit {
 
   onBuild(){
     this.builder.build(this.selectedBuilding);
+    this.visible = false;
   }
 
   onCancel(){
@@ -204,8 +205,6 @@ export class BuilderComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.builder.onBuild().subscribe( data => console.log(data) );
 
     this.builder.onSelectedSlot().subscribe( () => {
       this.visible = true;
