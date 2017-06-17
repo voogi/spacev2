@@ -1,3 +1,4 @@
+<div *ngIf="visible" class="builder-overlay"></div>
 <div *ngIf="visible" class="builder-container">
 
   <div class="row no-gutters">
@@ -5,8 +6,6 @@
       Available buildings
     </div>
   </div>
-
-  <hr>
 
   <div class="row no-gutters">
     <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of productBuildings;"
@@ -75,3 +74,4 @@
 
 
 </div>
+
