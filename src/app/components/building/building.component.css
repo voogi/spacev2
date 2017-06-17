@@ -22,6 +22,8 @@
 .building-header {
   background: url("../../../assets/imgs/header.png");
   height: 53px;
+  background-size: 100% 53px;
+  background-repeat: no-repeat;
   text-align: center;
   color: #ffffff;
   line-height: 53px;
