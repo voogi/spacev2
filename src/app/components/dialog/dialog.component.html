@@ -1,9 +1,10 @@
-<div [@dialog] *ngIf="visible" class="dialog">
-  <div class="dialog-modal">
+<div [@dialog] *ngIf="visible" class="dialog" [ng2-draggable]=draggable [ng2DraggableHandle]="dragHandle"
+     [style.left]="getLeft()" [style.width]="width + 'px'">
+  <div class="dialog-modal" >
     <div class="dialog-content">
       <div class="dialog-header">
         <div class="row justify-content-center align-items-center no-gutters">
-          <div class="col dialog-title">
+          <div class="col-11 dialog-title"  #dragHandle>
             <span>{{title}}</span>
           </div>
           <div (click)="close()" class="col dialog-exit"></div>
@@ -12,15 +13,15 @@
       <div class="dialog-body">
         <ng-content></ng-content>
       </div>
-      <div class="dialog-footer">
-        <div class="row align-items-center">
-          <div class="col text-right button-container">
-            <button (click)="close()" class="dialog-button">Close</button>
-          </div>
-        </div>
-      </div>
+      <!--<div class="dialog-footer">-->
+        <!--<div class="row align-items-center">-->
+          <!--<div class="col text-right button-container">-->
+            <!--<button (click)="close()" class="dialog-button">Close</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
   </div>
 </div>
 
-<div [@overlay] *ngIf="visible" class="overlay" (click)="close()"></div>
+<div [@overlay] *ngIf="visible && hasOverlay" class="overlay" (click)="close()"></div>

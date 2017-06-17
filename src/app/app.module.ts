@@ -27,6 +27,8 @@ import {FooterComponent} from "./components/footer/footer.component";
 import {BuilderService} from "./services/builder.service";
 import {StarmapComponent} from "./views/starmap/starmap.component";
 import {RoutedDataService} from "./services/routed-data.service";
+import {Draggable} from "./directives/draggable.directive";
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import {RoutedDataService} from "./services/routed-data.service";
     HeaderComponent,
     DialogComponent,
     routedComponents,
+    Draggable,
     TabsComponent,
     TabComponent,
     ProgressBarComponent,

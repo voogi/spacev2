@@ -3,6 +3,7 @@
   <div class="row">
     <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
     <space-button (click)="loadPlanetJSON()" [name]="'Load Planets JSON'"></space-button>
+    <space-button (click)="dialog.show()" [name]="'Dialog'"></space-button>
   </div>
   <div class="row">
     <div class="col-md-12 solar-system-background row no-gutters">
@@ -13,5 +14,11 @@
       </div>
     </div>
   </div>
+  <space-dialog #dialog [hasOverlay]="true" [draggable]="true" [width]="1000" [title]="'Dialog'">
+    <space-tabs>
+      <space-tab [name]="'Építmények'"></space-tab>
+      <space-tab [name]="'Egységek'"></space-tab>
+    </space-tabs>
+  </space-dialog>
   <space-footer></space-footer>
 </div>
