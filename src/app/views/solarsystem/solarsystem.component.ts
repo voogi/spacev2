@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Planet} from "../shared/planet";
+import {Planet} from "../../shared/planet";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
-import {fadeInAnimation, slideInOutAnimation} from "../animations/slide-in-out.animation";
-import {DummyService} from "../services/dummy.service";
+import {fadeInAnimation, slideInOutAnimation} from "../../animations/slide-in-out.animation";
+import {DummyService} from "../../services/dummy.service";
 
 @Component({
   selector: 'space-solarsystem',

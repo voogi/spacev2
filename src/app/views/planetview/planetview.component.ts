@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {fadeInAnimation} from "../animations/slide-in-out.animation";
+import {fadeInAnimation} from "../../animations/slide-in-out.animation";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DummyService} from "../services/dummy.service";
-import {Planet} from "../shared/planet";
+import {DummyService} from "../../services/dummy.service";
+import {Planet} from "../../shared/planet";
 import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({

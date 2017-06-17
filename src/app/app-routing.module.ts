@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {BackgroundComponent} from "./components/background/background.component";
-import {SolarsystemComponent} from "./solarsystem/solarsystem.component";
-import {PlanetviewComponent} from "./planetview/planetview.component";
+import {SolarsystemComponent} from "./views/solarsystem/solarsystem.component";
+import {PlanetviewComponent} from "./views/planetview/planetview.component";
 
 const routes: Routes = [
   {

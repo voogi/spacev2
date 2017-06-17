@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BackendService} from "../../backend.service";
+import {BackendService} from "../../services/backend.service";
 import {Resource} from "../../shared/resource";
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 import {Subscription} from "rxjs/Subscription";
