@@ -55,6 +55,11 @@ export class BackendService {
   saveBuilding(building: IBuilding, planetId: number){
     let planet: IPlanet = this.getPlanetById(planetId);
     planet.buildings.push(building);
+    for(let construction of planet.constructions){
+      if(construction.building.id == building.id){
+        planet.constructions.splice(planet.constructions.lastIndexOf(construction), 1);
+      }
+    }
     localStorage.setItem("planet_" + planetId, JSON.stringify(planet));
   }
 

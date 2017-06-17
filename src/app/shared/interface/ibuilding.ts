@@ -1,5 +1,6 @@
 export interface IBuilding {
 
+  id: number,
   name: string,
   desc: string,
   tooltip: string,
