@@ -27,6 +27,7 @@ import {FooterComponent} from "./components/footer/footer.component";
 import {BuilderService} from "./services/builder.service";
 import {StarmapComponent} from "./views/starmap/starmap.component";
 import {RoutedDataService} from "./services/routed-data.service";
+import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {RoutedDataService} from "./services/routed-data.service";
     PlanetviewComponent,
     ButtonComponent,
     BuilderComponent,
-    StarmapComponent
+    StarmapComponent,
+    ProgressQueueComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import {RoutedDataService} from "./services/routed-data.service";
     AppRoutingModule
   ],
   providers: [BackendService,ResourceLoaderService,BuilderService,RoutedDataService],
+  entryComponents : [ProgressBarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
