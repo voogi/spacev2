@@ -44,6 +44,10 @@ export class SolarsystemComponent implements OnInit {
     this.router.navigate(['/planet',planet.id]);
   }
 
+  public loadPlanetJSON() {
+    this.backendService.loadPlanetsJSON();
+  }
+
   public getPlanetStyle(planet: IPlanet) {
     return {
       'background-image' : 'url(' + planet.img + ')',

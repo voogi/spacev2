@@ -1,11 +1,16 @@
 <div class="system-container">
   <space-resources></space-resources>
-  <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
-  <div class="solar-system-background row no-gutters">
-    <div class="planet col-md-4" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
-      <div class="planet-background" [ngStyle]="getPlanetStyle(planet)" (click)="setActivePlanet(planet)" (dblclick)="onNavigateToPlanet(planet)"></div>
-      <div class="planet-name">{{planet.name}}</div>
-      <div class="planet-buildings glass-container"></div>
+  <div class="row">
+    <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
+    <space-button (click)="loadPlanetJSON()" [name]="'Load Planets JSON'"></space-button>
+  </div>
+  <div class="row">
+    <div class="col-md-12 solar-system-background row no-gutters">
+      <div class="planet col-md-4" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
+        <div class="planet-background" [ngStyle]="getPlanetStyle(planet)" (click)="setActivePlanet(planet)" (dblclick)="onNavigateToPlanet(planet)"></div>
+        <div class="planet-name">{{planet.name}}</div>
+        <div class="planet-buildings glass-container"></div>
+      </div>
     </div>
   </div>
   <space-footer></space-footer>

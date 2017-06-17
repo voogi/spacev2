@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import {Resource} from "../shared/resource";
 import {IPlanet} from "../shared/interface/iplanet";
+import {IBuilding} from "../shared/interface/ibuilding";
 
 @Injectable()
 export class BackendService {
@@ -35,6 +36,25 @@ export class BackendService {
   //PLANET RELATED REQUEST
   getAllPlanetBySystem():Observable<Array<IPlanet>>{
     return this.http.get("/assets/planets.json").map( (res:Response) => res.json().payload )
+  }
+
+  //törölni ha lesz backend
+  loadPlanetsJSON(){
+    this.getAllPlanetBySystem().subscribe(data => {
+      for(let planet of data){
+          localStorage.setItem("planet_" + planet.id, JSON.stringify(planet))
+        }
+    });
+  }
+
+  getPlanetById(planetId: number):IPlanet{
+    return JSON.parse(localStorage.getItem("planet_" + planetId));
+  }
+
+  saveBuilding(building: IBuilding, planetId: number){
+    let planet: IPlanet = this.getPlanetById(planetId);
+    planet.buildings.push(building);
+    localStorage.setItem("planet_" + planetId, JSON.stringify(planet));
   }
 
 }

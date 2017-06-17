@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {fadeInAnimation} from "../../animations/slide-in-out.animation";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, Params} from "@angular/router";
 import {IPlanet} from "../../shared/interface/iplanet";
 import {NotificationsService} from "angular2-notifications/dist";
 import {RoutedDataService} from "../../services/routed-data.service";
+import {BackendService} from "../../services/backend.service";
+import {IBuilding} from "../../shared/interface/ibuilding";
 
 @Component({
   selector: 'space-planetview',
@@ -17,10 +19,12 @@ export class PlanetviewComponent implements OnInit {
   private selectedPlanet: IPlanet;
 
   constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationsService,
-  private routedData: RoutedDataService) { }
+  private routedData: RoutedDataService, private backendService: BackendService) { }
 
   ngOnInit() {
-    this.selectedPlanet = this.routedData.routedPlanet;
+    this.route.params.switchMap( (params: Params) => params["id"] ).subscribe(data => {
+      this.selectedPlanet = this.backendService.getPlanetById(data[0]);
+    });
   }
 
   onNavigateToSystem(id:number){
@@ -41,4 +45,16 @@ export class PlanetviewComponent implements OnInit {
     }
   };
 
+  getPlanetJSON() {
+    let building : IBuilding = {
+      name : "Building_1",
+      desc : "desc",
+      energy: 20,
+      time: 2,
+      titanium: 30,
+      tooltip: "asd",
+      superPlastic: 10
+    }
+   this.backendService.saveBuilding(building, this.selectedPlanet.id);
+  }
 }
