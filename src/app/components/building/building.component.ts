@@ -1,28 +1,30 @@
-import {Component, OnInit, Input, SimpleChange, OnChanges} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {IPlanet} from "../../shared/interface/iplanet";
+import {BuilderService} from "../../services/builder.service";
 
 @Component({
   selector: 'space-building',
   templateUrl: './building.component.html',
   styleUrls: ['./building.component.css']
 })
-export class BuildingComponent implements OnInit, OnChanges {
+export class BuildingComponent implements OnInit {
 
   @Input()
   public planet:IPlanet;
   public slots:Array<number>;
 
 
-  constructor() {
+  constructor(private builder: BuilderService) {
   }
 
-  ngOnChanges(changes: {[planet: string]: SimpleChange}) {
-    if(changes.planet.currentValue){
+  ngOnInit() {
+    if(this.planet){
       this.slots = Array.from(Array(this.planet.slots),(x,i)=>i);
     }
   }
 
-  ngOnInit() {
+  onSelectSlot(){
+    this.builder.selectedSlot()
   }
 
 }

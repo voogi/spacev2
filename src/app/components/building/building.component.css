@@ -9,6 +9,11 @@
   border: 2px solid #565656;
 }
 
+.building-slot:hover {
+  cursor: pointer;
+  border: 2px solid aliceblue;
+}
+
 .slot-container {
   width: 80px;
   margin: 1.3em;

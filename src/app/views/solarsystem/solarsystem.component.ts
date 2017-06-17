@@ -44,7 +44,7 @@ export class SolarsystemComponent implements OnInit {
     this.router.navigate(['/planet',planet.id]);
   }
 
-  static getPlanetStyle(planet: IPlanet) {
+  public getPlanetStyle(planet: IPlanet) {
     return {
       'background-image' : 'url(' + planet.img + ')',
       'background-size' : planet.size + 'px',

@@ -199,9 +199,17 @@ export class BuilderComponent implements OnInit {
     this.builder.build(this.selectedBuilding);
   }
 
+  onCancel(){
+    this.visible = false;
+  }
+
   ngOnInit() {
 
     this.builder.onBuild().subscribe( data => console.log(data) );
+
+    this.builder.onSelectedSlot().subscribe( () => {
+      this.visible = true;
+    });
 
   }
 

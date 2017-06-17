@@ -60,7 +60,16 @@
       </div>
     </div>
     <div class="col building">
-      <space-button (click)="onBuild()" [name]="'Build'"></space-button>
+      <div class="row">
+        <div class="col">
+          <space-button (click)="onBuild()" [name]="'Build'"></space-button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <space-button (click)="onCancel()" [name]="'Cancel'"></space-button>
+        </div>
+      </div>
     </div>
   </div>
 

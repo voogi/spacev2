@@ -52,8 +52,8 @@ import {RoutedDataService} from "./services/routed-data.service";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     SimpleNotificationsModule.forRoot(),
+    HttpModule,
     BrowserAnimationsModule,
     AppRoutingModule
   ],

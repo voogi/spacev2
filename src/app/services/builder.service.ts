@@ -7,9 +7,11 @@ import {Observable} from "rxjs/Observable";
 export class BuilderService {
 
   private subject: Subject<IBuilding>;
+  private selectedSlotSubject: Subject<any>;
 
   constructor() {
     this.subject = new Subject();
+    this.selectedSlotSubject = new Subject();
   }
 
   build(building:IBuilding){
@@ -18,6 +20,14 @@ export class BuilderService {
 
   onBuild():Observable<IBuilding>{
     return this.subject
+  }
+
+  selectedSlot(){
+    this.selectedSlotSubject.next();
+  }
+
+  onSelectedSlot():Observable<any>{
+    return this.selectedSlotSubject
   }
 
 
