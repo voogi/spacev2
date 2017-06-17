@@ -1,8 +1,9 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, ContentChildren, QueryList, ViewChildren} from '@angular/core';
 import {IPlanet} from "../../shared/interface/iplanet";
 import {BuilderService} from "../../services/builder.service";
 import {IBuilding} from "../../shared/interface/ibuilding";
 import {NotificationsService} from "angular2-notifications/dist";
+import {ProgressBarComponent} from "../progress-bar/progress-bar.component";
 
 @Component({
   selector: 'space-building',
@@ -15,8 +16,7 @@ export class BuildingComponent implements OnInit {
   public planet: IPlanet;
   public slots: Array<number>;
   public building: IBuilding;
-  @ViewChild('progress1')
-  public progress: any;
+  @ViewChildren(ProgressBarComponent) progressBars: QueryList<ProgressBarComponent>;
 
   constructor(private builder: BuilderService, private notifications: NotificationsService) {
   }
@@ -28,7 +28,7 @@ export class BuildingComponent implements OnInit {
 
     this.builder.onBuild().subscribe(data => {
       this.building = data;
-      this.progress.start();
+      this.progressBars.last.start();
     });
 
   }
