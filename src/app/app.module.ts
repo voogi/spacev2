@@ -19,7 +19,7 @@ import {BackendService} from "./services/backend.service";
 import {ResourceLoaderService} from "./services/resource-loader.service";
 import { BuildingComponent } from './components/building/building.component';
 import { PlanetviewComponent } from './views/planetview/planetview.component';
-import {SimpleNotificationsModule} from "angular2-notifications/dist";
+import {SimpleNotificationsModule} from "angular2-notifications";
 import {ButtonComponent} from "./components/button/button.component";
 import {BuilderComponent} from "./components/builder/builder.component";
 import {HeaderComponent} from "./components/header/header.component";
@@ -52,9 +52,9 @@ import {RoutedDataService} from "./services/routed-data.service";
   imports: [
     BrowserModule,
     FormsModule,
-    SimpleNotificationsModule.forRoot(),
     HttpModule,
     BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
     AppRoutingModule
   ],
   providers: [BackendService,ResourceLoaderService,BuilderService,RoutedDataService],
