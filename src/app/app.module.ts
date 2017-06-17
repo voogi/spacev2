@@ -29,6 +29,7 @@ import {StarmapComponent} from "./views/starmap/starmap.component";
 import {RoutedDataService} from "./services/routed-data.service";
 import {Draggable} from "./directives/draggable.directive";
 
+import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {Draggable} from "./directives/draggable.directive";
     PlanetviewComponent,
     ButtonComponent,
     BuilderComponent,
-    StarmapComponent
+    StarmapComponent,
+    ProgressQueueComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import {Draggable} from "./directives/draggable.directive";
     AppRoutingModule
   ],
   providers: [BackendService,ResourceLoaderService,BuilderService,RoutedDataService],
+  entryComponents : [ProgressBarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

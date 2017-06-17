@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, OnDestroy, Output, EventEmitter} from '@angular/core';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 import {Subscription} from "rxjs";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'space-progress-bar',
