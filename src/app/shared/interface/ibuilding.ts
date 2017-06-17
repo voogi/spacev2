@@ -7,6 +7,7 @@ export interface IBuilding {
   energy: number,
   titanium : number,
   superPlastic: number,
-  time: number
+  time: number,
+  position?: number
 
 }

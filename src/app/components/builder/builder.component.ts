@@ -28,7 +28,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 2,
@@ -38,7 +38,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 3,
@@ -48,7 +48,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 4,
@@ -58,7 +58,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 5,
@@ -68,7 +68,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 6,
@@ -78,7 +78,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 7,
@@ -88,7 +88,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 8,
@@ -98,7 +98,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       }
     ];
     this.armyBuildings = [
@@ -110,7 +110,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 10,
@@ -120,7 +120,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       }
     ];
     this.defenseBuildings = [
@@ -132,7 +132,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       },
       {
         id: 12,
@@ -142,7 +142,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium: 40,
         superPlastic: 30,
-        time: 90
+        time: 3
       }
     ];
     this.selectedBuilding = this.productBuildings[0];

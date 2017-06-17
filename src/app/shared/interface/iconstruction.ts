@@ -5,4 +5,5 @@ export interface IConstruction {
   duration: number,
   startTime?: number,
   endTime?: number
+
 }

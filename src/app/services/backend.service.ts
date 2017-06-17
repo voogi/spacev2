@@ -27,7 +27,7 @@ export class BackendService {
   * systemId : egy adott naprendszer id alapján visszaadja a hozzá
   * tartozó resourceokat
   *
-  * return Observable
+  * return Observable<Array<Resource>>
   *
   * */
   getPlayerResources(systemId:string):Observable<Array<Resource>>{
