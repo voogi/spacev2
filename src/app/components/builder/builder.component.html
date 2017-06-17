@@ -58,20 +58,17 @@
         <span class="col-lg-5 info-value">{{selectedBuilding.titanium}}</span>
       </div>
     </div>
-    <div class="col building">
+  </div>
+
+  <div class="row no-gutters button-group">
+    <div class="col">
       <div class="row">
-        <div class="col">
+        <div class="col text-right">
           <space-button (click)="onBuild()" [name]="'Build'"></space-button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
           <space-button (click)="onCancel()" [name]="'Cancel'"></space-button>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
 

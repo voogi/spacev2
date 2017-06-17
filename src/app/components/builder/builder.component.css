@@ -2,7 +2,6 @@
   position: fixed;
   top: 30px;
   right: 0;
-  height: calc(100vh - 60px);
   background-color: #363636;
   color: white;
   z-index: 401;
@@ -63,4 +62,8 @@
 }
 .info-value {
 
+}
+
+.button-group{
+  margin: 10px;
 }

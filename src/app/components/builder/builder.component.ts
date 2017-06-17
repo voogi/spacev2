@@ -206,7 +206,7 @@ export class BuilderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.builder.onSelectedSlot().subscribe( () => {
+    this.builder.onSelectedSlot().subscribe( (slot) => {
       this.visible = true;
     });
 
