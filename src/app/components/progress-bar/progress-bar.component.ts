@@ -14,6 +14,7 @@ export class ProgressBarComponent implements OnInit,OnDestroy {
   public currentWidth: number = 0;
   @Input() duration:number;
   public remainingTime: number;
+  @Input() public elapsedTime: number;
   @Output()
   completed: EventEmitter<boolean> = new EventEmitter<boolean>();
   private ended:boolean = true;
@@ -26,11 +27,15 @@ export class ProgressBarComponent implements OnInit,OnDestroy {
   public start(): void {
     this.currentWidth = 0;
     this.remainingTime = this.duration;
+    if(this.elapsedTime){
+      this.remainingTime = this.duration - this.elapsedTime;
+    }
     if(this.subscription){
       this.subscription.unsubscribe();
     }
     let timer = TimerObservable.create(0, 1000);
     this.subscription = timer.subscribe(t => {
+      t += this.elapsedTime;
       this.ended = false;
       this.currentWidth = Math.round(((t+1) / this.duration) * 100);
       this.remainingTime -= 1;

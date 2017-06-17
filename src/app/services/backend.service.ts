@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import {Resource} from "../shared/resource";
 import {IPlanet} from "../shared/interface/iplanet";
 import {IBuilding} from "../shared/interface/ibuilding";
+import {IConstruction} from "../shared/interface/iconstruction";
 
 @Injectable()
 export class BackendService {
@@ -54,6 +55,14 @@ export class BackendService {
   saveBuilding(building: IBuilding, planetId: number){
     let planet: IPlanet = this.getPlanetById(planetId);
     planet.buildings.push(building);
+    localStorage.setItem("planet_" + planetId, JSON.stringify(planet));
+  }
+
+  startConstruction(construction: IConstruction, planetId: number){
+    let planet: IPlanet = this.getPlanetById(planetId);
+    construction.startTime = new Date().getMilliseconds();
+    construction.endTime = construction.startTime + construction.duration;
+    planet.constructions.push(construction);
     localStorage.setItem("planet_" + planetId, JSON.stringify(planet));
   }
 
