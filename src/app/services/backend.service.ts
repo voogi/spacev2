@@ -61,7 +61,7 @@ export class BackendService {
   startConstruction(construction: IConstruction, planetId: number){
     let planet: IPlanet = this.getPlanetById(planetId);
     construction.startTime = new Date().getMilliseconds();
-    construction.endTime = construction.startTime + construction.duration;
+    construction.endTime = construction.startTime + (construction.duration * 1000);
     planet.constructions.push(construction);
     localStorage.setItem("planet_" + planetId, JSON.stringify(planet));
   }
