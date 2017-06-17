@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {fadeInAnimation} from "../../animations/slide-in-out.animation";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DummyService} from "../../services/dummy.service";
-import {Planet} from "../../shared/planet";
+import {IPlanet} from "../../shared/interface/iplanet";
 import {NotificationsService} from "angular2-notifications/dist";
+import {RoutedDataService} from "../../services/routed-data.service";
 
 @Component({
   selector: 'space-planetview',
@@ -14,13 +14,13 @@ import {NotificationsService} from "angular2-notifications/dist";
 })
 export class PlanetviewComponent implements OnInit {
 
-  private selectedPlanet: Planet;
+  private selectedPlanet: IPlanet;
 
-  constructor(private route: ActivatedRoute, private router: Router, private dummyService: DummyService,
-              private notificationService: NotificationsService ) { }
+  constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationsService,
+  private routedData: RoutedDataService) { }
 
   ngOnInit() {
-    this.selectedPlanet = this.dummyService.selectedPlanet;
+    this.selectedPlanet = this.routedData.routedPlanet;
   }
 
   onNavigateToSystem(id:number){
@@ -34,7 +34,7 @@ export class PlanetviewComponent implements OnInit {
   public getPlanetStyle() {
     if(this.selectedPlanet){
       return {
-        'background-image' : 'url(' + this.selectedPlanet.background + ')',
+        'background-image' : 'url(' + this.selectedPlanet.img + ')',
         'background-size' : this.selectedPlanet.size + 'px',
         'height' : this.selectedPlanet.size + 'px',
         'width' : this.selectedPlanet.size + 'px'}

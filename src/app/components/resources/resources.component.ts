@@ -17,13 +17,13 @@ export class ResourcesComponent implements OnInit, OnDestroy {
 
   constructor( private backendService:BackendService ) {
     this.getResourcesSub = this.backendService.getPlayerResources("systemId").subscribe( data => {
-      this.resources = data.payload;
+      this.resources = data;
     } )
   }
 
   onRefresh(){
     this.getResourcesSub = this.backendService.getPlayerResources("systemId").subscribe( data => {
-      this.resources = data.payload;
+      this.resources = data;
     } )
   }
 

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, SimpleChange, OnChanges} from '@angular/core';
-import {Planet} from "../../shared/planet";
+import {IPlanet} from "../../shared/interface/iplanet";
 
 @Component({
   selector: 'space-building',
@@ -8,7 +8,8 @@ import {Planet} from "../../shared/planet";
 })
 export class BuildingComponent implements OnInit, OnChanges {
 
-  @Input() public planet:Planet;
+  @Input()
+  public planet:IPlanet;
   public slots:Array<number>;
 
 

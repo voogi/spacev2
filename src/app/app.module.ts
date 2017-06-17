@@ -19,7 +19,6 @@ import {BackendService} from "./services/backend.service";
 import {ResourceLoaderService} from "./services/resource-loader.service";
 import { BuildingComponent } from './components/building/building.component';
 import { PlanetviewComponent } from './views/planetview/planetview.component';
-import {DummyService} from "./services/dummy.service";
 import {SimpleNotificationsModule} from "angular2-notifications/dist";
 import {ButtonComponent} from "./components/button/button.component";
 import {BuilderComponent} from "./components/builder/builder.component";
@@ -27,6 +26,7 @@ import {HeaderComponent} from "./components/header/header.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import {BuilderService} from "./services/builder.service";
 import {StarmapComponent} from "./views/starmap/starmap.component";
+import {RoutedDataService} from "./services/routed-data.service";
 
 @NgModule({
   declarations: [
@@ -53,11 +53,11 @@ import {StarmapComponent} from "./views/starmap/starmap.component";
     BrowserModule,
     FormsModule,
     HttpModule,
+    SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
-    AppRoutingModule,
-    SimpleNotificationsModule.forRoot()
+    AppRoutingModule
   ],
-  providers: [BackendService,ResourceLoaderService,DummyService,BuilderService],
+  providers: [BackendService,ResourceLoaderService,BuilderService,RoutedDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

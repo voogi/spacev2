@@ -3,6 +3,8 @@ import {environment} from "../../environments/environment.prod";
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import {Resource} from "../shared/resource";
+import {IPlanet} from "../shared/interface/iplanet";
 
 @Injectable()
 export class BackendService {
@@ -26,8 +28,13 @@ export class BackendService {
   * return Observable
   *
   * */
-  getPlayerResources(systemId:string):Observable<any>{
-    return this.http.get("/assets/resources.json").map( (res: Response) => res.json());
+  getPlayerResources(systemId:string):Observable<Array<Resource>>{
+    return this.http.get("/assets/resources.json").map( (res: Response) => res.json().payload);
+  }
+
+  //PLANET RELATED REQUEST
+  getAllPlanetBySystem():Observable<Array<IPlanet>>{
+    return this.http.get("/assets/planets.json").map( (res:Response) => res.json().payload )
   }
 
 }

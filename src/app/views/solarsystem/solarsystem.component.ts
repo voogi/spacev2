@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Planet} from "../../shared/planet";
+import {IPlanet} from "../../shared/interface/iplanet";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
-import {fadeInAnimation, slideInOutAnimation} from "../../animations/slide-in-out.animation";
-import {DummyService} from "../../services/dummy.service";
+import {fadeInAnimation} from "../../animations/slide-in-out.animation";
+import {BackendService} from "../../services/backend.service";
+import {Subscription} from "rxjs/Subscription";
+import {RoutedDataService} from "../../services/routed-data.service";
 
 @Component({
   selector: 'space-solarsystem',
@@ -14,21 +16,23 @@ import {DummyService} from "../../services/dummy.service";
 })
 export class SolarsystemComponent implements OnInit {
 
-  public planets: Array<Planet>;
-  public activePlanet: Planet;
+  public planets: Array<IPlanet>;
+  private planetSub: Subscription;
+  public activePlanet: IPlanet;
 
 
-  constructor( private route: ActivatedRoute, private router: Router, private dummyService: DummyService) { }
+  constructor( private route: ActivatedRoute, private router: Router, private backendService: BackendService,
+  private routedData: RoutedDataService) { }
 
   ngOnInit() {
 
     this.route.params.switchMap( (params: Params) => params["id"] ).subscribe(data => console.log(data));
 
-    this.planets = [
-      new Planet(1, "planet_1", 200, "assets/imgs/planet_1.png", 4, []),
-      new Planet(2, "planet_2", 300, "assets/imgs/planet_2.png", 6, []),
-      new Planet(3, "planet_3", 250, "assets/imgs/planet_3.png", 9, []),
-    ];
+    this.planetSub = this.backendService.getAllPlanetBySystem().subscribe( data => {
+      this.planets = data;
+    });
+
+
 
   }
 
@@ -36,21 +40,21 @@ export class SolarsystemComponent implements OnInit {
     this.router.navigate(['/starmap']);
   }
 
-  onNavigateToPlanet(planet: Planet){
+  onNavigateToPlanet(planet: IPlanet){
     this.router.navigate(['/planet',planet.id]);
   }
 
-  public getPlanetStyle(planet: Planet) {
+  public getPlanetStyle(planet: IPlanet) {
     return {
-      'background-image' : 'url(' + planet.background + ')',
+      'background-image' : 'url(' + planet.img + ')',
       'background-size' : planet.size + 'px',
       'height' : planet.size + 'px',
       'width' : planet.size + 'px'}
   };
 
-  public setActivePlanet(planet: Planet){
+  public setActivePlanet(planet: IPlanet){
     this.activePlanet = planet;
-    this.dummyService.selectedPlanet = this.activePlanet
+    this.routedData.routedPlanet = planet;
   }
 
 }
