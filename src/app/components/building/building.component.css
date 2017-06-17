@@ -19,3 +19,13 @@
   margin: 1.3em;
 }
 
+.building-header {
+  background: url("../../../assets/imgs/header.png");
+  height: 53px;
+  text-align: center;
+  color: #ffffff;
+  line-height: 53px;
+  text-transform: uppercase;
+  font-size: 1.3em;
+}
+

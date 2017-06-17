@@ -1,6 +1,8 @@
 <space-resources></space-resources>
-<space-button (click)="onNavigateToSystem(1)" [name]="'System'"></space-button>
-<space-button (click)="onShowNotification()" [name]="'Notification'"></space-button>
+<div class="row">
+  <space-button (click)="onNavigateToSystem(1)" [name]="'System'"></space-button>
+  <space-button (click)="onShowNotification()" [name]="'Notification'"></space-button>
+</div>
 <div class="row justify-content-center">
   <div class="col-md-4">
     <div class="planet" [ngStyle]="getPlanetStyle()"></div>
