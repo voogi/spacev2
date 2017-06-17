@@ -48,13 +48,17 @@ export class BuildingComponent implements OnInit {
     }
 
     this.builder.onBuild().subscribe(data => {
+
       this.building = data;
       this.building.position = this.selectedSlot.position;
+
       this.progressBars.last.start();
+
       this.backendService.startConstruction({
         building : this.building,
         duration : this.building.time
       },this.planet.id);
+
       this.selectedSlot.isEmpty = false;
     });
 
