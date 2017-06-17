@@ -7,7 +7,8 @@
       "size": 200,
       "img": "/assets/imgs/planet_1.png",
       "slots": 4,
-      "buildings" : []
+      "buildings" : [],
+      "constructions" : []
     },
     {
       "id": 2,
@@ -15,7 +16,8 @@
       "size": 400,
       "img": "/assets/imgs/planet_2.png",
       "slots": 6,
-      "buildings" : []
+      "buildings" : [],
+      "constructions" : []
     },
     {
       "id": 3,
@@ -23,7 +25,8 @@
       "size": 300,
       "img": "/assets/imgs/planet_3.png",
       "slots": 7,
-      "buildings" : []
+      "buildings" : [],
+      "constructions" : []
     }
   ]
 }
