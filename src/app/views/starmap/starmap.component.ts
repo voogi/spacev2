@@ -5,13 +5,13 @@ import {ResourceLoaderService} from "../../services/resource-loader.service";
 import {slideInOutAnimation,fadeInAnimation} from "../../animations/slide-in-out.animation";
 
 @Component({
-  selector: 'space-background',
-  templateUrl: './background.component.html',
-  styleUrls: ['./background.component.css'],
+  selector: 'space-starmap',
+  templateUrl: './starmap.component.html',
+  styleUrls: ['./starmap.component.css'],
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
-export class BackgroundComponent implements OnInit {
+export class StarmapComponent implements OnInit {
 
   private renderer: any;
   private stage: PIXI.Container;
@@ -122,22 +122,22 @@ export class BackgroundComponent implements OnInit {
 
     this.stage.addChild(this.littleStars);
 
-    let texture = this.renderer.generateTexture( BackgroundComponent.makeParticleGraphic(0.8) );
+    let texture = this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.8) );
 
     let decoyTexture = [
-      this.renderer.generateTexture( BackgroundComponent.makeParticleGraphic(0.6) ),
-      this.renderer.generateTexture( BackgroundComponent.makeParticleGraphic(0.5) ),
-      this.renderer.generateTexture( BackgroundComponent.makeParticleGraphic(0.4) ),
-      this.renderer.generateTexture( BackgroundComponent.makeParticleGraphic(0.3) ),
-      this.renderer.generateTexture( BackgroundComponent.makeParticleGraphic(0.2) )
+      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.6) ),
+      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.5) ),
+      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.4) ),
+      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.3) ),
+      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.2) )
     ];
 
     for( let i = 0; i < this.backgroundStarLength; i++){
 
       let index = i;
       const p = new PIXI.Sprite(texture);
-      let w = BackgroundComponent.randomInt(20,window.innerWidth-20);
-      let h = BackgroundComponent.randomInt(20,window.innerHeight-20);
+      let w = StarmapComponent.randomInt(20,window.innerWidth-20);
+      let h = StarmapComponent.randomInt(20,window.innerHeight-20);
       p.x = w;
       p.y = h;
       this.littleStars.addChild(p);

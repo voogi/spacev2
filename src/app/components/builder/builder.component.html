@@ -1,4 +1,4 @@
-<div class="builder-container">
+<div *ngIf="visible" class="builder-container">
 
   <div class="row no-gutters">
     <div class="col builder-header text-center">
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="col building">
-      <space-button [name]="'Build'"></space-button>
+      <space-button (click)="onBuild()" [name]="'Build'"></space-button>
     </div>
   </div>
 

@@ -14,7 +14,6 @@ import {TabsComponent} from "./components/tabs/tabs.component";
 import {TabComponent} from "./components/tabs/tab/tab.component";
 import { TableComponent } from './components/table/table.component';
 import { SolarsystemComponent } from './views/solarsystem/solarsystem.component';
-import { BackgroundComponent } from './components/background/background.component';
 import {ResourcesComponent} from "./components/resources/resources.component";
 import {BackendService} from "./services/backend.service";
 import {ResourceLoaderService} from "./services/resource-loader.service";
@@ -26,6 +25,8 @@ import {ButtonComponent} from "./components/button/button.component";
 import {BuilderComponent} from "./components/builder/builder.component";
 import {HeaderComponent} from "./components/header/header.component";
 import {FooterComponent} from "./components/footer/footer.component";
+import {BuilderService} from "./services/builder.service";
+import {StarmapComponent} from "./views/starmap/starmap.component";
 
 @NgModule({
   declarations: [
@@ -42,11 +43,11 @@ import {FooterComponent} from "./components/footer/footer.component";
     FooterComponent,
     TableComponent,
     ResourcesComponent,
-    BackgroundComponent,
     BuildingComponent,
     PlanetviewComponent,
     ButtonComponent,
-    BuilderComponent
+    BuilderComponent,
+    StarmapComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ import {FooterComponent} from "./components/footer/footer.component";
     AppRoutingModule,
     SimpleNotificationsModule.forRoot()
   ],
-  providers: [BackendService,ResourceLoaderService,DummyService],
+  providers: [BackendService,ResourceLoaderService,DummyService,BuilderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

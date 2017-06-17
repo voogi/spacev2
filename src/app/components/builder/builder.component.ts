@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {IBuilding} from "../../shared/interface/ibuilding";
+import {BuilderService} from "../../services/builder.service";
 
 @Component({
   selector: 'space-builder',
@@ -7,14 +9,15 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BuilderComponent implements OnInit {
 
-  @Input() visible: boolean;
-
-  public productBuildings: Array<any> = [];
-  public armyBuildings: Array<any> = [];
-  public defenseBuildings: Array<any> = [];
+  public productBuildings: Array<IBuilding> = [];
+  public armyBuildings: Array<IBuilding> = [];
+  public defenseBuildings: Array<IBuilding> = [];
   public selectedBuilding: any;
 
-  constructor() {
+  @Input()
+  public visible:boolean = false;
+
+  constructor(private builder:BuilderService) {
 
     this.productBuildings = [
       {
@@ -184,16 +187,22 @@ export class BuilderComponent implements OnInit {
         time: 90
       }
     ];
-
     this.selectedBuilding = this.productBuildings[0];
 
   }
 
-  onSelectBuilding(building:any){
+  onSelectBuilding(building:IBuilding){
     this.selectedBuilding = building;
   }
 
+  onBuild(){
+    this.builder.build(this.selectedBuilding);
+  }
+
   ngOnInit() {
+
+    this.builder.onBuild().subscribe( data => console.log(data) );
+
   }
 
 }
