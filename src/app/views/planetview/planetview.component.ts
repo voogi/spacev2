@@ -44,17 +44,4 @@ export class PlanetviewComponent implements OnInit {
         'width' : this.selectedPlanet.size + 'px'}
     }
   };
-
-  getPlanetJSON() {
-    let building : IBuilding = {
-      name : "Building_1",
-      desc : "desc",
-      energy: 20,
-      time: 2,
-      titanium: 30,
-      tooltip: "asd",
-      superPlastic: 10
-    }
-   this.backendService.saveBuilding(building, this.selectedPlanet.id);
-  }
 }
