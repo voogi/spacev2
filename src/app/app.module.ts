@@ -30,6 +30,7 @@ import {RoutedDataService} from "./services/routed-data.service";
 import {Draggable} from "./directives/draggable.directive";
 
 import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
+import {ProgressService} from "./services/progress.service";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { ProgressQueueComponent } from './components/progress-queue/progress-que
     SimpleNotificationsModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [BackendService,ResourceLoaderService,BuilderService,RoutedDataService],
+  providers: [BackendService,ResourceLoaderService,BuilderService,RoutedDataService,ProgressService],
   entryComponents : [ProgressBarComponent],
   bootstrap: [AppComponent]
 })

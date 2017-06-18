@@ -20,7 +20,7 @@ export class ProgressBarComponent implements OnInit,OnDestroy {
   public elapsedTime: number;
   @Output()
   completed: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private ended:boolean = true;
+  private ended:boolean = false;
 
   constructor() { }
 

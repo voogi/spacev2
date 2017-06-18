@@ -4,6 +4,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {ProgressBarComponent} from "../progress-bar/progress-bar.component";
+import {ProgressService} from "../../services/progress.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'space-progress-queue',
@@ -15,29 +17,30 @@ export class ProgressQueueComponent implements OnInit {
   @ViewChild('queueContainer', { read: ViewContainerRef}) container;
   private factory: ComponentFactory<ProgressBarComponent>;
 
-  constructor(private resolver: ComponentFactoryResolver) {
+  constructor(private resolver: ComponentFactoryResolver, private progressServie: ProgressService) {
     this.factory = this.resolver.resolveComponentFactory(ProgressBarComponent);
   }
 
   ngOnInit() {
 
-    this.onAddProgress({duration:10});
-    this.onAddProgress({duration:12});
-    this.onAddProgress({duration:13});
-    this.onAddProgress({duration:14});
-    this.onAddProgress({duration:15});
+    this.progressServie.addedProgress().subscribe( data => {
+      this.onAddProgress(data);
+    })
 
   }
 
   onAddProgress(progress:any){
-    let instance = this.container.createComponent(this.factory,0).instance;
-    instance.duration = progress.duration;
+    let comp = this.container.createComponent(this.factory);
+    let instance = comp.instance;
+    instance.duration = progress.time || progress.building.time;
     instance.start();
-    instance.completed.subscribe( data => console.log(data))
-  }
+    instance.completed.subscribe( data => {
+      this.progressServie.onCompletedProgress(data);
 
-  removeProgress(){
+      console.log("+INDEX", this.container.indexOf(comp));
 
+      this.container.remove(this.container.indexOf(comp));
+    })
   }
 
 }

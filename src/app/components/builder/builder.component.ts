@@ -1,18 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IBuilding} from "../../shared/interface/ibuilding";
 import {BuilderService} from "../../services/builder.service";
+import {ISlot} from "../../shared/interface/islot";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'space-builder',
   templateUrl: './builder.component.html',
   styleUrls: ['./builder.component.css']
 })
-export class BuilderComponent implements OnInit {
+export class BuilderComponent implements OnInit,OnDestroy {
 
   public productBuildings: Array<IBuilding> = [];
   public armyBuildings: Array<IBuilding> = [];
   public defenseBuildings: Array<IBuilding> = [];
   public selectedBuilding: any;
+  private selectedSlot: ISlot;
+  private buildSub: Subscription = new Subscription();
 
   @Input()
   public visible:boolean = false;
@@ -28,7 +32,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 2,
@@ -38,7 +42,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 4
       },
       {
         id: 3,
@@ -48,7 +52,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 4,
@@ -58,7 +62,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 5,
@@ -68,7 +72,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 6,
@@ -78,7 +82,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 7,
@@ -88,7 +92,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 8,
@@ -98,7 +102,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       }
     ];
     this.armyBuildings = [
@@ -110,7 +114,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 10,
@@ -120,7 +124,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       }
     ];
     this.defenseBuildings = [
@@ -132,7 +136,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium : 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       },
       {
         id: 12,
@@ -142,7 +146,7 @@ export class BuilderComponent implements OnInit {
         energy: 20,
         titanium: 40,
         superPlastic: 30,
-        time: 3
+        time: 20
       }
     ];
     this.selectedBuilding = this.productBuildings[0];
@@ -154,7 +158,7 @@ export class BuilderComponent implements OnInit {
   }
 
   onBuild(){
-    this.builder.build(this.selectedBuilding);
+    this.builder.build({ building : this.selectedBuilding, slot : this.selectedSlot });
     this.visible = false;
   }
 
@@ -164,10 +168,15 @@ export class BuilderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.builder.onSelectedSlot().subscribe( (slot) => {
+    this.buildSub = this.builder.onSelectedSlot().subscribe( (slot) => {
+      this.selectedSlot = slot;
       this.visible = true;
     });
 
+  }
+
+  ngOnDestroy(){
+    this.buildSub.unsubscribe()
   }
 
 }

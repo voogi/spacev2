@@ -23,7 +23,7 @@ import {trigger, transition, style, animate, state} from "@angular/animations";
         animate(400)
       ]),
       transition('* => void', [
-        animate(400, style({transform: 'translateY(-500px)'}))
+        animate(400, style({transform: 'translateY(-5000px)'}))
       ])
     ])
   ]
