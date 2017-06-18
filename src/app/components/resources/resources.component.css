@@ -1,9 +1,11 @@
 .background {
-  background-color: rgba(29,45,53,0.7);
+  background: url("../../../assets/imgs/menu.png");
+  background-repeat: no-repeat;
   color: white;
-  height: 30px;
-  line-height: 30px;
+  height: 62px;
+  line-height: 62px;
   text-align: center;
+  background-size: 100% 100%;
 }
 
 .resource-container {
@@ -13,7 +15,7 @@
 .resource-label{
   min-width: 80px;
   display: inline-block;
-  color: #fffa5c;
+  color: #b38b7b;
   vertical-align: top;
   margin-left: 10px;
 }
@@ -29,10 +31,16 @@
 }
 
 .resource-container:after {
-  content: "|";
-  color: #fffa5c;
+  content: " ";
+  background: url("../../../assets/imgs/menu-border.png");
+  background-size: 100% 100%;
+  display: inline-block;
+  height: 45px;
+  width: 6px;
+  color: #b38b7b;
   padding-left: 4px;
   vertical-align: top;
+  margin-top: 8px;
 }
 
 
