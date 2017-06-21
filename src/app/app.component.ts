@@ -4,13 +4,13 @@ import {Component, OnInit} from '@angular/core';
   selector: 'space-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  constructor(){
+  constructor() {
 
   }
 
-  ngOnInit(){
+  ngOnInit(): void {
 
   }
 

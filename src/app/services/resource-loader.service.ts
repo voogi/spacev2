@@ -9,28 +9,26 @@ export class ResourceLoaderService {
 
   constructor() {
     this.resources = [
-      "assets/imgs/starClassK2.png"
+      'assets/imgs/starClassK2.png'
     ];
   }
 
-  loadResources(callback:Function){
+  loadResources(callback: Function) {
 
     let loaded = false;
 
-    for( let res of this.resources){
-      if( this.loader.resources[res] == undefined ){
+    for (const res of this.resources){
+      if (this.loader.resources[res] === undefined) {
         break;
-      }
-      else{
-        loaded = true
+      }else {
+        loaded = true;
       }
 
     }
 
-    if(!loaded){
+    if (!loaded) {
       this.loader.add(this.resources).load(callback);
-    }
-    else{
+    }else {
       callback();
     }
 

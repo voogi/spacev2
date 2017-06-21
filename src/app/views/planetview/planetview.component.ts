@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {fadeInAnimation} from "../../animations/slide-in-out.animation";
-import {ActivatedRoute, Router, Params} from "@angular/router";
-import {IPlanet} from "../../shared/interface/iplanet";
-import {NotificationsService} from "angular2-notifications/dist";
-import {RoutedDataService} from "../../services/routed-data.service";
-import {BackendService} from "../../services/backend.service";
-import {IBuilding} from "../../shared/interface/ibuilding";
+import {fadeInAnimation} from '../../animations/slide-in-out.animation';
+import {ActivatedRoute, Router, Params} from '@angular/router';
+import {IPlanet} from '../../shared/interface/iplanet';
+import {NotificationsService} from 'angular2-notifications/dist';
+import {RoutedDataService} from '../../services/routed-data.service';
+import {BackendService} from '../../services/backend.service';
 
 @Component({
   selector: 'space-planetview',
@@ -22,26 +21,27 @@ export class PlanetviewComponent implements OnInit {
   private routedData: RoutedDataService, private backendService: BackendService) { }
 
   ngOnInit() {
-    this.route.params.switchMap( (params: Params) => params["id"] ).subscribe(data => {
+    this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => {
       this.selectedPlanet = this.backendService.getPlanetById(data[0]);
     });
   }
 
-  onNavigateToSystem(id:number){
+  onNavigateToSystem(id: number) {
     this.router.navigate(['/system', id]);
   }
 
   onShowNotification() {
-    this.notificationService.success("Success", "Sucessfully created a notification");
+    this.notificationService.success('Success', 'Sucessfully created a notification');
   }
 
   public getPlanetStyle() {
-    if(this.selectedPlanet){
+    if (this.selectedPlanet) {
       return {
         'background-image' : 'url(' + this.selectedPlanet.img + ')',
         'background-size' : this.selectedPlanet.size + 'px',
         'height' : this.selectedPlanet.size + 'px',
-        'width' : this.selectedPlanet.size + 'px'}
+        'width' : this.selectedPlanet.size + 'px'
+      };
     }
   };
 }

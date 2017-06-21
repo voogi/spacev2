@@ -1,6 +1,6 @@
-import {IBuilding} from "./ibuilding";
+import {IBuilding} from './ibuilding';
 export interface ISlot {
-  position: number,
-  building: IBuilding,
-  isEmpty:boolean
+  position: number;
+  building: IBuilding;
+  isEmpty: boolean;
 }

@@ -1,0 +1,73 @@
+{
+  "payload": {
+    "producer": [
+      {
+        "id": 1,
+        "type": "PRODUCER",
+        "subType": "MINING_STATION",
+        "name": "Mining Station",
+        "desc": "Produce minerals...etc..TBD",
+        "cost": {
+          "titanium": 10,
+          "energy": 20
+        },
+        "time": 10
+      },
+      {
+        "id": 2,
+        "type": "PRODUCER",
+        "subType": "ACANDEMY",
+        "name": "Academy",
+        "desc": "Produce crews for ships...etc..TBD",
+        "cost": {
+          "titanium": 10,
+          "energy": 20
+        },
+        "time": 10
+      }
+    ],
+    "military": [
+      {
+        "id": 1,
+        "type": "MILITARY",
+        "subType": "AIRPORT",
+        "name": "Airport",
+        "desc": "Produce ships...etc..TBD",
+        "cost": {
+          "titanium": 10,
+          "energy": 20
+        },
+        "time": 10
+      }
+    ],
+    "defensive": [
+      {
+        "id": 1,
+        "type": "DEFENSIVE",
+        "subType": "PLANETARY_TURRET",
+        "name": "Planetary turret",
+        "desc": "Protect the planet...etc..TBD",
+        "cost": {
+          "titanium": 10,
+          "energy": 20
+        },
+        "time": 10
+      }
+    ],
+    "development": [
+      {
+        "id": 1,
+        "type": "DEVELOPMENT",
+        "subType": "SCIENCE_STATION",
+        "name": "Science station",
+        "desc": "Develop upgrades for ship...etc..TBD",
+        "cost": {
+          "titanium": 10,
+          "energy": 20
+        },
+        "time": 10
+      }
+    ]
+  },
+  "type": "OK"
+}

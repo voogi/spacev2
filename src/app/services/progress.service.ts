@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs/Subject";
+import {Subject} from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 
@@ -11,19 +11,19 @@ export class ProgressService {
 
   constructor() {}
 
-  createProgress(obj:any){
-    this.progressSubject.next(obj)
+  createProgress(obj: any) {
+    this.progressSubject.next(obj);
   }
 
-  addedProgress() : Observable<any>{
+  addedProgress(): Observable<any> {
     return this.progressSubject;
   }
 
-  onCompletedProgress(data:any){
+  onCompletedProgress(data: any) {
     this.completedProgressSubject.next(data);
   }
 
-  onComplete() : Observable<any>{
+  onComplete(): Observable<any> {
     return this.completedProgressSubject;
   }
 

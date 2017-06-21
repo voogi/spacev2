@@ -1,8 +1,8 @@
-import {Directive, OnInit, ElementRef, HostListener, Input} from "@angular/core";
+import {Directive, OnInit, ElementRef, HostListener, Input} from '@angular/core';
 @Directive({
-  selector: '[ng2-draggable]'
+  selector: '[spaceDraggable]'
 })
-export class Draggable implements OnInit {
+export class DraggableDirective implements OnInit {
   private topStart: number;
   private leftStart: number;
   private _allowDrag: boolean = true;
@@ -23,8 +23,9 @@ export class Draggable implements OnInit {
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {
-    if (event.button === 2 || (this._handle !== undefined && event.target !== this._handle))
+    if (event.button === 2 || (this._handle !== undefined && event.target !== this._handle)) {
       return; // prevents right click drag, remove his if you don't want it
+    }
     this.md = true;
     this.topStart = event.clientY - this.element.nativeElement.style.top.replace('px', '');
     this.leftStart = event.clientX - this.element.nativeElement.style.left.replace('px', '');
@@ -37,7 +38,7 @@ export class Draggable implements OnInit {
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    //console.dir(event.target)
+    // console.dir(event.target)
     if (this.md && this._allowDrag) {
       this.element.nativeElement.style.top = (event.clientY - this.topStart) + 'px';
       this.element.nativeElement.style.left = (event.clientX - this.leftStart) + 'px';
@@ -71,14 +72,15 @@ export class Draggable implements OnInit {
     event.stopPropagation();
   }
 
-  @Input('ng2-draggable')
+  @Input('spaceDraggable')
   set allowDrag(value: boolean) {
     this._allowDrag = value;
-    if (this._allowDrag)
+    if (this._allowDrag){
       this.element.nativeElement.className += ' cursor-draggable';
-    else
+    }else {
       this.element.nativeElement.className = this.element.nativeElement.className
-        .replace(' cursor-draggable', '');
+          .replace(' cursor-draggable', '');
+    }
   }
 
   @Input()

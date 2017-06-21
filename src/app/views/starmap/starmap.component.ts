@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import * as PIXI from 'pixi.js/dist/pixi.js';
-import {Router} from "@angular/router";
-import {ResourceLoaderService} from "../../services/resource-loader.service";
-import {slideInOutAnimation,fadeInAnimation} from "../../animations/slide-in-out.animation";
+import {Router} from '@angular/router';
+import {ResourceLoaderService} from '../../services/resource-loader.service';
+import {slideInOutAnimation,fadeInAnimation} from '../../animations/slide-in-out.animation';
 
 @Component({
   selector: 'space-starmap',
@@ -23,7 +23,18 @@ export class StarmapComponent implements OnInit {
   private loader: PIXI.loader = PIXI.loader;
   private stars: Array<any> = [];
 
-  constructor(private elementRef: ElementRef, private router:Router, private resourceLoader: ResourceLoaderService) { }
+  static makeParticleGraphic(alpha: number) {
+    const gr = new PIXI.Graphics();
+    gr.beginFill(0xFFFFFF , alpha);
+    gr.drawCircle(0, 0, 3);
+    return gr;
+  }
+
+  static randomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  constructor(private elementRef: ElementRef, private router: Router, private resourceLoader: ResourceLoaderService) { }
 
   ngOnInit() {
     this.resourceLoader.loadResources(this.init.bind(this));
@@ -40,9 +51,9 @@ export class StarmapComponent implements OnInit {
 
     this.stage = new PIXI.Container();
 
-    let pointsArr = [];
+    const pointsArr = [];
 
-    let dragStart = "";
+    let dragStart = '';
 
     this.interactionManager = new PIXI.interaction.InteractionManager(this.renderer);
 
@@ -55,41 +66,41 @@ export class StarmapComponent implements OnInit {
       this.isDragging = false;
     }.bind(this));
 
-    this.interactionManager.on("mouseout", function() {
+    this.interactionManager.on('mouseout', function() {
       this.isDragging = false;
     }.bind(this));
 
-    this.interactionManager.on('mousemove',function(event){
-      if(this.isDragging){
+    this.interactionManager.on('mousemove', function(event){
+      if (this.isDragging) {
 
-        let mousePosition = event.data.global;
+        const mousePosition = event.data.global;
 
-        let dragS = JSON.parse( dragStart );
+        const dragS = JSON.parse( dragStart );
 
-        let deltaX = dragS.x - mousePosition.x;
-        let deltaY = dragS.y - mousePosition.y;
+        const deltaX = dragS.x - mousePosition.x;
+        const deltaY = dragS.y - mousePosition.y;
 
         dragStart = JSON.stringify({
           x : mousePosition.x,
           y : mousePosition.y
         });
 
-        for( let child = 0 ; child < pointsArr.length; child++){
+        for ( let child = 0 ; child < pointsArr.length; child++) {
 
-          pointsArr[child].x -= deltaX/child;
+          pointsArr[child].x -= deltaX / child;
 
-          if(pointsArr[child].x < 0){
+          if (pointsArr[child].x < 0){
             pointsArr[child].x = window.innerWidth;
           }
 
-          if(pointsArr[child].x > window.innerWidth){
+          if (pointsArr[child].x > window.innerWidth){
             pointsArr[child].x = 0;
           }
 
 
-          pointsArr[child].y -= deltaY/child;
+          pointsArr[child].y -= deltaY / child;
 
-          if(pointsArr[child].y > window.innerHeight){
+          if (pointsArr[child].y > window.innerHeight){
             pointsArr[child].y = 0;
           }
 
@@ -103,9 +114,9 @@ export class StarmapComponent implements OnInit {
           // }
         }
 
-        for( let i = 0; i < this.stars.length; i++){
-          this.stars[i].x -= deltaX/6
-          this.stars[i].y -= deltaY/6
+        for (let i = 0; i < this.stars.length; i++) {
+          this.stars[i].x -= deltaX / 6;
+          this.stars[i].y -= deltaY / 6;
         }
 
 
@@ -122,9 +133,9 @@ export class StarmapComponent implements OnInit {
 
     this.stage.addChild(this.littleStars);
 
-    let texture = this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.8) );
+    const texture = this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.8) );
 
-    let decoyTexture = [
+    const decoyTexture = [
       this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.6) ),
       this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.5) ),
       this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.4) ),
@@ -132,12 +143,12 @@ export class StarmapComponent implements OnInit {
       this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.2) )
     ];
 
-    for( let i = 0; i < this.backgroundStarLength; i++){
+    for (let i = 0; i < this.backgroundStarLength; i++) {
 
-      let index = i;
+      const index = i;
       const p = new PIXI.Sprite(texture);
-      let w = StarmapComponent.randomInt(20,window.innerWidth-20);
-      let h = StarmapComponent.randomInt(20,window.innerHeight-20);
+      const w = StarmapComponent.randomInt(20, window.innerWidth - 20);
+      const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
       p.x = w;
       p.y = h;
       this.littleStars.addChild(p);
@@ -160,33 +171,22 @@ export class StarmapComponent implements OnInit {
     this.gameLoop.call(this);
   }
 
-  gameLoop(){
+  gameLoop() {
     requestAnimationFrame(this.gameLoop.bind(this));
-    this.renderer.render(this.stage)
+    this.renderer.render(this.stage);
   }
 
-  initStars(){
-    const star = new PIXI.Sprite(this.loader.resources["assets/imgs/starClassK2.png"].texture);
-    star.x = window.innerWidth/2;
-    star.y = window.innerHeight/2;
+  initStars() {
+    const star = new PIXI.Sprite(this.loader.resources['assets/imgs/starClassK2.png'].texture);
+    star.x = window.innerWidth / 2;
+    star.y = window.innerHeight / 2;
     star.scale.set(0.2);
     this.stage.addChild(star);
     this.stars.push(star);
   }
 
-  onNavToSystem(id:number){
+  onNavToSystem(id: number) {
     this.router.navigate(['/system', id]);
-  }
-
-  static makeParticleGraphic(alpha:number){
-    let gr = new PIXI.Graphics();
-    gr.beginFill(0xFFFFFF , alpha);
-    gr.drawCircle(0, 0, 3);
-    return gr
-  }
-
-  static randomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 }

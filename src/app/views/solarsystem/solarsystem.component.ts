@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {IPlanet} from "../../shared/interface/iplanet";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {IPlanet} from '../../shared/interface/iplanet';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {fadeInAnimation} from "../../animations/slide-in-out.animation";
-import {BackendService} from "../../services/backend.service";
-import {Subscription} from "rxjs/Subscription";
-import {RoutedDataService} from "../../services/routed-data.service";
+import {fadeInAnimation} from '../../animations/slide-in-out.animation';
+import {BackendService} from '../../services/backend.service';
+import {Subscription} from 'rxjs/Subscription';
+import {RoutedDataService} from '../../services/routed-data.service';
 
 @Component({
   selector: 'space-solarsystem',
@@ -26,7 +26,7 @@ export class SolarsystemComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.switchMap( (params: Params) => params["id"] ).subscribe(data => console.log(data));
+    this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => console.log(data));
 
     this.planetSub = this.backendService.getAllPlanetBySystem().subscribe( data => {
       this.planets = data;
@@ -36,12 +36,12 @@ export class SolarsystemComponent implements OnInit {
 
   }
 
-  onNavigateToStarMap(){
+  onNavigateToStarMap() {
     this.router.navigate(['/starmap']);
   }
 
-  onNavigateToPlanet(planet: IPlanet){
-    this.router.navigate(['/planet',planet.id]);
+  onNavigateToPlanet(planet: IPlanet) {
+    this.router.navigate(['/planet', planet.id]);
   }
 
   public loadPlanetJSON() {
@@ -53,10 +53,10 @@ export class SolarsystemComponent implements OnInit {
       'background-image' : 'url(' + planet.img + ')',
       'background-size' : planet.size + 'px',
       'height' : planet.size + 'px',
-      'width' : planet.size + 'px'}
+      'width' : planet.size + 'px'};
   };
 
-  public setActivePlanet(planet: IPlanet){
+  public setActivePlanet(planet: IPlanet) {
     this.activePlanet = planet;
     this.routedData.routedPlanet = planet;
   }

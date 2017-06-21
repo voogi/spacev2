@@ -1,8 +1,8 @@
-import {ISlot} from "./islot";
-import {IBuilding} from "./ibuilding";
+import {ISlot} from './islot';
+import {IBuilding} from './ibuilding';
 export interface IBuilder {
 
-  building: IBuilding,
-  slot: ISlot
+  building: IBuilding;
+  slot: ISlot;
 
 }

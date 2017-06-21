@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {IBuilding} from "../shared/interface/ibuilding";
-import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/Observable";
-import {ISlot} from "../shared/interface/islot";
-import {ProgressService} from "./progress.service";
-import {IBuilder} from "../shared/interface/ibuilder";
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
+import {ISlot} from '../shared/interface/islot';
+import {ProgressService} from './progress.service';
+import {IBuilder} from '../shared/interface/ibuilder';
 
 @Injectable()
 export class BuilderService {
@@ -17,21 +16,21 @@ export class BuilderService {
     this.selectedSlotSubject = new Subject();
   }
 
-  build(builder:IBuilder){
+  build(builder: IBuilder) {
     this.subject.next(builder);
     this.progressService.createProgress(builder);
   }
 
-  onBuild():Observable<IBuilder>{
+  onBuild(): Observable<IBuilder> {
     return this.subject;
   }
 
-  selectedSlot(slot:ISlot){
+  selectedSlot(slot: ISlot) {
     this.selectedSlotSubject.next(slot);
   }
 
-  onSelectedSlot():Observable<ISlot>{
-    return this.selectedSlotSubject
+  onSelectedSlot(): Observable<ISlot> {
+    return this.selectedSlotSubject;
   }
 
 

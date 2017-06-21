@@ -8,21 +8,28 @@
   </div>
 
   <div class="row no-gutters">
-    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of productBuildings;"
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of producerBuildings;"
          class="col-md-2 building"></div>
   </div>
 
   <hr>
 
   <div class="row no-gutters">
-    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of armyBuildings;"
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of militaryBuildings;"
          class="col-md-2 building"></div>
   </div>
 
   <hr>
 
   <div class="row no-gutters">
-    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of defenseBuildings;"
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of defensiveBuildings;"
+         class="col-md-2 building"></div>
+  </div>
+
+  <hr>
+
+  <div class="row no-gutters">
+    <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of developmentBuildings;"
          class="col-md-2 building"></div>
   </div>
 
@@ -35,27 +42,27 @@
       </div>
       <div class="row no-gutters">
         <span class="col-lg-5 info-label">Name</span>
-        <span class="col-lg-5 info-value">{{selectedBuilding.name}}</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding?.name}}</span>
       </div>
       <div class="row no-gutters">
         <span class="col-lg-5 info-label">Desc</span>
-        <span class="col-lg-5 info-value">{{selectedBuilding.desc}}</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding?.desc}}</span>
       </div>
       <div class="row no-gutters">
         <span class="col-lg-5 info-label">Time</span>
-        <span class="col-lg-5 info-value">{{selectedBuilding.time}}</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding?.time}}</span>
       </div>
       <div class="row no-gutters">
         <span class="col-lg-5 info-label">Energy</span>
-        <span class="col-lg-5 info-value">{{selectedBuilding.energy}}</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding?.energy}}</span>
       </div>
       <div class="row no-gutters">
         <span class="col-lg-5 info-label">Plastic</span>
-        <span class="col-lg-5 info-value">{{selectedBuilding.superPlastic}}</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding?.superPlastic}}</span>
       </div>
       <div class="row no-gutters">
         <span class="col-lg-5 info-label">Titanium</span>
-        <span class="col-lg-5 info-value">{{selectedBuilding.titanium}}</span>
+        <span class="col-lg-5 info-value">{{selectedBuilding?.titanium}}</span>
       </div>
     </div>
   </div>

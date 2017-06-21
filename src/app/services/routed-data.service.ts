@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {IPlanet} from "../shared/interface/iplanet";
+import {IPlanet} from '../shared/interface/iplanet';
 
 @Injectable()
 export class RoutedDataService {

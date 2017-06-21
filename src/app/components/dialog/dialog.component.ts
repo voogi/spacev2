@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter, Output, Input, ElementRef} from '@angular/core';
-import {trigger, transition, style, animate, state} from "@angular/animations";
+import {trigger, transition, style, animate, state} from '@angular/animations';
 
 @Component({
   selector: 'space-dialog',
@@ -45,11 +45,11 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  show(){
+  show() {
     this.visible = true;
   }
 
-  getLeft(){
+  getLeft() {
     return (window.innerWidth / 2 ) - (this.width / 2) + 'px';
   }
 
