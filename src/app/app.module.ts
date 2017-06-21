@@ -31,6 +31,7 @@ import {DraggableDirective} from './directives/draggable.directive';
 
 import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
 import {ProgressService} from './services/progress.service';
+import { UnitBuilderComponent } from './components/unit-builder/unit-builder.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {ProgressService} from './services/progress.service';
     ButtonComponent,
     BuilderComponent,
     StarmapComponent,
-    ProgressQueueComponent
+    ProgressQueueComponent,
+    UnitBuilderComponent
   ],
   imports: [
     BrowserModule,

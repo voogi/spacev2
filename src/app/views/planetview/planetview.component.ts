@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer, Renderer2} from '@angular/core';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IPlanet} from '../../shared/interface/iplanet';
@@ -17,12 +17,19 @@ export class PlanetviewComponent implements OnInit {
 
   private selectedPlanet: IPlanet;
 
-  constructor(private route: ActivatedRoute, private router: Router, private notificationService: NotificationsService,
-  private routedData: RoutedDataService, private backendService: BackendService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private notificationService: NotificationsService,
+    private routedData: RoutedDataService,
+    private backendService: BackendService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef) { }
 
   ngOnInit() {
     this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => {
       this.selectedPlanet = this.backendService.getPlanetById(data[0]);
+      this.setPlanetStyle();
     });
   }
 
@@ -34,14 +41,14 @@ export class PlanetviewComponent implements OnInit {
     this.notificationService.success('Success', 'Sucessfully created a notification');
   }
 
-  public getPlanetStyle() {
-    if (this.selectedPlanet) {
-      return {
-        'background-image' : 'url(' + this.selectedPlanet.img + ')',
-        'background-size' : this.selectedPlanet.size + 'px',
-        'height' : this.selectedPlanet.size + 'px',
-        'width' : this.selectedPlanet.size + 'px'
-      };
-    }
-  };
+  setPlanetStyle(){
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+      'background-image', 'url(' + this.selectedPlanet.img + ')');
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+      'background-size', this.selectedPlanet.size + 'px');
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+      'height', this.selectedPlanet.size + 'px');
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+      'width', this.selectedPlanet.size + 'px');
+  }
 }
