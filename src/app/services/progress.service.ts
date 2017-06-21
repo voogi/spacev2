@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
+import {IBuilder} from "../shared/interface/ibuilder";
 
 @Injectable()
 export class ProgressService {
@@ -11,7 +12,7 @@ export class ProgressService {
 
   constructor() {}
 
-  createProgress(obj: any) {
+  createProgress(obj: IBuilder | any) {
     this.progressSubject.next(obj);
   }
 

@@ -20,6 +20,7 @@ export class BuilderComponent implements OnInit, OnDestroy {
   public selectedBuilding: any;
   private selectedSlot: ISlot;
   private buildSub: Subscription = new Subscription();
+  public availableBuildings: Array<any> = [];
 
   @Input()
   public visible: boolean = false;
@@ -48,6 +49,23 @@ export class BuilderComponent implements OnInit, OnDestroy {
       this.militaryBuildings = this.buildings.military;
       this.defensiveBuildings = this.buildings.defensive;
       this.developmentBuildings = this.buildings.development;
+
+      this.availableBuildings.push({
+        name : "Producer buildings",
+        buildings : this.producerBuildings
+      });
+      this.availableBuildings.push({
+        name : "Military buildings",
+        buildings : this.militaryBuildings
+      });
+      this.availableBuildings.push({
+        name : "Defensive buildings",
+        buildings : this.defensiveBuildings
+      });
+      this.availableBuildings.push({
+        name : "Development buildings",
+        buildings : this.developmentBuildings
+      });
     });
 
     this.buildSub = this.builder.onSelectedSlot().subscribe( (slot) => {

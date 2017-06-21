@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BackendService} from "../../services/backend.service";
-import {Resource} from "../../shared/resource";
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 import {Subscription} from "rxjs/Subscription";
+import {IResource} from "../../shared/interface/iresource";
 
 @Component({
   selector: 'space-resources',
@@ -13,7 +13,7 @@ export class ResourcesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   private getResourcesSub: Subscription;
-  public resources: Array<Resource> = [];
+  public resources: Array<IResource> = [];
 
   constructor( private backendService:BackendService ) {
     this.getResourcesSub = this.backendService.getPlayerResources("systemId").subscribe( data => {

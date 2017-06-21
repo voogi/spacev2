@@ -53,11 +53,17 @@ export class BuildingSlotsComponent implements OnInit {
         building : this.building,
         duration : this.building.time
       }, this.planet.id);
-
       this.selectedSlot.isEmpty = false;
     });
 
-    this.progressService.onComplete().subscribe( data => console.log(data) );
+    // when any queue completed data is a IBuilder obj
+    this.progressService.onComplete().subscribe( data => {
+      this.slots.forEach( slot => {
+        if (slot.position === data.slot.position){
+          slot.building = data.building;
+        }
+      });
+    });
 
   }
 
@@ -65,6 +71,8 @@ export class BuildingSlotsComponent implements OnInit {
     if (slot.isEmpty) {
       this.builder.selectedSlot(slot);
       this.selectedSlot = slot;
+    }else{
+      console.log(slot)
     }
   }
 

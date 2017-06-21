@@ -5,6 +5,7 @@
   background-color: #363636;
   color: white;
   z-index: 401;
+  min-width: 600px;
 }
 
 .builder-overlay {
@@ -23,15 +24,24 @@
   border-top: 1px solid rgba(0,0,0,0.5);
 }
 
+.section-header {
+  display: inline-block;
+  text-align: left;
+}
+
 .building {
   background-image: url("../../../assets/imgs/building.png");
   height: 60px;
-  width: 60px;
   background-repeat: no-repeat;
   margin-bottom: 1em;
   margin-top: 1em;
   background-position: center;
   background-size: 60px 60px;
+}
+
+.building:hover{
+  cursor: pointer;
+  outline: 1px solid whitesmoke;
 }
 
 .button-container {

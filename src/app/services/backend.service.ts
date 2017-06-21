@@ -3,10 +3,10 @@ import {environment} from '../../environments/environment.prod';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {Resource} from '../shared/resource';
 import {IPlanet} from '../shared/interface/iplanet';
 import {IBuilding} from '../shared/interface/ibuilding';
 import {IConstruction} from '../shared/interface/iconstruction';
+import {IResource} from "../shared/interface/iresource";
 
 @Injectable()
 export class BackendService {
@@ -25,7 +25,7 @@ export class BackendService {
   }
 
   /*RESOURCE RELATED BACKEND REQUESTS*/
-  getPlayerResources(systemId: string): Observable<Array<Resource>> {
+  getPlayerResources(systemId: string): Observable<Array<IResource>> {
     return this.http.get('/assets/resources.json').map( (res: Response) => res.json().payload);
   }
 

@@ -35,10 +35,7 @@ export class ProgressQueueComponent implements OnInit {
     instance.duration = progress.time || progress.building.time;
     instance.start();
     instance.completed.subscribe( data => {
-      this.progressServie.onCompletedProgress(data);
-
-      console.log("+INDEX", this.container.indexOf(comp));
-
+      this.progressServie.onCompletedProgress(progress);
       this.container.remove(this.container.indexOf(comp));
     })
   }
