@@ -14,7 +14,7 @@ import {RoutedDataService} from '../../services/routed-data.service';
    animations: [fadeInAnimation],
    host: { '[@fadeInAnimation]': '' }
 })
-export class SolarsystemComponent implements OnInit {
+export class SolarSystemComponent implements OnInit {
 
   public planets: Array<IPlanet>;
   private planetSub: Subscription;
@@ -26,7 +26,7 @@ export class SolarsystemComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => console.log(data));
+    //this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => console.log(data));
 
     this.planetSub = this.backendService.getAllPlanetBySystem().subscribe( data => {
       this.planets = data;

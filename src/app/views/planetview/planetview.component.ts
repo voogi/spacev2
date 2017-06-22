@@ -13,7 +13,7 @@ import {BackendService} from '../../services/backend.service';
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
-export class PlanetviewComponent implements OnInit {
+export class PlanetViewComponent implements OnInit {
 
   private selectedPlanet: IPlanet;
 
