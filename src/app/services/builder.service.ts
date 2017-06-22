@@ -5,6 +5,7 @@ import {ISlot} from '../shared/interface/islot';
 import {ProgressService} from './progress.service';
 import {IBuilder} from '../shared/interface/ibuilder';
 import {IBuilding} from "../shared/interface/ibuilding";
+import {IShip} from "../shared/interface/iship";
 
 @Injectable()
 export class BuilderService {
@@ -43,6 +44,5 @@ export class BuilderService {
   onSelectedBuilding(): Observable<IBuilding> {
     return this.selectedBuildingSubject;
   }
-
 
 }

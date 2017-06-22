@@ -3,9 +3,8 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {ProgressBarComponent} from "../progress-bar/progress-bar.component";
-import {ProgressService} from "../../services/progress.service";
-import {Observable} from "rxjs/Observable";
+import {ProgressBarComponent} from '../progress-bar/progress-bar.component';
+import {ProgressService} from '../../services/progress.service';
 
 @Component({
   selector: 'space-progress-queue',
@@ -22,22 +21,20 @@ export class ProgressQueueComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.progressServie.addedProgress().subscribe( data => {
       this.onAddProgress(data);
-    })
-
+    });
   }
 
-  onAddProgress(progress:any){
-    let comp = this.container.createComponent(this.factory);
-    let instance = comp.instance;
-    instance.duration = progress.time || progress.building.time;
+  onAddProgress(progress: any) {
+    const comp = this.container.createComponent(this.factory);
+    const instance = comp.instance;
+    instance.duration = progress.time || progress.item.time;
     instance.start();
     instance.completed.subscribe( data => {
       this.progressServie.onCompletedProgress(progress);
       this.container.remove(this.container.indexOf(comp));
-    })
+    });
   }
 
 }

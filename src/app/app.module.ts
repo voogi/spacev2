@@ -21,7 +21,7 @@ import {BuildingSlotsComponent} from './components/building-slots/building-slots
 import { PlanetviewComponent } from './views/planetview/planetview.component';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {ButtonComponent} from './components/button/button.component';
-import {BuilderComponent} from './components/builder/builder.component';
+import {BuildingBuilderComponent} from './components/building-builder/building-builder';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BuilderService} from './services/builder.service';
@@ -52,7 +52,7 @@ import { UnitBuilderComponent } from './components/unit-builder/unit-builder.com
     BuildingSlotsComponent,
     PlanetviewComponent,
     ButtonComponent,
-    BuilderComponent,
+    BuildingBuilderComponent,
     StarmapComponent,
     ProgressQueueComponent,
     UnitBuilderComponent

@@ -1,8 +1,9 @@
 import {ISlot} from './islot';
-import {IBuilding} from './ibuilding';
+import {BuilderType} from '../builder-type.enum';
 export interface IBuilder {
 
-  building: IBuilding;
-  slot: ISlot;
+  item: any;
+  slot?: ISlot;
+  type: BuilderType;
 
 }

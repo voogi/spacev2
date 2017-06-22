@@ -8,6 +8,7 @@ import {ISlot} from '../../shared/interface/islot';
 import {BackendService} from '../../services/backend.service';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {ProgressService} from '../../services/progress.service';
+import {BuilderType} from "../../shared/builder-type.enum";
 
 @Component({
   selector: 'space-building-slots',
@@ -44,25 +45,28 @@ export class BuildingSlotsComponent implements OnInit {
     }
 
 
-    this.builder.onBuild().subscribe( (data: IBuilder) => {
+    this.builder.onBuild().subscribe( (builder: IBuilder) => {
+      if (builder.type === BuilderType.BULDING) {
+        this.building = builder.item;
+        this.building.position = builder.slot.position;
 
-      this.building = data.building;
-      this.building.position = data.slot.position;
-
-      this.backendService.startConstruction({
-        building : this.building,
-        duration : this.building.time
-      }, this.planet.id);
-      this.selectedSlot.isEmpty = false;
+        this.backendService.startConstruction({
+          building : this.building,
+          duration : this.building.time
+        }, this.planet.id);
+        this.selectedSlot.isEmpty = false;
+      }
     });
 
     // when any queue completed data is a IBuilder obj
-    this.progressService.onComplete().subscribe( data => {
-      this.slots.forEach( slot => {
-        if (slot.position === data.slot.position){
-          slot.building = data.building;
-        }
-      });
+    this.progressService.onComplete().subscribe( (builder: IBuilder) => {
+      if (builder.type === BuilderType.BULDING) {
+        this.slots.forEach( (slot: ISlot) => {
+          if (slot.position === builder.slot.position) {
+            slot.building = builder.item;
+          }
+        });
+      }
     });
 
   }

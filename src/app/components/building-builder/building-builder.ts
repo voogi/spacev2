@@ -4,13 +4,15 @@ import {BuilderService} from '../../services/builder.service';
 import {ISlot} from '../../shared/interface/islot';
 import {Subscription} from 'rxjs/Subscription';
 import {BackendService} from '../../services/backend.service';
+import {IBuilder} from "../../shared/interface/ibuilder";
+import {BuilderType} from "../../shared/builder-type.enum";
 
 @Component({
   selector: 'space-builder',
-  templateUrl: './builder.component.html',
-  styleUrls: ['./builder.component.css']
+  templateUrl: './building-builder.html',
+  styleUrls: ['./building-builder.css']
 })
-export class BuilderComponent implements OnInit, OnDestroy {
+export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   public buildings: any = {};
   public producerBuildings: Array<IBuilding> = [];
@@ -33,7 +35,12 @@ export class BuilderComponent implements OnInit, OnDestroy {
   }
 
   onBuild() {
-    this.builder.build({ building : this.selectedBuilding, slot : this.selectedSlot });
+    const item: IBuilder = {
+      type: BuilderType.BULDING,
+      slot: this.selectedSlot,
+      item: this.selectedBuilding
+    };
+    this.builder.build(item);
     this.visible = false;
   }
 
@@ -51,19 +58,19 @@ export class BuilderComponent implements OnInit, OnDestroy {
       this.developmentBuildings = this.buildings.development;
 
       this.availableBuildings.push({
-        name : "Producer buildings",
+        name : 'Producer buildings',
         buildings : this.producerBuildings
       });
       this.availableBuildings.push({
-        name : "Military buildings",
+        name : 'Military buildings',
         buildings : this.militaryBuildings
       });
       this.availableBuildings.push({
-        name : "Defensive buildings",
+        name : 'Defensive buildings',
         buildings : this.defensiveBuildings
       });
       this.availableBuildings.push({
-        name : "Development buildings",
+        name : 'Development buildings',
         buildings : this.developmentBuildings
       });
     });

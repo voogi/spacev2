@@ -3,6 +3,9 @@ import {BackendService} from '../../services/backend.service';
 import {ProgressService} from '../../services/progress.service';
 import {BuilderService} from '../../services/builder.service';
 import {IBuilding} from '../../shared/interface/ibuilding';
+import {IShip} from '../../shared/interface/iship';
+import {BuilderType} from "../../shared/builder-type.enum";
+import {IBuilder} from "../../shared/interface/ibuilder";
 
 @Component({
   selector: 'space-unit-builder',
@@ -11,9 +14,9 @@ import {IBuilding} from '../../shared/interface/ibuilding';
 })
 export class UnitBuilderComponent implements OnInit, OnDestroy {
 
-  public ships: Array<any> = [];
+  public ships: Array<IShip> = [];
   public visible: boolean = false;
-  public selectedShip: any;
+  public selectedShip: IShip;
 
   constructor(
       private backendService: BackendService,
@@ -22,14 +25,18 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
 
 
   onBuild() {
-    // TODO on ship build
+    this.builderService.build({
+      item : this.selectedShip,
+      type : BuilderType.SHIP
+    });
   }
+
   onCancel() {
     this.visible = false;
   }
 
-  onSelectShip(ship: any) {
-    console.log('SELECTED_SHIP', ship);
+  onSelectShip(ship: IShip) {
+    this.selectedShip = ship;
   }
 
   ngOnInit(): void {
@@ -39,7 +46,13 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
       this.backendService.getAllShips().subscribe( data => {
         this.ships = data['military'];
       });
-    } );
+    });
+
+    this.progressService.onComplete().subscribe( (builder: IBuilder) => {
+      if (builder.type === BuilderType.SHIP) {
+        console.log(builder.item);
+      }
+    });
 
   }
 
