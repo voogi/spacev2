@@ -71,8 +71,8 @@ export class BuildingSlotsComponent implements OnInit {
     if (slot.isEmpty) {
       this.builder.selectedSlot(slot);
       this.selectedSlot = slot;
-    }else{
-      console.log(slot)
+    }else {
+      this.builder.selectedBuilding(slot.building);
     }
   }
 

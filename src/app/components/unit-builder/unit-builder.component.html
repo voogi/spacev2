@@ -1,0 +1,70 @@
+<div *ngIf="visible" class="builder-overlay"></div>
+<div *ngIf="visible" class="builder-container container-fluid">
+
+  <div class="row">
+    <div class="col builder-header text-center">
+      Available ships
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col">
+      <div class="row">
+        <div class="section-header col">Ships</div>
+      </div>
+      <div class="row">
+        <div title="{{b?.tooltip}}" (click)="onSelectShip(b)" *ngFor="let b of ships;"
+             class="col-md-2 col-lg-2">
+          <div class="building"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="row preview-header">
+        <span class="col info-label">Building preview</span>
+      </div>
+      <div class="row">
+        <span class="col-lg-2 info-label">Name</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.name}}</span>
+      </div>
+      <div class="row">
+        <span class="col-lg-2 info-label">Desc</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.desc}}</span>
+      </div>
+      <div class="row">
+        <span class="col-lg-2 info-label">Time</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.time}}</span>
+      </div>
+      <div class="row">
+        <span class="col-lg-2 info-label">Energy</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.energy}}</span>
+      </div>
+      <div class="row">
+        <span class="col-lg-2 info-label">Plastic</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.superPlastic}}</span>
+      </div>
+      <div class="row">
+        <span class="col-lg-2 info-label">Titanium</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.titanium}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row button-group">
+    <div class="col">
+      <div class="row">
+        <div class="col text-right">
+          <space-button (click)="onBuild()" [name]="'Build'"></space-button>
+          <space-button (click)="onCancel()" [name]="'Cancel'"></space-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

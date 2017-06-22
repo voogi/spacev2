@@ -33,7 +33,10 @@
 
 
 .building{
-  background: cornflowerblue;
+  background-image: url("../../../assets/imgs/building.png");
   height: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60px 60px;
 }
 

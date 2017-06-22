@@ -3,10 +3,11 @@ import {environment} from '../../environments/environment.prod';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 import {IPlanet} from '../shared/interface/iplanet';
 import {IBuilding} from '../shared/interface/ibuilding';
 import {IConstruction} from '../shared/interface/iconstruction';
-import {IResource} from "../shared/interface/iresource";
+import {IResource} from '../shared/interface/iresource';
 
 @Injectable()
 export class BackendService {
@@ -19,7 +20,12 @@ export class BackendService {
 
   constructor( private http: Http ) { }
 
-  /*BUILDING RELATED REQUEST*/
+  /*SHIPS RELATED REQUESTS*/
+  getAllShips() {
+    return this.http.get('/assets/ships.json').map( (res: Response) => res.json().payload );
+  }
+
+  /*BUILDING RELATED REQUESTS*/
   getAllBuilding() {
     return this.http.get('/assets/buildings.json').map( (res: Response) => res.json().payload);
   }
