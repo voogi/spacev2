@@ -1,4 +1,18 @@
-.progress-bar {
+.progress-bar-comp {
   -webkit-transition: width 1.3s ease-out;
   transition: width 1.3s ease-out;
+  background-image: url("../../../assets/imgs/SliderFiller.png");
+  background-size: 278px 11px;
+  background-position-x: 4px;
+  background-repeat: no-repeat;
+  width: 282px;
+  height: 11px;
+}
+
+.progress-comp {
+  background-image: url("../../../assets/imgs/SliderBack.png");
+  background-size: 282px 11px;
+  background-repeat: no-repeat;
+  width: 282px;
+  height: 11px;
 }

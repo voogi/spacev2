@@ -1,3 +1,10 @@
-<div class="progress">
-  <div class="progress-bar" role="progressbar" [style.width]="currentWidth + '%'">{{currentWidth}}%</div>
+<div class="row">
+  <div class="col-lg-2">
+    {{currentWidth}}%
+  </div>
+  <div class="col-lg-10 d-flex align-items-center">
+    <div class="progress-comp">
+      <div class="progress-bar-comp" role="progressbar" [style.width]="currentWidth + '%'"></div>
+    </div>
+  </div>
 </div>
