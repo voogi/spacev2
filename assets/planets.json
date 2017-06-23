@@ -5,7 +5,7 @@
       "id": 1,
       "name": "Pluto",
       "size": 120,
-      "img": "/spacev2/assets/imgs/planet_1.png",
+      "img": "/assets/imgs/planet_1.png",
       "slots": 4,
       "buildings" : [],
       "constructions" : []
@@ -14,7 +14,7 @@
       "id": 2,
       "name": "Merkur",
       "size": 120,
-      "img": "/spacev2/assets/imgs/planet_2.png",
+      "img": "/assets/imgs/planet_2.png",
       "slots": 6,
       "buildings" : [],
       "constructions" : []
@@ -23,7 +23,7 @@
       "id": 3,
       "name": "Mars",
       "size": 120,
-      "img": "/spacev2/assets/imgs/planet_3.png",
+      "img": "/assets/imgs/planet_3.png",
       "slots": 7,
       "buildings" : [],
       "constructions" : []
@@ -32,7 +32,7 @@
       "id": 4,
       "name": "Mars",
       "size": 120,
-      "img": "/spacev2/assets/imgs/planet_3.png",
+      "img": "/assets/imgs/planet_3.png",
       "slots": 7,
       "buildings" : [],
       "constructions" : []
@@ -41,7 +41,7 @@
       "id": 5,
       "name": "Mars",
       "size": 120,
-      "img": "/spacev2/assets/imgs/planet_3.png",
+      "img": "/assets/imgs/planet_3.png",
       "slots": 7,
       "buildings" : [],
       "constructions" : []
