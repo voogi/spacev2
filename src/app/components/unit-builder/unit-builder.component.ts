@@ -7,6 +7,7 @@ import {IShip} from '../../shared/interface/iship';
 import {BuilderType} from '../../shared/builder-type.enum';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {Subscription} from "rxjs/Subscription";
+import {isUndefined} from "util";
 
 @Component({
   selector: 'space-unit-builder',
@@ -20,6 +21,7 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
   public selectedShip: IShip;
   public onSelectedBuildingSub: Subscription;
   public onCompleteSub: Subscription;
+  public getAllShipSub: Subscription;
 
   constructor(
       private backendService: BackendService,
@@ -28,6 +30,7 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
   {
     this.onSelectedBuildingSub = new Subscription();
     this.onCompleteSub = new Subscription();
+    this.getAllShipSub = new Subscription();
   }
 
   onSelectShip(ship: IShip) {
@@ -35,10 +38,15 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
   }
 
   onBuild() {
-    this.builderService.build({
-      item : this.selectedShip,
-      type : BuilderType.SHIP
-    });
+
+    if(this.selectedShip === undefined) return;
+
+    const item: IBuilder = {
+      type  : BuilderType.SHIP,
+      item : this.selectedShip
+    };
+    this.builderService.build(item);
+    this.visible = false;
   }
 
   onCancel() {
@@ -49,7 +57,7 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
 
     this.onSelectedBuildingSub = this.builderService.onSelectedBuilding().subscribe( (building: IBuilding) => {
       this.visible = true;
-      this.backendService.getAllShips().subscribe( data => {
+      this.getAllShipSub = this.backendService.getAllShips().subscribe( data => {
         this.ships = data['military'];
       });
     });
@@ -66,5 +74,6 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.onSelectedBuildingSub.unsubscribe();
     this.onCompleteSub.unsubscribe();
+    this.getAllShipSub.unsubscribe();
   }
 }

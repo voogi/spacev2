@@ -23,6 +23,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
   private selectedSlot: ISlot;
   private buildSub: Subscription = new Subscription();
   public availableBuildings: Array<any> = [];
+  private allBuildingSub: Subscription;
 
   @Input()
   public visible: boolean = false;
@@ -32,9 +33,13 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   onSelectBuilding(building: IBuilding) {
     this.selectedBuilding = building;
+    this.allBuildingSub = new Subscription();
   }
 
   onBuild() {
+
+    if(this.selectedBuilding === undefined) return;
+
     const item: IBuilder = {
       type: BuilderType.BULDING,
       slot: this.selectedSlot,
@@ -50,7 +55,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.backendService.getAllBuilding().subscribe( buildings => {
+    this.allBuildingSub = this.backendService.getAllBuilding().subscribe( buildings => {
       this.buildings = buildings;
       this.producerBuildings = this.buildings.producer;
       this.militaryBuildings = this.buildings.military;
@@ -84,6 +89,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.buildSub.unsubscribe();
+    this.allBuildingSub.unsubscribe();
   }
 
 }
