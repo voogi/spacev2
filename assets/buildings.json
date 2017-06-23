@@ -11,7 +11,7 @@
           "titanium": 10,
           "energy": 20
         },
-        "time": 10
+        "time": 200
       },
       {
         "id": 2,
@@ -20,10 +20,10 @@
         "name": "Academy",
         "desc": "Produce crews for ships...etc..TBD",
         "cost": {
-          "titanium": 10,
+          "titanium": 200,
           "energy": 20
         },
-        "time": 10
+        "time": 200
       }
     ],
     "military": [
@@ -34,10 +34,10 @@
         "name": "Airport",
         "desc": "Produce ships...etc..TBD",
         "cost": {
-          "titanium": 10,
+          "titanium": 200,
           "energy": 20
         },
-        "time": 10
+        "time": 200
       }
     ],
     "defensive": [
@@ -48,10 +48,10 @@
         "name": "Planetary turret",
         "desc": "Protect the planet...etc..TBD",
         "cost": {
-          "titanium": 10,
+          "titanium": 200,
           "energy": 20
         },
-        "time": 10
+        "time": 200
       }
     ],
     "development": [
@@ -62,10 +62,10 @@
         "name": "Science station",
         "desc": "Develop upgrades for ship...etc..TBD",
         "cost": {
-          "titanium": 10,
+          "titanium": 200,
           "energy": 20
         },
-        "time": 10
+        "time": 200
       }
     ]
   },
