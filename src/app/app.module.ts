@@ -29,6 +29,7 @@ import {DraggableDirective} from './directives/draggable.directive';
 import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
 import {ProgressService} from './services/progress.service';
 import { UnitBuilderComponent } from './components/unit-builder/unit-builder.component';
+import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { UnitBuilderComponent } from './components/unit-builder/unit-builder.com
     BuildingBuilderComponent,
     ProgressQueueComponent,
     UnitBuilderComponent,
-    routedComponents
+    routedComponents,
+    PlanetDetailsComponent
   ],
   imports: [
     BrowserModule,

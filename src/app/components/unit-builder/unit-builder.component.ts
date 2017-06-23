@@ -4,8 +4,8 @@ import {ProgressService} from '../../services/progress.service';
 import {BuilderService} from '../../services/builder.service';
 import {IBuilding} from '../../shared/interface/ibuilding';
 import {IShip} from '../../shared/interface/iship';
-import {BuilderType} from "../../shared/builder-type.enum";
-import {IBuilder} from "../../shared/interface/ibuilder";
+import {BuilderType} from '../../shared/builder-type.enum';
+import {IBuilder} from '../../shared/interface/ibuilder';
 
 @Component({
   selector: 'space-unit-builder',

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit, Renderer, Renderer2} from '@angular/core';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IPlanet} from '../../shared/interface/iplanet';
@@ -10,12 +10,15 @@ import {BackendService} from '../../services/backend.service';
   selector: 'space-planetview',
   templateUrl: './planetview.component.html',
   styleUrls: ['./planetview.component.css'],
-  animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  animations: [fadeInAnimation]
 })
 export class PlanetViewComponent implements OnInit {
 
-  private selectedPlanet: IPlanet;
+  @HostBinding('@fadeInAnimation') get fadeInAnimation() {
+    return '@fadeInAnimation';
+  }
+
+  public selectedPlanet: IPlanet;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,14 +44,14 @@ export class PlanetViewComponent implements OnInit {
     this.notificationService.success('Success', 'Sucessfully created a notification');
   }
 
-  setPlanetStyle(){
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+  setPlanetStyle() {
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
       'background-image', 'url(' + this.selectedPlanet.img + ')');
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
       'background-size', this.selectedPlanet.size + 'px');
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
       'height', this.selectedPlanet.size + 'px');
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector(".planet"),
+    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
       'width', this.selectedPlanet.size + 'px');
   }
 }

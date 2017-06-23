@@ -1,17 +1,20 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit} from '@angular/core';
 import * as PIXI from 'pixi.js/dist/pixi.js';
 import {Router} from '@angular/router';
 import {ResourceLoaderService} from '../../services/resource-loader.service';
-import {slideInOutAnimation,fadeInAnimation} from '../../animations/slide-in-out.animation';
+import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 
 @Component({
   selector: 'space-starmap',
   templateUrl: './starmap.component.html',
   styleUrls: ['./starmap.component.css'],
-  animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  animations: [fadeInAnimation]
 })
 export class StarmapComponent implements OnInit {
+
+  @HostBinding('@fadeInAnimation') get fadeInAnimation() {
+    return '@fadeInAnimation';
+  }
 
   private renderer: any;
   private stage: PIXI.Container;
@@ -40,7 +43,7 @@ export class StarmapComponent implements OnInit {
     this.resourceLoader.loadResources(this.init.bind(this));
   }
 
-  init(){
+  init() {
 
     this.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {
       transparent : true
@@ -89,22 +92,22 @@ export class StarmapComponent implements OnInit {
 
           pointsArr[child].x -= deltaX / child;
 
-          if (pointsArr[child].x < 0){
+          if (pointsArr[child].x < 0) {
             pointsArr[child].x = window.innerWidth;
           }
 
-          if (pointsArr[child].x > window.innerWidth){
+          if (pointsArr[child].x > window.innerWidth) {
             pointsArr[child].x = 0;
           }
 
 
           pointsArr[child].y -= deltaY / child;
 
-          if (pointsArr[child].y > window.innerHeight){
+          if (pointsArr[child].y > window.innerHeight) {
             pointsArr[child].y = 0;
           }
 
-          if(pointsArr[child].y < 0){
+          if (pointsArr[child].y < 0) {
             pointsArr[child].y = window.innerHeight;
           }
 

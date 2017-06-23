@@ -4,7 +4,7 @@
     {
       "id": 1,
       "name": "Pluto",
-      "size": 200,
+      "size": 120,
       "img": "/assets/imgs/planet_1.png",
       "slots": 4,
       "buildings" : [],
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "name": "Merkur",
-      "size": 400,
+      "size": 120,
       "img": "/assets/imgs/planet_2.png",
       "slots": 6,
       "buildings" : [],
@@ -22,7 +22,25 @@
     {
       "id": 3,
       "name": "Mars",
-      "size": 300,
+      "size": 120,
+      "img": "/assets/imgs/planet_3.png",
+      "slots": 7,
+      "buildings" : [],
+      "constructions" : []
+    },
+    {
+      "id": 4,
+      "name": "Mars",
+      "size": 120,
+      "img": "/assets/imgs/planet_3.png",
+      "slots": 7,
+      "buildings" : [],
+      "constructions" : []
+    },
+    {
+      "id": 5,
+      "name": "Mars",
+      "size": 120,
       "img": "/assets/imgs/planet_3.png",
       "slots": 7,
       "buildings" : [],

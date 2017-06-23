@@ -4,22 +4,22 @@
     <div class="dialog-content">
       <div class="dialog-header">
         <div class="row justify-content-center align-items-center no-gutters">
-          <div class="col-11 dialog-title"  #dragHandle>
+          <div class="col-12 dialog-title"  #dragHandle>
             <span>{{title}}</span>
           </div>
-          <div (click)="close()" class="col dialog-exit"></div>
+          <!--<div (click)="close()" class="col dialog-exit"></div>-->
         </div>
       </div>
       <div class="dialog-body">
         <ng-content></ng-content>
       </div>
-      <!--<div class="dialog-footer">-->
-        <!--<div class="row align-items-center">-->
-          <!--<div class="col text-right button-container">-->
-            <!--<button (click)="close()" class="dialog-button">Close</button>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="dialog-footer">
+        <div class="row align-items-center">
+          <div class="col text-right button-container">
+            <space-button [name]="'Close'" (click)="close()" class="dialog-button"></space-button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

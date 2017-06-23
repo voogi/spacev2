@@ -1,26 +1,25 @@
 import {Component, OnInit, Input, OnDestroy, Output, EventEmitter} from '@angular/core';
-import {TimerObservable} from "rxjs/observable/TimerObservable";
-import {Subscription} from "rxjs";
-import {AppComponent} from "../../app.component";
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'space-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.css']
 })
-export class ProgressBarComponent implements OnInit,OnDestroy {
+export class ProgressBarComponent implements OnInit, OnDestroy {
 
 
   private subscription: Subscription;
   public currentWidth: number = 0;
   @Input()
-  public duration:number;
+  public duration: number;
   public remainingTime: number;
   @Input()
   public elapsedTime: number;
   @Output()
   completed: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private ended:boolean = false;
+  private ended: boolean = false;
 
   constructor() { }
 
@@ -30,22 +29,22 @@ export class ProgressBarComponent implements OnInit,OnDestroy {
   public start(): void {
     this.currentWidth = 0;
     this.remainingTime = this.duration;
-    if(this.elapsedTime){
+    if (this.elapsedTime) {
       this.remainingTime = this.duration - this.elapsedTime;
     }
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    let timer = TimerObservable.create(0, 1000);
+    const timer = TimerObservable.create(0, 1000);
     this.subscription = timer.subscribe(t => {
-      if(this.elapsedTime){
+      if (this.elapsedTime) {
         t += this.elapsedTime;
       }
 
       this.ended = false;
-      this.currentWidth = Math.round(((t+1) / this.duration) * 100);
+      this.currentWidth = Math.round(((t + 1) / this.duration) * 100);
       this.remainingTime -= 1;
-      if((t+1) == this.duration){
+      if ((t + 1) === this.duration) {
         this.ended = true;
         this.subscription.unsubscribe();
         this.completed.emit(this.ended);
@@ -54,7 +53,7 @@ export class ProgressBarComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }

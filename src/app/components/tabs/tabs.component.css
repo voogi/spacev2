@@ -42,7 +42,6 @@
   white-space: nowrap;
   line-height: 2.5;
   padding: 0 1em;
-  font-weight: 700;
 }
 
 .tabs nav a span {
@@ -64,7 +63,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: rgb(29,45,53);
+  background: #6a1d01;
   content: '';
   -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
   transition: background-color 0.3s, transform 0.3s;
@@ -82,7 +81,7 @@
 .tabs nav a:hover::after,
 .tabs nav a:focus::after,
 .tabs nav li.tab-current a::after {
-  background: rgb(29,45,53);
+  background: #6a1d01;
 }
 
 .tabs nav a:hover span {

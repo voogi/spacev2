@@ -8,7 +8,7 @@ import {ISlot} from '../../shared/interface/islot';
 import {BackendService} from '../../services/backend.service';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {ProgressService} from '../../services/progress.service';
-import {BuilderType} from "../../shared/builder-type.enum";
+import {BuilderType} from '../../shared/builder-type.enum';
 
 @Component({
   selector: 'space-building-slots',

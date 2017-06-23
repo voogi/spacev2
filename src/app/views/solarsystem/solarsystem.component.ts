@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit, Renderer2} from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -11,28 +11,33 @@ import {RoutedDataService} from '../../services/routed-data.service';
   selector: 'space-solarsystem',
   templateUrl: './solarsystem.component.html',
   styleUrls: ['./solarsystem.component.css'],
-   animations: [fadeInAnimation],
-   host: { '[@fadeInAnimation]': '' }
+   animations: [fadeInAnimation]
 })
 export class SolarSystemComponent implements OnInit {
+
+  @HostBinding('@fadeInAnimation') get fadeInAnimation() {
+    return '@fadeInAnimation';
+  }
 
   public planets: Array<IPlanet>;
   private planetSub: Subscription;
   public activePlanet: IPlanet;
 
 
-  constructor( private route: ActivatedRoute, private router: Router, private backendService: BackendService,
-  private routedData: RoutedDataService) { }
+  constructor(
+      private route: ActivatedRoute,
+      private router: Router,
+      private backendService: BackendService,
+      private routedData: RoutedDataService,
+      private renderer: Renderer2) { }
 
   ngOnInit() {
 
-    //this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => console.log(data));
-
+    // this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => console.log(data));
     this.planetSub = this.backendService.getAllPlanetBySystem().subscribe( data => {
       this.planets = data;
+      this.activePlanet = data[0];
     });
-
-
 
   }
 
@@ -51,9 +56,7 @@ export class SolarSystemComponent implements OnInit {
   public getPlanetStyle(planet: IPlanet) {
     return {
       'background-image' : 'url(' + planet.img + ')',
-      'background-size' : planet.size + 'px',
-      'height' : planet.size + 'px',
-      'width' : planet.size + 'px'};
+      'background-size' : planet.size + 'px'};
   };
 
   public setActivePlanet(planet: IPlanet) {

@@ -1,17 +1,23 @@
 <div class="system-container">
   <space-resources></space-resources>
   <div class="row">
-    <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
-    <space-button (click)="loadPlanetJSON()" [name]="'Load Planets JSON'"></space-button>
-    <space-button (click)="dialog.show()" [name]="'Dialog'"></space-button>
+    <div class="col">
+      <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
+      <space-button (click)="loadPlanetJSON()" [name]="'Load Planets JSON'"></space-button>
+      <space-button (click)="dialog.show()" [name]="'Dialog'"></space-button>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 solar-system-background row no-gutters">
-      <div class="planet col-md-4" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
+  <div class="row planet-holder-row">
+    <div class="col solar-system-background row">
+      <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
         <div class="planet-background" [ngStyle]="getPlanetStyle(planet)" (click)="setActivePlanet(planet)" (dblclick)="onNavigateToPlanet(planet)"></div>
         <div class="planet-name">{{planet.name}}</div>
-        <div class="planet-buildings glass-container"></div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <space-planet-details [planet]="activePlanet"></space-planet-details>
     </div>
   </div>
   <space-dialog #dialog [hasOverlay]="true" [draggable]="true" [width]="1000" [title]="'Dialog'">

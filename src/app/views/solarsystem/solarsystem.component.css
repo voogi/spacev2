@@ -7,10 +7,15 @@
 .planet-background {
   background: no-repeat center;
   margin: 0 auto;
+  transition: all .3s ease;
+  width: 100%;
+  min-height: 140px;
 }
 
 .planet-background:hover {
   cursor: pointer;
+  transition: all .3s ease;
+  background-size: 140px!important;
 }
 
 .planet-buildings {
@@ -54,4 +59,9 @@
 
 .system-container {
   height: 100vh;
+}
+
+.planet-holder-row{
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

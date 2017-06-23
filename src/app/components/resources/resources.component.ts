@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BackendService} from "../../services/backend.service";
-import {TimerObservable} from "rxjs/observable/TimerObservable";
-import {Subscription} from "rxjs/Subscription";
-import {IResource} from "../../shared/interface/iresource";
+import {BackendService} from '../../services/backend.service';
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
+import {Subscription} from 'rxjs/Subscription';
+import {IResource} from '../../shared/interface/iresource';
 
 @Component({
   selector: 'space-resources',
@@ -15,29 +15,29 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   private getResourcesSub: Subscription;
   public resources: Array<IResource> = [];
 
-  constructor( private backendService:BackendService ) {
-    this.getResourcesSub = this.backendService.getPlayerResources("systemId").subscribe( data => {
+  constructor( private backendService: BackendService ) {
+    this.getResourcesSub = this.backendService.getPlayerResources('systemId').subscribe( data => {
       this.resources = data;
-    } )
+    } );
   }
 
-  onRefresh(){
-    this.getResourcesSub = this.backendService.getPlayerResources("systemId").subscribe( data => {
+  onRefresh() {
+    this.getResourcesSub = this.backendService.getPlayerResources('systemId').subscribe( data => {
       this.resources = data;
-    } )
+    } );
   }
 
   ngOnInit() {
-    let timer = TimerObservable.create(0, 1000);
+    const timer = TimerObservable.create(0, 1000);
     this.subscription = timer.subscribe(() => {
-      for(let i = 0; i < this.resources.length; i++){
-        this.resources[i].amount += Math.floor( this.resources[i].pps )
+      for (let i = 0; i < this.resources.length; i++) {
+        this.resources[i].amount += Math.floor( this.resources[i].pps );
       }
     });
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
     this.getResourcesSub.unsubscribe();
   }

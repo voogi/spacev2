@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   private mouseEnter: boolean = false;
   private options: any = {};
-  private tmhover:any;
+  private tmhover: any;
   public activePage: number = 0;
   @Output() onChange = new EventEmitter<number>();
 
@@ -24,15 +24,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  act(event: MouseEvent, id:number) {
+  act(event: MouseEvent, id: number) {
 
     this.onChange.emit(id);
     this.activePage = id;
 
-    let direction = this.getDirection(event.srcElement, { x: event.pageX, y: event.pageY } );
-    let styleCSS = this.getStyle( direction );
-    let $overlay = $(event.srcElement).find(".menu-overlay");
-    let self = this;
+    const direction = this.getDirection(event.srcElement, { x: event.pageX, y: event.pageY } );
+    const styleCSS = this.getStyle( direction );
+    const $overlay = $(event.srcElement).find('.menu-overlay');
+    const self = this;
 
     $overlay.hide().css( styleCSS.from );
     clearTimeout( this.tmhover );
@@ -41,8 +41,8 @@ export class HeaderComponent implements OnInit {
 
       $overlay.show( 0, function() {
 
-        let $el = $( this );
-        if( self.options.support ) {
+        const $el = $( this );
+        if ( self.options.support ) {
           $el.css( 'transition', 'all 300ms ease');
         }
         self.applyAnimation( $el, styleCSS.to, self.options.speed );
@@ -55,12 +55,12 @@ export class HeaderComponent implements OnInit {
 
   deact(event: MouseEvent) {
 
-    let direction = this.getDirection(event.srcElement, { x: event.pageX, y: event.pageY } );
-    let styleCSS = this.getStyle( direction );
-    let $overlay = $(event.srcElement).find(".menu-overlay");
-    let self = this;
+    const direction = this.getDirection(event.srcElement, { x: event.pageX, y: event.pageY } );
+    const styleCSS = this.getStyle( direction );
+    const $overlay = $(event.srcElement).find('.menu-overlay');
+    const self = this;
 
-    if( this.options.support ) {
+    if ( this.options.support ) {
       $overlay.css( 'transition', this.options.transitionProp );
     }
     clearTimeout( self.tmhover );
@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
 
   getDirection(el: any, coord: any) {
 
-    let w = $(el).width(),
+    const w = $(el).width(),
         h = $(el).height(),
         top = $(el).offset().top,
         left = $(el).offset().left,
@@ -77,13 +77,14 @@ export class HeaderComponent implements OnInit {
         x = ( coord.x - left - ( w / 2 )) * ( w > h ? ( h /  w  ) : 1 ),
         y = ( coord.y - top - ( h / 2 )) * ( h > w ? ( w  / h  ) : 1 ) ;
 
-    let direction = Math.round(( ( ( Math.atan2(y, x) * (180 / Math.PI) ) + 180 ) / 90 ) + 3) % 4;
+    const direction = Math.round(( ( ( Math.atan2(y, x) * (180 / Math.PI) ) + 180 ) / 90 ) + 3) % 4;
 
     return direction;
   }
 
-  getStyle(direction:any){
-    let fromStyle, toStyle,
+  getStyle(direction: any) {
+    let fromStyle, toStyle;
+    const
       slideFromTop = { left : '0px', top : '-100%' },
       slideFromBottom = { left : '0px', top : '100%' },
       slideFromLeft = { left : '-100%', top : '0px' },
@@ -91,7 +92,7 @@ export class HeaderComponent implements OnInit {
       slideTop = { top : '0px' },
       slideLeft = { left : '0px' };
 
-    switch( direction ) {
+    switch ( direction ) {
       case 0:
         // from top
         fromStyle = !this.options.inverse ? slideFromTop : slideFromBottom;
@@ -117,7 +118,7 @@ export class HeaderComponent implements OnInit {
     return { from : fromStyle, to : toStyle };
   }
 
-  applyAnimation(element:any, styleCSS:any, speed:number){
+  applyAnimation(element: any, styleCSS: any, speed: number) {
     // $.fn.applyStyle = this.options.support ? $.fn.css : $.fn.animate;
     $(element).stop().css( styleCSS, $.extend( true, [], { duration : speed + 'ms' } ) );
   }

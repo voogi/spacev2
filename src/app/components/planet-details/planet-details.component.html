@@ -1,0 +1,23 @@
+<div class="row details-container">
+  <div class="col">
+    <div class="row details-header">
+      <div class="col">Planet details</div>
+    </div>
+    <div class="row details-body">
+      <div class="col">
+        <space-tabs>
+          <space-tab [name]="'Planet'">
+            <div class="row">
+              <div class="col">
+                {{planet?.name}}
+              </div>
+            </div>
+          </space-tab>
+          <space-tab [name]="'Buildings'"></space-tab>
+          <space-tab [name]="'Unit'"></space-tab>
+          <space-tab [name]="'Constructions'"></space-tab>
+        </space-tabs>
+      </div>
+    </div>
+  </div>
+</div>

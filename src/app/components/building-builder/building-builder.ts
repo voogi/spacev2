@@ -4,8 +4,8 @@ import {BuilderService} from '../../services/builder.service';
 import {ISlot} from '../../shared/interface/islot';
 import {Subscription} from 'rxjs/Subscription';
 import {BackendService} from '../../services/backend.service';
-import {IBuilder} from "../../shared/interface/ibuilder";
-import {BuilderType} from "../../shared/builder-type.enum";
+import {IBuilder} from '../../shared/interface/ibuilder';
+import {BuilderType} from '../../shared/builder-type.enum';
 
 @Component({
   selector: 'space-builder',

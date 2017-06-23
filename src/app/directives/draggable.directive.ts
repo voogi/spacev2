@@ -75,7 +75,7 @@ export class DraggableDirective implements OnInit {
   @Input('spaceDraggable')
   set allowDrag(value: boolean) {
     this._allowDrag = value;
-    if (this._allowDrag){
+    if (this._allowDrag) {
       this.element.nativeElement.className += ' cursor-draggable';
     }else {
       this.element.nativeElement.className = this.element.nativeElement.className

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
-import {IBuilder} from "../shared/interface/ibuilder";
+import {IBuilder} from '../shared/interface/ibuilder';
 
 @Injectable()
 export class ProgressService {
