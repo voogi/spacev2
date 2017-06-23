@@ -29,7 +29,7 @@ export class StarmapComponent implements OnInit {
   static makeParticleGraphic(alpha: number) {
     const gr = new PIXI.Graphics();
     gr.beginFill(0xFFFFFF , alpha);
-    gr.drawCircle(0, 0, 3);
+    gr.drawCircle(0, 0, 2);
     return gr;
   }
 
