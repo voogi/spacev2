@@ -10,7 +10,7 @@
   <div class="row planet-holder-row">
     <div class="col solar-system-background row">
       <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
-        <div class="planet-background" [ngStyle]="getPlanetStyle(planet)" (click)="setActivePlanet(planet)" (dblclick)="onNavigateToPlanet(planet)"></div>
+        <div [ngStyle]="setPlanetStyle(planet)" class="planet-background"(click)="setActivePlanet(planet)" (dblclick)="onNavigateToPlanet(planet)"></div>
         <div class="planet-name">{{planet.name}}</div>
       </div>
     </div>

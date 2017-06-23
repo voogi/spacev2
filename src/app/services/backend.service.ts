@@ -8,6 +8,7 @@ import {IPlanet} from '../shared/interface/iplanet';
 import {IBuilding} from '../shared/interface/ibuilding';
 import {IConstruction} from '../shared/interface/iconstruction';
 import {IResource} from '../shared/interface/iresource';
+import {IShip} from "../shared/interface/iship";
 
 @Injectable()
 export class BackendService {
@@ -45,6 +46,7 @@ export class BackendService {
     this.getAllPlanetBySystem().subscribe(data => {
       for (const planet of data){
           localStorage.setItem('planet_' + planet.id, JSON.stringify(planet));
+          localStorage.setItem('playerShips', JSON.stringify([]));
         }
     });
   }
@@ -56,12 +58,27 @@ export class BackendService {
   saveBuilding(building: IBuilding, planetId: number) {
     const planet: IPlanet = this.getPlanetById(planetId);
     planet.buildings.push(building);
+
     for (const construction of planet.constructions){
       if (construction.building.id === building.id) {
         planet.constructions.splice(planet.constructions.lastIndexOf(construction), 1);
       }
     }
+
     localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
+  }
+
+  saveShip(ship: IShip) {
+    let playerShips = JSON.parse( localStorage.getItem('playerShips') );
+    playerShips.push(ship);
+    localStorage.setItem('playerShips', JSON.stringify(playerShips));
+  }
+
+  getPlayerFleets(): Observable<any> {
+    return Observable.create( observer => {
+      observer.next(  JSON.parse(localStorage.getItem('playerShips')) );
+      observer.complete();
+    });
   }
 
   startConstruction(construction: IConstruction, planetId: number) {

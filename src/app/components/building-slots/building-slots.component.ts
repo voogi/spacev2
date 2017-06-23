@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, Input
+  Component, OnInit, Input, OnDestroy
 } from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
 import {BuilderService} from '../../services/builder.service';
@@ -9,21 +9,26 @@ import {BackendService} from '../../services/backend.service';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {ProgressService} from '../../services/progress.service';
 import {BuilderType} from '../../shared/builder-type.enum';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'space-building-slots',
   templateUrl: './building-slots.component.html',
   styleUrls: ['./building-slots.component.css']
 })
-export class BuildingSlotsComponent implements OnInit {
+export class BuildingSlotsComponent implements OnInit, OnDestroy {
 
   @Input()
   public planet: IPlanet;
   public slots: Array<ISlot> = [];
   public selectedSlot: ISlot;
   public building: IBuilding;
+  public onBuildSubscription: Subscription;
+  public progressServiceSubscription: Subscription;
 
   constructor(private builder: BuilderService, private backendService: BackendService, private progressService: ProgressService) {
+    this.onBuildSubscription = new Subscription();
+    this.progressServiceSubscription = new Subscription();
   }
 
   ngOnInit() {
@@ -45,7 +50,7 @@ export class BuildingSlotsComponent implements OnInit {
     }
 
 
-    this.builder.onBuild().subscribe( (builder: IBuilder) => {
+    this.onBuildSubscription = this.builder.onBuild().subscribe( (builder: IBuilder) => {
       if (builder.type === BuilderType.BULDING) {
         this.building = builder.item;
         this.building.position = builder.slot.position;
@@ -59,16 +64,22 @@ export class BuildingSlotsComponent implements OnInit {
     });
 
     // when any queue completed data is a IBuilder obj
-    this.progressService.onComplete().subscribe( (builder: IBuilder) => {
+    this.progressServiceSubscription = this.progressService.onComplete().subscribe( (builder: IBuilder) => {
       if (builder.type === BuilderType.BULDING) {
         this.slots.forEach( (slot: ISlot) => {
           if (slot.position === builder.slot.position) {
             slot.building = builder.item;
+            this.backendService.saveBuilding(builder.item, this.planet.id);
           }
         });
       }
     });
 
+  }
+
+  ngOnDestroy() {
+    this.onBuildSubscription.unsubscribe();
+    this.progressServiceSubscription.unsubscribe();
   }
 
   onSelectSlot(slot: ISlot) {
@@ -78,10 +89,6 @@ export class BuildingSlotsComponent implements OnInit {
     }else {
       this.builder.selectedBuilding(slot.building);
     }
-  }
-
-  onBuildingCompleted() {
-    this.backendService.saveBuilding(this.building, this.planet.id);
   }
 
 }

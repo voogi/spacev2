@@ -6,6 +6,7 @@ import {IBuilding} from '../../shared/interface/ibuilding';
 import {IShip} from '../../shared/interface/iship';
 import {BuilderType} from '../../shared/builder-type.enum';
 import {IBuilder} from '../../shared/interface/ibuilder';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'space-unit-builder',
@@ -17,12 +18,21 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
   public ships: Array<IShip> = [];
   public visible: boolean = false;
   public selectedShip: IShip;
+  public onSelectedBuildingSub: Subscription;
+  public onCompleteSub: Subscription;
 
   constructor(
       private backendService: BackendService,
       private progressService: ProgressService,
-      private builderService: BuilderService) { }
+      private builderService: BuilderService)
+  {
+    this.onSelectedBuildingSub = new Subscription();
+    this.onCompleteSub = new Subscription();
+  }
 
+  onSelectShip(ship: IShip) {
+    this.selectedShip = ship;
+  }
 
   onBuild() {
     this.builderService.build({
@@ -35,22 +45,18 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
     this.visible = false;
   }
 
-  onSelectShip(ship: IShip) {
-    this.selectedShip = ship;
-  }
-
   ngOnInit(): void {
 
-    this.builderService.onSelectedBuilding().subscribe( (building: IBuilding) => {
+    this.onSelectedBuildingSub = this.builderService.onSelectedBuilding().subscribe( (building: IBuilding) => {
       this.visible = true;
       this.backendService.getAllShips().subscribe( data => {
         this.ships = data['military'];
       });
     });
 
-    this.progressService.onComplete().subscribe( (builder: IBuilder) => {
+    this.onCompleteSub = this.progressService.onComplete().subscribe( (builder: IBuilder) => {
       if (builder.type === BuilderType.SHIP) {
-        console.log(builder.item);
+        this.backendService.saveShip(builder.item);
       }
     });
 
@@ -58,5 +64,7 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
+    this.onSelectedBuildingSub.unsubscribe();
+    this.onCompleteSub.unsubscribe();
   }
 }

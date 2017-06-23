@@ -14,7 +14,9 @@
             </div>
           </space-tab>
           <space-tab [name]="'Buildings'"></space-tab>
-          <space-tab [name]="'Unit'"></space-tab>
+          <space-tab [name]="'Unit'">
+            <div *ngFor="let s of ships;" class="row">{{s.name}}</div>
+          </space-tab>
           <space-tab [name]="'Constructions'"></space-tab>
         </space-tabs>
       </div>

@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit, Renderer2} from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -28,8 +28,7 @@ export class SolarSystemComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private backendService: BackendService,
-      private routedData: RoutedDataService,
-      private renderer: Renderer2) { }
+      private routedData: RoutedDataService) { }
 
   ngOnInit() {
 
@@ -53,7 +52,7 @@ export class SolarSystemComponent implements OnInit {
     this.backendService.loadPlanetsJSON();
   }
 
-  public getPlanetStyle(planet: IPlanet) {
+  public setPlanetStyle(planet: IPlanet) {
     return {
       'background-image' : 'url(' + planet.img + ')',
       'background-size' : planet.size + 'px'};
