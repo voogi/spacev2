@@ -6,6 +6,7 @@ import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {BackendService} from '../../services/backend.service';
 import {Subscription} from 'rxjs/Subscription';
 import {RoutedDataService} from '../../services/routed-data.service';
+import {ProgressService} from "../../services/progress.service";
 
 @Component({
   selector: 'space-solarsystem',
@@ -28,7 +29,9 @@ export class SolarSystemComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private backendService: BackendService,
-      private routedData: RoutedDataService) { }
+      private routedData: RoutedDataService,
+      private progressService: ProgressService
+  ) { }
 
   ngOnInit() {
 

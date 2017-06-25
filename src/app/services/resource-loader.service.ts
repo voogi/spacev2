@@ -9,7 +9,7 @@ export class ResourceLoaderService {
 
   constructor() {
     this.resources = [
-      'assets/imgs/starClassK2.png'
+      'assets/imgs/stars/blue_giant120.png'
     ];
   }
 

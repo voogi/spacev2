@@ -90,6 +90,8 @@ export class StarmapComponent implements OnInit {
     this.interactionManager = new PIXI.interaction.InteractionManager(this.renderer);
 
     this.interactionManager.on('mousedown', function(event){
+      this.deltaX = 0;
+      this.deltaY = 0;
       if(event.currentTarget !== null){
         console.log("SELECTED_STAR",event.currentTarget)
       }else{
@@ -128,7 +130,7 @@ export class StarmapComponent implements OnInit {
   update() {
     for ( let child = 0 ; child < this.littleStars.children.length; child++) {
 
-      let speed = child;
+      let speed = child/8;
 
       this.littleStars.children[child].x -= this.deltaX / speed;
 
@@ -154,8 +156,8 @@ export class StarmapComponent implements OnInit {
     }
 
     for (let i = 0; i < this.stars.length; i++) {
-      this.stars[i].x -= this.deltaX / 6;
-      this.stars[i].y -= this.deltaY / 6;
+      this.stars[i].x -= this.deltaX;
+      this.stars[i].y -= this.deltaY;
     }
   }
 
@@ -166,10 +168,10 @@ export class StarmapComponent implements OnInit {
   }
 
   initStars() {
-    const star = new PIXI.Sprite(this.loader.resources['assets/imgs/starClassK2.png'].texture);
+    const star = new PIXI.Sprite(this.loader.resources['assets/imgs/stars/blue_giant120.png'].texture);
     star.x = window.innerWidth / 2;
     star.y = window.innerHeight / 2;
-    star.scale.set(0.2);
+    star.scale.set(0.6);
     star.interactive = true;
     star.buttonMode = true;
     this.stage.addChild(star);
