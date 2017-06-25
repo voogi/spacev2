@@ -21,6 +21,7 @@ export class StarmapComponent implements OnInit {
   private backgroundStarLength: number = 500;
   private isDragging: boolean = false;
   private littleStars: PIXI.particles.ParticleContainer;
+  private littleStars1: PIXI.particles.ParticleContainer;
   private interactionManager: PIXI.interaction.InteractionManager;
   private loader: PIXI.loader = PIXI.loader;
   private stars: Array<any> = [];
@@ -73,16 +74,39 @@ export class StarmapComponent implements OnInit {
       uvs: true,
       alpha: true
     });
+
+
+    this.littleStars1 = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
+      scale: true,
+      position: true,
+      rotation: true,
+      uvs: true,
+      alpha: true
+    });
+
     this.stage.addChild(this.littleStars);
-    const texture = this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.8) );
-    for (let i = 0; i < this.backgroundStarLength; i++) {
-      const p = new PIXI.Sprite(texture);
+    this.stage.addChild(this.littleStars1);
+    // const texture = this.renderer.generateTexture();
+    for (let i = 0; i < this.backgroundStarLength/2; i++) {
+      let p = new PIXI.Sprite( this.loader.resources['assets/imgs/stars/blue_giant120.png'].texture);
+      p.scale.set(0.1);
       const w = StarmapComponent.randomInt(20, window.innerWidth - 20);
       const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
       p.x = w;
       p.y = h;
       this.littleStars.addChild(p);
     }
+
+    for (let i = 0; i < this.backgroundStarLength/2; i++) {
+      let p = new PIXI.Sprite( this.loader.resources['assets/imgs/stars/yellow_dwarf60.png'].texture);
+      p.scale.set(0.2);
+      const w = StarmapComponent.randomInt(20, window.innerWidth - 20);
+      const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
+      p.x = w;
+      p.y = h;
+      this.littleStars1.addChild(p);
+    }
+
   }
 
   bindMouseEvents() {
@@ -151,6 +175,33 @@ export class StarmapComponent implements OnInit {
 
       if (this.littleStars.children[child].y < 0) {
         this.littleStars.children[child].y = window.innerHeight;
+      }
+
+    }
+
+    for ( let child = 0 ; child < this.littleStars1.children.length; child++) {
+
+      let speed = child/8;
+
+      this.littleStars1.children[child].x -= this.deltaX / speed;
+
+      if (this.littleStars1.children[child].x < 0) {
+        this.littleStars1.children[child].x = window.innerWidth;
+      }
+
+      if (this.littleStars1.children[child].x > window.innerWidth) {
+        this.littleStars1.children[child].x = 0;
+      }
+
+
+      this.littleStars1.children[child].y -= this.deltaY / speed;
+
+      if (this.littleStars1.children[child].y > window.innerHeight) {
+        this.littleStars1.children[child].y = 0;
+      }
+
+      if (this.littleStars1.children[child].y < 0) {
+        this.littleStars1.children[child].y = window.innerHeight;
       }
 
     }
