@@ -30,6 +30,7 @@ import { ProgressQueueComponent } from './components/progress-queue/progress-que
 import {ProgressService} from './services/progress.service';
 import { UnitBuilderComponent } from './components/unit-builder/unit-builder.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
+import { SystemDetailsComponent } from './components/system-details/system-details.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PlanetDetailsComponent } from './components/planet-details/planet-detai
     ProgressQueueComponent,
     UnitBuilderComponent,
     routedComponents,
-    PlanetDetailsComponent
+    PlanetDetailsComponent,
+    SystemDetailsComponent
   ],
   imports: [
     BrowserModule,

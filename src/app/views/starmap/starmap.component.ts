@@ -21,10 +21,12 @@ export class StarmapComponent implements OnInit {
   private backgroundStarLength: number = 500;
   private isDragging: boolean = false;
   private littleStars: PIXI.particles.ParticleContainer;
-  private littleStarsDecoys: any = {};
   private interactionManager: PIXI.interaction.InteractionManager;
   private loader: PIXI.loader = PIXI.loader;
   private stars: Array<any> = [];
+  private dragStart: string = '';
+  private deltaX: number = 0;
+  private deltaY: number = 0;
 
   static makeParticleGraphic(alpha: number) {
     const gr = new PIXI.Graphics();
@@ -54,15 +56,46 @@ export class StarmapComponent implements OnInit {
 
     this.stage = new PIXI.Container();
 
-    const pointsArr = [];
+    this.bindMouseEvents();
 
-    let dragStart = '';
+    this.makeDraggableParticles();
+
+    this.initStars();
+
+    this.gameLoop.call(this);
+  }
+
+  makeDraggableParticles() {
+    this.littleStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
+      scale: true,
+      position: true,
+      rotation: true,
+      uvs: true,
+      alpha: true
+    });
+    this.stage.addChild(this.littleStars);
+    const texture = this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.8) );
+    for (let i = 0; i < this.backgroundStarLength; i++) {
+      const p = new PIXI.Sprite(texture);
+      const w = StarmapComponent.randomInt(20, window.innerWidth - 20);
+      const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
+      p.x = w;
+      p.y = h;
+      this.littleStars.addChild(p);
+    }
+  }
+
+  bindMouseEvents() {
 
     this.interactionManager = new PIXI.interaction.InteractionManager(this.renderer);
 
     this.interactionManager.on('mousedown', function(event){
-      dragStart = JSON.stringify( event.data.global );
-      this.isDragging = true;
+      if(event.currentTarget !== null){
+        console.log("SELECTED_STAR",event.currentTarget)
+      }else{
+        this.dragStart = JSON.stringify( event.data.global );
+        this.isDragging = true;
+      }
     }.bind(this));
 
     this.interactionManager.on('mouseup', function(){
@@ -78,104 +111,57 @@ export class StarmapComponent implements OnInit {
 
         const mousePosition = event.data.global;
 
-        const dragS = JSON.parse( dragStart );
+        const dragS = JSON.parse( this.dragStart );
 
-        const deltaX = dragS.x - mousePosition.x;
-        const deltaY = dragS.y - mousePosition.y;
+        this.deltaX = dragS.x - mousePosition.x;
+        this.deltaY = dragS.y - mousePosition.y;
 
-        dragStart = JSON.stringify({
+        this.dragStart = JSON.stringify({
           x : mousePosition.x,
           y : mousePosition.y
         });
 
-        for ( let child = 0 ; child < pointsArr.length; child++) {
-
-          pointsArr[child].x -= deltaX / child;
-
-          if (pointsArr[child].x < 0) {
-            pointsArr[child].x = window.innerWidth;
-          }
-
-          if (pointsArr[child].x > window.innerWidth) {
-            pointsArr[child].x = 0;
-          }
-
-
-          pointsArr[child].y -= deltaY / child;
-
-          if (pointsArr[child].y > window.innerHeight) {
-            pointsArr[child].y = 0;
-          }
-
-          if (pointsArr[child].y < 0) {
-            pointsArr[child].y = window.innerHeight;
-          }
-
-          // for(let i = 0; i < 5; i++){
-          //   this.littleStarsDecoys[child][i].x -= (deltaX/child);
-          //   this.littleStarsDecoys[child][i].y -= (deltaY/child)
-          // }
-        }
-
-        for (let i = 0; i < this.stars.length; i++) {
-          this.stars[i].x -= deltaX / 6;
-          this.stars[i].y -= deltaY / 6;
-        }
-
-
       }
     }.bind(this));
+  }
 
-    this.littleStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
-      scale: true,
-      position: true,
-      rotation: true,
-      uvs: true,
-      alpha: true
-    });
+  update() {
+    for ( let child = 0 ; child < this.littleStars.children.length; child++) {
 
-    this.stage.addChild(this.littleStars);
+      let speed = child;
 
-    const texture = this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.8) );
+      this.littleStars.children[child].x -= this.deltaX / speed;
 
-    const decoyTexture = [
-      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.6) ),
-      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.5) ),
-      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.4) ),
-      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.3) ),
-      this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(0.2) )
-    ];
+      if (this.littleStars.children[child].x < 0) {
+        this.littleStars.children[child].x = window.innerWidth;
+      }
 
-    for (let i = 0; i < this.backgroundStarLength; i++) {
+      if (this.littleStars.children[child].x > window.innerWidth) {
+        this.littleStars.children[child].x = 0;
+      }
 
-      const index = i;
-      const p = new PIXI.Sprite(texture);
-      const w = StarmapComponent.randomInt(20, window.innerWidth - 20);
-      const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
-      p.x = w;
-      p.y = h;
-      this.littleStars.addChild(p);
-      pointsArr.push(p);
 
-      this.littleStarsDecoys[index] = [];
+      this.littleStars.children[child].y -= this.deltaY / speed;
 
-      // for( let i = 0; i < 5; i++){
-      //   const lp = new PIXI.Sprite(decoyTexture[i]);
-      //   lp.x = w;
-      //   lp.y = h;
-      //   this.littleStars.addChild(lp);
-      //   this.littleStarsDecoys[index].push(lp);
-      // }
+      if (this.littleStars.children[child].y > window.innerHeight) {
+        this.littleStars.children[child].y = 0;
+      }
+
+      if (this.littleStars.children[child].y < 0) {
+        this.littleStars.children[child].y = window.innerHeight;
+      }
 
     }
 
-    this.initStars();
-
-    this.gameLoop.call(this);
+    for (let i = 0; i < this.stars.length; i++) {
+      this.stars[i].x -= this.deltaX / 6;
+      this.stars[i].y -= this.deltaY / 6;
+    }
   }
 
   gameLoop() {
     requestAnimationFrame(this.gameLoop.bind(this));
+    this.update();
     this.renderer.render(this.stage);
   }
 
@@ -184,6 +170,8 @@ export class StarmapComponent implements OnInit {
     star.x = window.innerWidth / 2;
     star.y = window.innerHeight / 2;
     star.scale.set(0.2);
+    star.interactive = true;
+    star.buttonMode = true;
     this.stage.addChild(star);
     this.stars.push(star);
   }
