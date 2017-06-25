@@ -20,19 +20,27 @@ export class StarmapComponent implements OnInit {
   private stage: PIXI.Container;
   private backgroundStarLength: number = 500;
   private isDragging: boolean = false;
+
   private littleStars: PIXI.particles.ParticleContainer;
   private littleStars1: PIXI.particles.ParticleContainer;
+  private verticalGrid: PIXI.Container;
+  private horizontalGrid: PIXI.Container;
+
   private interactionManager: PIXI.interaction.InteractionManager;
   private loader: PIXI.loader = PIXI.loader;
   private stars: Array<any> = [];
   private dragStart: string = '';
+
   private deltaX: number = 0;
   private deltaY: number = 0;
 
-  static makeParticleGraphic(alpha: number) {
+  static makeParticleGraphic( ax: number, ay: number, bx: number, by: number ) {
     const gr = new PIXI.Graphics();
-    gr.beginFill(0xFFFFFF , alpha);
-    gr.drawCircle(0, 0, 2);
+    const s = 1;
+    const c = 0xFFFFFFF;
+    gr.lineStyle(s,c,0.1);
+    gr.moveTo(ax,ay);
+    gr.lineTo(bx, by);
     return gr;
   }
 
@@ -52,7 +60,6 @@ export class StarmapComponent implements OnInit {
       transparent : true
     });
 
-
     this.elementRef.nativeElement.children[0].appendChild(this.renderer.view);
 
     this.stage = new PIXI.Container();
@@ -61,13 +68,16 @@ export class StarmapComponent implements OnInit {
 
     this.makeDraggableParticles();
 
+    this.makeDraggableGrid();
+
     this.initStars();
 
     this.gameLoop.call(this);
   }
 
-  makeDraggableParticles() {
-    this.littleStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
+  makeDraggableGrid() {
+
+    this.verticalGrid = new PIXI.Container(32, {
       scale: true,
       position: true,
       rotation: true,
@@ -75,6 +85,51 @@ export class StarmapComponent implements OnInit {
       alpha: true
     });
 
+    for( let i = 0; i < 32 ; i++ ) {
+      const texture = new PIXI.Sprite( this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(
+        60*i,0,
+        60*i,window.innerHeight
+      )));
+      texture.x = 60*i;
+      texture.y = 0;
+      this.verticalGrid.addChild(texture);
+    }
+
+    this.stage.addChild(this.verticalGrid);
+
+    this.horizontalGrid = new PIXI.Container(32, {
+      scale: true,
+      position: true,
+      rotation: true,
+      uvs: true,
+      alpha: true
+    });
+
+    for( let i = 0; i < 16 ; i++ ) {
+      const texture = new PIXI.Sprite( this.renderer.generateTexture( StarmapComponent.makeParticleGraphic(
+        0,60*i,
+        window.innerWidth,60*i
+      )));
+      texture.x = 0;
+      texture.y = 60*i;
+      this.horizontalGrid.addChild(texture);
+    }
+
+    this.stage.addChild(this.horizontalGrid);
+
+  }
+
+  makeDraggableParticles() {
+
+    const container = new PIXI.Container();
+
+    this.littleStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
+      scale: true,
+      position: true,
+      rotation: true,
+      uvs: true,
+      alpha: true
+    });
 
     this.littleStars1 = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
       scale: true,
@@ -84,8 +139,12 @@ export class StarmapComponent implements OnInit {
       alpha: true
     });
 
-    this.stage.addChild(this.littleStars);
-    this.stage.addChild(this.littleStars1);
+    container.addChild(this.littleStars);
+    container.addChild(this.littleStars1);
+
+    this.stage.addChild(container);
+
+
     // const texture = this.renderer.generateTexture();
     for (let i = 0; i < this.backgroundStarLength/2; i++) {
       let p = new PIXI.Sprite( this.loader.resources['assets/imgs/stars/blue_giant120.png'].texture);
@@ -96,7 +155,6 @@ export class StarmapComponent implements OnInit {
       p.y = h;
       this.littleStars.addChild(p);
     }
-
     for (let i = 0; i < this.backgroundStarLength/2; i++) {
       let p = new PIXI.Sprite( this.loader.resources['assets/imgs/stars/yellow_dwarf60.png'].texture);
       p.scale.set(0.2);
@@ -106,7 +164,6 @@ export class StarmapComponent implements OnInit {
       p.y = h;
       this.littleStars1.addChild(p);
     }
-
   }
 
   bindMouseEvents() {
@@ -130,6 +187,8 @@ export class StarmapComponent implements OnInit {
 
     this.interactionManager.on('mouseout', function() {
       this.isDragging = false;
+      this.deltaY = 0;
+      this.deltaX = 0;
     }.bind(this));
 
     this.interactionManager.on('mousemove', function(event){
@@ -204,6 +263,30 @@ export class StarmapComponent implements OnInit {
         this.littleStars1.children[child].y = window.innerHeight;
       }
 
+    }
+
+    for ( let child = 0 ; child < this.verticalGrid.children.length; child++) {
+      this.verticalGrid.children[child].x -= this.deltaX;
+
+      if (this.verticalGrid.children[child].x < 0) {
+        this.verticalGrid.children[child].x = window.innerWidth;
+      }
+
+      if (this.verticalGrid.children[child].x > window.innerWidth) {
+        this.verticalGrid.children[child].x = 0;
+      }
+    }
+
+    for ( let child = 0 ; child < this.horizontalGrid.children.length; child++) {
+      this.horizontalGrid.children[child].y -= this.deltaY;
+
+      if (this.horizontalGrid.children[child].y > window.innerHeight) {
+        this.horizontalGrid.children[child].y = 0;
+      }
+
+      if (this.horizontalGrid.children[child].y < 0) {
+        this.horizontalGrid.children[child].y = window.innerHeight;
+      }
     }
 
     for (let i = 0; i < this.stars.length; i++) {
