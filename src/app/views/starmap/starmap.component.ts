@@ -391,10 +391,11 @@ export class StarmapComponent implements OnInit {
         // star name
         const style = new PIXI.TextStyle({
             fill: 0xd3d3d3,
-            fontSize: 14
+            fontSize: 32
         });
 
         const basicText = new PIXI.Text(name, style);
+        basicText.scale.set(0.43);
         basicText.x = 60;
         basicText.y = -30;
 
