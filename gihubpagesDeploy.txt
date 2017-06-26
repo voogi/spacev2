@@ -1,1 +1,3 @@
 ng build --prod -base-href https://voogi.github.io/spacev2/ & ngh
+
+ng build -base-href https://voogi.github.io/spacev2/

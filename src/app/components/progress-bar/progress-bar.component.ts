@@ -36,15 +36,15 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
     const timer = TimerObservable.create(0, 1000);
-    this.subscription = timer.subscribe(t => {
+    this.subscription = timer.subscribe(time => {
       if (this.elapsedTime) {
-        t += this.elapsedTime;
+        time += this.elapsedTime;
       }
 
       this.ended = false;
-      this.currentWidth = Math.round(((t + 1) / this.duration) * 100);
+      this.currentWidth = Math.round(((time + 1) / this.duration) * 100);
       this.remainingTime -= 1;
-      if ((t + 1) === this.duration) {
+      if ((time + 1) === this.duration) {
         this.ended = true;
         this.subscription.unsubscribe();
         this.completed.emit(this.ended);
