@@ -23,8 +23,6 @@ export class StarmapComponent implements OnInit {
 
     private littleStars: PIXI.particles.ParticleContainer;
     private littleStars1: PIXI.particles.ParticleContainer;
-    private verticalGrid: PIXI.Container;
-    private horizontalGrid: PIXI.Container;
 
     private interactionManager: PIXI.interaction.InteractionManager;
     private loader: any = PIXI.loader;
@@ -38,15 +36,7 @@ export class StarmapComponent implements OnInit {
     private coords: PIXI.Text;
     private coordinates: { x: number, y: number } = { x: 0, y: 0 };
 
-    static makeParticleGraphic(ax: number, ay: number, bx: number, by: number) {
-        const gr = new PIXI.Graphics();
-        const s = 1;
-        const c = 0xFFFFFFF;
-        gr.lineStyle(s, c, 0.1);
-        gr.moveTo(ax, ay);
-        gr.lineTo(bx, by);
-        return gr;
-    }
+    private pulseRate: number = 0;
 
     static randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -321,6 +311,21 @@ export class StarmapComponent implements OnInit {
             this.stars[i].y -= this.deltaY / 6;
             this.stars[i].visible = true;
             this.coords.text = 'Coords: ' + Math.round(this.stars[i].x) + ' ,' + Math.round(this.stars[i].y);
+
+            this.stars[i].children[3].clear();
+            this.stars[i].children[3].lineStyle(1, 0xFFFFFF);
+
+            this.stars[i].children[4].clear();
+            this.stars[i].children[4].lineStyle(1, 0xFFFFFF);
+
+            if ( this.stars[i].children[3].hovered ) {
+                if ( this.pulseRate < 70) {
+                    this.pulseRate += 1.5;
+                }
+                this.stars[i].children[3].drawCircle(37, 35, this.pulseRate);
+                this.stars[i].children[4].drawCircle(37, 35, this.pulseRate / 2);
+            }
+
         }
     }
 
@@ -344,11 +349,10 @@ export class StarmapComponent implements OnInit {
 
     makeNewStar(texture: string, name: string, position: { x: number, y: number }) {
 
-
         const star = new PIXI.Sprite(this.loader.resources[texture].texture);
         star.scale.set(0.6);
         star.interactive = true;
-        star.buttonMode = true;
+        // star.buttonMode = true;
 
         // star name
         const style = new PIXI.TextStyle({
@@ -364,10 +368,23 @@ export class StarmapComponent implements OnInit {
         // star line to name
         const lineToName = new PIXI.Graphics();
         const s = 1;
-        const c = 0xFFFFFFF;
+        const c = 0xd3d3d3;
         lineToName.lineStyle(s, c, .5);
         lineToName.moveTo(50, 20);
         lineToName.lineTo(80, -10);
+
+        const pixiCircle = new PIXI.Graphics();
+        pixiCircle.lineStyle(1, 0xFFFFFF);
+        pixiCircle.drawCircle(30, 30, 50);
+        pixiCircle.endFill();
+        pixiCircle.visible = false;
+
+        const pixiCircle1 = new PIXI.Graphics();
+        pixiCircle1.lineStyle(1, 0xFFFFFF);
+        pixiCircle1.drawCircle(30, 30, 50);
+        pixiCircle.endFill();
+        pixiCircle1.visible = false;
+
 
         const container = new PIXI.Container();
         container.x = position.x;
@@ -375,11 +392,21 @@ export class StarmapComponent implements OnInit {
         container.addChild(basicText);
         container.addChild(star);
         container.addChild(lineToName);
+        container.addChild(pixiCircle);
+        container.addChild(pixiCircle1);
         container.visible = false;
 
-        // container.on('pointerover', filterOn )
-        //     .on('pointerout', filterOff );
-        // filterOff.call(container);
+
+        star.on('pointerover', function(){
+            pixiCircle.visible = true;
+            pixiCircle.hovered = true;
+            pixiCircle1.visible = true;
+        })
+        .on('pointerout', function(){
+            pixiCircle.visible = false;
+            pixiCircle.hovered = false;
+            pixiCircle1.visible = false;
+        });
 
         this.stage.addChild(container);
         this.stars.push(container);
