@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import * as PIXI from 'pixi.js/dist/pixi.js';
+import * as PIXI from 'pixi.js';
 
 @Injectable()
 export class ResourceLoaderService {
 
-  private loader: PIXI.loader = PIXI.loader;
+  private loader: any = PIXI.loader;
   private resources: Array<string> = [];
 
   constructor() {

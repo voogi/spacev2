@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostBinding, OnInit} from '@angular/core';
-import * as PIXI from 'pixi.js/dist/pixi.js';
 import {Router} from '@angular/router';
 import {ResourceLoaderService} from '../../services/resource-loader.service';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
+import * as PIXI from 'pixi.js';
 
 @Component({
     selector: 'space-starmap',
@@ -27,16 +27,16 @@ export class StarmapComponent implements OnInit {
     private horizontalGrid: PIXI.Container;
 
     private interactionManager: PIXI.interaction.InteractionManager;
-    private loader: PIXI.loader = PIXI.loader;
+    private loader: any = PIXI.loader;
     private stars: Array<any> = [];
     private dragStart: string = '';
 
     private deltaX: number = 0;
     private deltaY: number = 0;
-
-    private max_zoom_factor: number = 5;
     private zoom_factor_counter: number = 0;
-    private zoom_out_factor_counter: number = 0;
+    private positionText: PIXI.Text;
+    private coords: PIXI.Text;
+    private coordinates: { x: number, y: number } = { x: 0, y: 0 };
 
     static makeParticleGraphic(ax: number, ay: number, bx: number, by: number) {
         const gr = new PIXI.Graphics();
@@ -73,55 +73,32 @@ export class StarmapComponent implements OnInit {
 
         this.makeDraggableParticles();
 
-        this.makeDraggableGrid();
-
         this.initStars();
+
+        this.addInfoToCanvas();
 
         this.gameLoop.call(this);
     }
 
-    makeDraggableGrid() {
-
-        this.verticalGrid = new PIXI.Container(32, {
-            scale: true,
-            position: true,
-            rotation: true,
-            uvs: true,
-            alpha: true
+    addInfoToCanvas() {
+        // star name
+        const style = new PIXI.TextStyle({
+            fill: 0xd3d3d3,
+            fontSize: 42
         });
 
-        for (let i = 0; i < 32; i++) {
-            const texture = new PIXI.Sprite(this.renderer.generateTexture(StarmapComponent.makeParticleGraphic(
-                60 * i, 0,
-                60 * i, window.innerHeight
-            )));
-            texture.x = 60 * i;
-            texture.y = 0;
-            this.verticalGrid.addChild(texture);
-        }
+        this.positionText = new PIXI.Text('Position: ' + this.deltaX, style);
+        this.positionText.scale.set(0.43);
+        this.positionText.x = window.innerWidth - 400;
+        this.positionText.y = 30;
 
-        this.horizontalGrid = new PIXI.Container(16, {
-            scale: true,
-            position: true,
-            rotation: true,
-            uvs: true,
-            alpha: true
-        });
+        this.coords = new PIXI.Text('Position: ' + this.deltaX, style);
+        this.coords.scale.set(0.43);
+        this.coords.x = window.innerWidth - 400;
+        this.coords.y = 70;
 
-        for (let i = 0; i < 19; i++) {
-            const texture = new PIXI.Sprite(this.renderer.generateTexture(StarmapComponent.makeParticleGraphic(
-                0, 50 * i,
-                window.innerWidth, 50 * i
-            )));
-            texture.x = 0;
-            texture.y = 50 * i;
-            this.horizontalGrid.addChild(texture);
-        }
-        //
-        // this.stage.addChild(this.horizontalGrid);
-        // this.stage.addChild(this.verticalGrid);
-
-
+        this.stage.addChild(this.positionText);
+        this.stage.addChild(this.coords);
     }
 
     makeDraggableParticles() {
@@ -171,7 +148,7 @@ export class StarmapComponent implements OnInit {
         }
     }
 
-    correct(renderer: PIXI.Renderer, stage: PIXI.Stage) {
+    correct(renderer: PIXI.CanvasRenderer, stage: PIXI.Container) {
 
         stage.x = Math.min(0, stage.x);
         stage.y = Math.min(0, stage.y);
@@ -279,6 +256,12 @@ export class StarmapComponent implements OnInit {
     }
 
     update() {
+
+        this.coordinates.x += this.deltaX;
+        this.coordinates.y += this.deltaY;
+
+        this.positionText.text = 'Position: ' + Math.round(this.coordinates.x) + ' ,' + Math.round(this.coordinates.y);
+
         for (let child = 0; child < this.littleStars.children.length; child++) {
 
             const speed = child / 8;
@@ -333,33 +316,11 @@ export class StarmapComponent implements OnInit {
 
         }
 
-        for (let child = 0; child < this.verticalGrid.children.length; child++) {
-            this.verticalGrid.children[child].x -= this.deltaX / 6;
-
-            if (this.verticalGrid.children[child].x < 0) {
-                this.verticalGrid.children[child].x = window.innerWidth;
-            }
-
-            if (this.verticalGrid.children[child].x > window.innerWidth) {
-                this.verticalGrid.children[child].x = 0;
-            }
-        }
-
-        for (let child = 0; child < this.horizontalGrid.children.length; child++) {
-            this.horizontalGrid.children[child].y -= this.deltaY / 6;
-
-            if (this.horizontalGrid.children[child].y > window.innerHeight) {
-                this.horizontalGrid.children[child].y = 0;
-            }
-
-            if (this.horizontalGrid.children[child].y < 0) {
-                this.horizontalGrid.children[child].y = window.innerHeight;
-            }
-        }
-
         for (let i = 0; i < this.stars.length; i++) {
             this.stars[i].x -= this.deltaX / 6;
             this.stars[i].y -= this.deltaY / 6;
+            this.stars[i].visible = true;
+            this.coords.text = 'Coords: ' + Math.round(this.stars[i].x) + ' ,' + Math.round(this.stars[i].y);
         }
     }
 
@@ -371,17 +332,18 @@ export class StarmapComponent implements OnInit {
 
     initStars() {
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 1; i++) {
             const text: string = i % 2 === 0 ? 'assets/imgs/stars/blue_giant120.png' : 'assets/imgs/stars/red_giant120.png';
             this.makeNewStar(text, 'Acheron (LV-426)', {
-                x: StarmapComponent.randomInt(100, window.innerWidth * 2 - 100),
-                y: StarmapComponent.randomInt(100, window.innerHeight * 2 - 100)
+                x: StarmapComponent.randomInt(window.innerWidth / 2, window.innerWidth / 2),
+                y: StarmapComponent.randomInt(window.innerHeight / 2, window.innerHeight / 2)
             });
         }
 
     }
 
     makeNewStar(texture: string, name: string, position: { x: number, y: number }) {
+
 
         const star = new PIXI.Sprite(this.loader.resources[texture].texture);
         star.scale.set(0.6);
@@ -413,6 +375,11 @@ export class StarmapComponent implements OnInit {
         container.addChild(basicText);
         container.addChild(star);
         container.addChild(lineToName);
+        container.visible = false;
+
+        // container.on('pointerover', filterOn )
+        //     .on('pointerout', filterOff );
+        // filterOff.call(container);
 
         this.stage.addChild(container);
         this.stars.push(container);
