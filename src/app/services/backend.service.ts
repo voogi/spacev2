@@ -9,6 +9,7 @@ import {IBuilding} from '../shared/interface/ibuilding';
 import {IConstruction} from '../shared/interface/iconstruction';
 import {IResource} from '../shared/interface/iresource';
 import {IShip} from "../shared/interface/iship";
+import {ISystem} from "../shared/interface/isystem";
 
 @Injectable()
 export class BackendService {
@@ -69,7 +70,7 @@ export class BackendService {
   }
 
   saveShip(ship: IShip) {
-    let playerShips = JSON.parse( localStorage.getItem('playerShips') );
+    const playerShips = JSON.parse( localStorage.getItem('playerShips') );
     playerShips.push(ship);
     localStorage.setItem('playerShips', JSON.stringify(playerShips));
   }
@@ -87,6 +88,11 @@ export class BackendService {
     construction.endTime = construction.startTime + (construction.duration * 1000);
     planet.constructions.push(construction);
     localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
+  }
+
+  getDiscoveredSystemByUser(userId: string): Observable<Array<ISystem>> {
+    return this.http.get('http://10.0.2.92:8080/api/solarsystem/user/'+userId+'/discovered')
+        .map( (json: Response) => json.json().payload );
   }
 
 }

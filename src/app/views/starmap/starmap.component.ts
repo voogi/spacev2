@@ -3,6 +3,12 @@ import {Router} from '@angular/router';
 import {ResourceLoaderService} from '../../services/resource-loader.service';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import * as PIXI from 'pixi.js';
+import {BackendService} from '../../services/backend.service';
+import {ISystem} from '../../shared/interface/isystem';
+
+class StarContainer extends PIXI.Container {
+    relativeStarCoordination: { x: number, y: number};
+}
 
 @Component({
     selector: 'space-starmap',
@@ -33,8 +39,7 @@ export class StarmapComponent implements OnInit {
     private deltaY: number = 0;
     private zoom_factor_counter: number = 0;
     private positionText: PIXI.Text;
-    private coords: PIXI.Text;
-    private coordinates: { x: number, y: number } = { x: 0, y: 0 };
+    private coordinates: { x: number, y: number } = {x: 5000, y: 5000};
 
     private pulseRate: number = 0;
 
@@ -42,8 +47,12 @@ export class StarmapComponent implements OnInit {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    constructor(private elementRef: ElementRef, private router: Router, private resourceLoader: ResourceLoaderService) {
-    }
+    constructor(
+        private elementRef: ElementRef,
+        private router: Router,
+        private resourceLoader: ResourceLoaderService,
+        private backendService: BackendService
+    ) {}
 
     ngOnInit() {
         this.resourceLoader.loadResources(this.init.bind(this));
@@ -63,7 +72,10 @@ export class StarmapComponent implements OnInit {
 
         this.makeDraggableParticles();
 
-        this.initStars();
+        this.backendService.getDiscoveredSystemByUser('3f22ac02-243a-46d3-a0ff-cb6284f1f97e')
+            .subscribe( (data: Array<ISystem>) => {
+                this.initStars( data );
+            });
 
         this.addInfoToCanvas();
 
@@ -82,13 +94,7 @@ export class StarmapComponent implements OnInit {
         this.positionText.x = window.innerWidth - 400;
         this.positionText.y = 30;
 
-        this.coords = new PIXI.Text('Position: ' + this.deltaX, style);
-        this.coords.scale.set(0.43);
-        this.coords.x = window.innerWidth - 400;
-        this.coords.y = 70;
-
         this.stage.addChild(this.positionText);
-        this.stage.addChild(this.coords);
     }
 
     makeDraggableParticles() {
@@ -247,8 +253,8 @@ export class StarmapComponent implements OnInit {
 
     update() {
 
-        this.coordinates.x += this.deltaX;
-        this.coordinates.y += this.deltaY;
+        this.coordinates.x += this.deltaX / 6;
+        this.coordinates.y += this.deltaY / 6;
 
         this.positionText.text = 'Position: ' + Math.round(this.coordinates.x) + ' ,' + Math.round(this.coordinates.y);
 
@@ -307,10 +313,15 @@ export class StarmapComponent implements OnInit {
         }
 
         for (let i = 0; i < this.stars.length; i++) {
+            const planetXLess = this.stars[i].x > 0 &&
+                this.stars[i].x < window.innerWidth;
+            const planetYLess = this.stars[i].y > 0 &&
+                this.stars[i].y < window.innerHeight;
+
             this.stars[i].x -= this.deltaX / 6;
             this.stars[i].y -= this.deltaY / 6;
-            this.stars[i].visible = true;
-            this.coords.text = 'Coords: ' + Math.round(this.stars[i].x) + ' ,' + Math.round(this.stars[i].y);
+
+            this.stars[i].visible =  planetXLess && planetYLess;
 
             this.stars[i].children[3].clear();
             this.stars[i].children[3].lineStyle(1, 0xFFFFFF);
@@ -318,12 +329,16 @@ export class StarmapComponent implements OnInit {
             this.stars[i].children[4].clear();
             this.stars[i].children[4].lineStyle(1, 0xFFFFFF);
 
-            if ( this.stars[i].children[3].hovered ) {
-                if ( this.pulseRate < 70) {
+            if (this.stars[i].children[3].hovered) {
+                if (this.pulseRate < 70) {
                     this.pulseRate += 1.5;
                 }
                 this.stars[i].children[3].drawCircle(37, 35, this.pulseRate);
                 this.stars[i].children[4].drawCircle(37, 35, this.pulseRate / 2);
+            } else {
+                this.pulseRate = 0;
+                this.stars[i].children[3].drawCircle(37, 35, 0);
+                this.stars[i].children[4].drawCircle(37, 35, 0);
             }
 
         }
@@ -335,24 +350,43 @@ export class StarmapComponent implements OnInit {
         this.renderer.render(this.stage);
     }
 
-    initStars() {
+    initStars(stars: Array<ISystem>) {
 
-        for (let i = 0; i < 1; i++) {
-            const text: string = i % 2 === 0 ? 'assets/imgs/stars/blue_giant120.png' : 'assets/imgs/stars/red_giant120.png';
-            this.makeNewStar(text, 'Acheron (LV-426)', {
-                x: StarmapComponent.randomInt(window.innerWidth / 2, window.innerWidth / 2),
-                y: StarmapComponent.randomInt(window.innerHeight / 2, window.innerHeight / 2)
+        for (let i = 0; i < stars.length; i++) {
+
+            const star = stars[i];
+
+            const textureMap: any = {
+                'YELLOW_DWARF' : 'assets/imgs/stars/yellow_dwarf60.png',
+                'RED_GIANT' : 'assets/imgs/stars/red_giant120.png',
+                'BLUE_GIANT' : 'assets/imgs/stars/blue_giant120.png',
+                'BROWN_DWARF' : 'assets/imgs/stars/brown_dwarf60.png',
+                'WHITE_DWARF' : 'assets/imgs/stars/white_dwarf60.png',
+                'NEUTRON_STAR' : 'assets/imgs/stars/neutron_star120.png',
+                'RED_DWARF' : 'assets/imgs/stars/red_dwarf60.png',
+                'NEBULA' : 'assets/imgs/nebula.png',
+            };
+
+
+            const text = textureMap['NEBULA'];
+            const _x = star.positionX;
+            const _y = star.positionY;
+
+            this.makeNewStar(text, star.name, {
+                x:  _x - this.coordinates.x,
+                y:  _y - this.coordinates.y
+            }, {
+                x : _x,
+                y : _y
             });
         }
-
     }
 
-    makeNewStar(texture: string, name: string, position: { x: number, y: number }) {
+    makeNewStar(texture: string, name: string, position: { x: number, y: number }, relPos: { x: number, y: number}) {
 
         const star = new PIXI.Sprite(this.loader.resources[texture].texture);
-        star.scale.set(0.6);
+        star.scale.set(0.2);
         star.interactive = true;
-        // star.buttonMode = true;
 
         // star name
         const style = new PIXI.TextStyle({
@@ -386,27 +420,32 @@ export class StarmapComponent implements OnInit {
         pixiCircle1.visible = false;
 
 
-        const container = new PIXI.Container();
+        const container = new StarContainer();
         container.x = position.x;
         container.y = position.y;
+        container.relativeStarCoordination = {
+            x : relPos.x,
+            y : relPos.y
+        };
         container.addChild(basicText);
         container.addChild(star);
         container.addChild(lineToName);
         container.addChild(pixiCircle);
         container.addChild(pixiCircle1);
+        // container.pivot.set(40, 40);
         container.visible = false;
 
 
-        star.on('pointerover', function(){
+        star.on('pointerover', function () {
             pixiCircle.visible = true;
             pixiCircle.hovered = true;
             pixiCircle1.visible = true;
         })
-        .on('pointerout', function(){
-            pixiCircle.visible = false;
-            pixiCircle.hovered = false;
-            pixiCircle1.visible = false;
-        });
+            .on('pointerout', function () {
+                pixiCircle.visible = false;
+                pixiCircle.hovered = false;
+                pixiCircle1.visible = false;
+            });
 
         this.stage.addChild(container);
         this.stars.push(container);

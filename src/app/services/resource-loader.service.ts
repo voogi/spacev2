@@ -12,6 +12,10 @@ export class ResourceLoaderService {
       'assets/imgs/stars/blue_giant120.png',
       'assets/imgs/stars/yellow_dwarf60.png',
       'assets/imgs/stars/red_giant120.png',
+      'assets/imgs/stars/red_dwarf60.png',
+      'assets/imgs/stars/white_dwarf60.png',
+      'assets/imgs/stars/brown_dwarf60.png',
+      'assets/imgs/nebula.png',
       'assets/imgs/stars/neutron_star120.png'
     ];
   }
