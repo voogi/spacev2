@@ -8,6 +8,7 @@ import {ISystem} from '../../shared/interface/isystem';
 
 class StarContainer extends PIXI.Container {
   relativeStarCoordination: { x: number, y: number };
+  backgroundColor: any;
 }
 
 class StarGraphics extends PIXI.Graphics {
@@ -340,13 +341,13 @@ export class StarmapComponent implements OnInit {
           this.stars[i].children[3].pulseRate += 1.5;
           this.stars[i].children[4].pulseRate += 1.5;
         }
-        this.stars[i].children[3].drawCircle(37, 35, this.stars[i].children[3].pulseRate );
-        this.stars[i].children[4].drawCircle(37, 35, this.stars[i].children[4].pulseRate / 2);
+        this.stars[i].children[3].drawCircle(0, 0, this.stars[i].children[3].pulseRate );
+        this.stars[i].children[4].drawCircle(0, 0, this.stars[i].children[4].pulseRate / 2);
       } else {
         this.stars[i].children[3].pulseRate = 0;
         this.stars[i].children[4].pulseRate = 0;
-        this.stars[i].children[3].drawCircle(37, 35, 0);
-        this.stars[i].children[4].drawCircle(37, 35, 0);
+        this.stars[i].children[3].drawCircle(0, 0, 0);
+        this.stars[i].children[4].drawCircle(0, 0, 0);
       }
 
     }
@@ -380,7 +381,7 @@ export class StarmapComponent implements OnInit {
       const _x = star.positionX;
       const _y = star.positionY;
 
-      this.makeNewStar(text, star.name, {
+      this.makeNewSystem(text, star.name, {
         x: _x - this.coordinates.x,
         y: _y - this.coordinates.y
       }, {
@@ -390,42 +391,48 @@ export class StarmapComponent implements OnInit {
     }
   }
 
-  makeNewStar(texture: string, name: string, position: { x: number, y: number }, relPos: { x: number, y: number }) {
+  makeNewSystem(texture: string, name: string, position: { x: number, y: number }, relPos: { x: number, y: number }) {
 
-    const star = new PIXI.Sprite(this.loader.resources[texture].texture);
-    star.scale.set(0.8);
-    star.interactive = true;
+    const system = new PIXI.Sprite(this.loader.resources[texture].texture);
+    system.interactive = true;
+    system.pivot.x = system.width / 2;
+    system.pivot.y = system.height / 2;
+    // system.scale.set(0.8);
 
-    // star name
+    // system name
     const style = new PIXI.TextStyle({
       fill: 0xd3d3d3,
       fontSize: 32
     });
 
-    const basicText = new PIXI.Text(name, style);
-    basicText.scale.set(0.43);
-    basicText.x = 60;
-    basicText.y = -30;
+    const systemName = new PIXI.Text(name, style);
+    systemName.pivot.x = systemName.width / 2 - systemName.width;
+    systemName.pivot.y = 120;
+    systemName.scale.set(0.43);
 
-    // star line to name
+    // system line to name
     const lineToName = new PIXI.Graphics();
     const s = 1;
     const c = 0xd3d3d3;
     lineToName.lineStyle(s, c, .5);
-    lineToName.moveTo(50, 20);
-    lineToName.lineTo(80, -10);
+    lineToName.moveTo(0, 0);
+    lineToName.lineTo(75, -35);
 
-    const pixiCircle = new StarGraphics();
-    pixiCircle.lineStyle(1, 0xFFFFFF);
-    pixiCircle.drawCircle(30, 30, 50);
-    pixiCircle.endFill();
-    pixiCircle.visible = false;
+    const pulseRing = new StarGraphics();
+    pulseRing.pivot.x = pulseRing.width / 2;
+    pulseRing.pivot.y = pulseRing.height / 2;
+    pulseRing.lineStyle(1, 0xFFFFFF);
+    pulseRing.drawCircle(0, 0, 50);
+    pulseRing.endFill();
+    pulseRing.visible = false;
 
-    const pixiCircle1 = new StarGraphics();
-    pixiCircle1.lineStyle(1, 0xFFFFFF);
-    pixiCircle1.drawCircle(30, 30, 50);
-    pixiCircle.endFill();
-    pixiCircle1.visible = false;
+    const pulseRing1 = new StarGraphics();
+    pulseRing1.pivot.x = pulseRing1.width / 2;
+    pulseRing1.pivot.y = pulseRing1.height / 2;
+    pulseRing1.lineStyle(1, 0xFFFFFF);
+    pulseRing1.drawCircle(0, 0, 50);
+    pulseRing.endFill();
+    pulseRing1.visible = false;
 
 
     const container = new StarContainer();
@@ -435,24 +442,27 @@ export class StarmapComponent implements OnInit {
       x: relPos.x,
       y: relPos.y
     };
-    container.addChild(basicText);
-    container.addChild(star);
+    container.addChild(systemName);
+    container.addChild(system);
     container.addChild(lineToName);
-    container.addChild(pixiCircle);
-    container.addChild(pixiCircle1);
-    // container.pivot.set(40, 40);
+    container.addChild(pulseRing);
+    container.addChild(pulseRing1);
+    container.pivot.x = container.width / 2;
+    container.pivot.y = container.height / 2;
     container.visible = false;
 
+    container.backgroundColor = 0x061639
 
-    star.on('pointerover', function () {
-      pixiCircle.visible = true;
-      pixiCircle.hovered = true;
-      pixiCircle1.visible = true;
+
+    system.on('pointerover', function () {
+      pulseRing.visible = true;
+      pulseRing.hovered = true;
+      pulseRing1.visible = true;
     })
       .on('pointerout', function () {
-        pixiCircle.visible = false;
-        pixiCircle.hovered = false;
-        pixiCircle1.visible = false;
+        pulseRing.visible = false;
+        pulseRing.hovered = false;
+        pulseRing1.visible = false;
       });
 
     this.stage.addChild(container);
