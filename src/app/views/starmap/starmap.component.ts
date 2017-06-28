@@ -319,10 +319,10 @@ export class StarmapComponent implements OnInit {
 
     for (let i = 0; i < this.stars.length; i++) {
 
-      const planetXLess = this.stars[i].x > -400 &&
-        this.stars[i].x < window.innerWidth + 400;
-      const planetYLess = this.stars[i].y > -400 &&
-        this.stars[i].y < window.innerHeight + 400;
+      const planetXLess = this.stars[i].x > -200 &&
+        this.stars[i].x < window.innerWidth + 200;
+      const planetYLess = this.stars[i].y > -200 &&
+        this.stars[i].y < window.innerHeight + 200;
 
       this.stars[i].x -= this.deltaX / 6;
       this.stars[i].y -= this.deltaY / 6;
