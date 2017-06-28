@@ -12,6 +12,7 @@ class StarContainer extends PIXI.Container {
 
 class StarGraphics extends PIXI.Graphics {
   hovered: boolean;
+  pulseRate: number = 0;
 }
 
 @Component({
@@ -58,10 +59,10 @@ export class StarmapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resourceLoader.loadResources(this.init.bind(this));
+    this.resourceLoader.loadResources(this.initStarmap.bind(this));
   }
 
-  init() {
+  initStarmap() {
 
     this.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {
       transparent: true
@@ -75,6 +76,7 @@ export class StarmapComponent implements OnInit {
 
     this.makeDraggableParticles();
 
+    // dummy userUUID
     this.backendService.getDiscoveredSystemByUser('3f22ac02-243a-46d3-a0ff-cb6284f1f97e')
       .subscribe((data: Array<ISystem>) => {
         this.initStars(data);
@@ -332,14 +334,16 @@ export class StarmapComponent implements OnInit {
       this.stars[i].children[4].clear();
       this.stars[i].children[4].lineStyle(1, 0xFFFFFF);
 
-      if (this.stars[i].children[3].hovered) {
-        if (this.pulseRate < 70) {
-          this.pulseRate += 1.5;
+      if ( this.stars[i].children[3].hovered ) {
+        if (this.stars[i].children[3].pulseRate < 70) {
+          this.stars[i].children[3].pulseRate += 1.5;
+          this.stars[i].children[4].pulseRate += 1.5;
         }
-        this.stars[i].children[3].drawCircle(37, 35, this.pulseRate);
-        this.stars[i].children[4].drawCircle(37, 35, this.pulseRate / 2);
+        this.stars[i].children[3].drawCircle(37, 35, this.stars[i].children[3].pulseRate );
+        this.stars[i].children[4].drawCircle(37, 35, this.stars[i].children[4].pulseRate / 2);
       } else {
-        this.pulseRate = 0;
+        this.stars[i].children[3].pulseRate = 0;
+        this.stars[i].children[4].pulseRate = 0;
         this.stars[i].children[3].drawCircle(37, 35, 0);
         this.stars[i].children[4].drawCircle(37, 35, 0);
       }

@@ -91,7 +91,7 @@ export class BackendService {
   }
 
   getDiscoveredSystemByUser(userId: string): Observable<Array<ISystem>> {
-    return this.http.get('http://10.0.2.92:8080/api/solarsystem/user/'+userId+'/discovered')
+    return this.http.get('http://localhost:8080/api/solarsystem/user/'+userId+'/discovered')
         .map( (json: Response) => json.json().payload );
   }
 
