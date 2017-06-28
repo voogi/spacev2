@@ -318,10 +318,11 @@ export class StarmapComponent implements OnInit {
     }
 
     for (let i = 0; i < this.stars.length; i++) {
-      const planetXLess = this.stars[i].x > 0 &&
-        this.stars[i].x < window.innerWidth;
-      const planetYLess = this.stars[i].y > 0 &&
-        this.stars[i].y < window.innerHeight;
+
+      const planetXLess = this.stars[i].x > -400 &&
+        this.stars[i].x < window.innerWidth + 400;
+      const planetYLess = this.stars[i].y > -400 &&
+        this.stars[i].y < window.innerHeight + 400;
 
       this.stars[i].x -= this.deltaX / 6;
       this.stars[i].y -= this.deltaY / 6;
@@ -375,7 +376,7 @@ export class StarmapComponent implements OnInit {
       };
 
 
-      const text = textureMap['NEBULA'];
+      const text = textureMap[star.type];
       const _x = star.positionX;
       const _y = star.positionY;
 
