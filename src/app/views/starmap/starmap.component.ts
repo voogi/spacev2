@@ -330,24 +330,24 @@ export class StarmapComponent implements OnInit {
 
       this.stars[i].visible = planetXLess && planetYLess;
 
+      this.stars[i].children[2].clear();
+      this.stars[i].children[2].lineStyle(1, 0xFFFFFF);
+
       this.stars[i].children[3].clear();
       this.stars[i].children[3].lineStyle(1, 0xFFFFFF);
 
-      this.stars[i].children[4].clear();
-      this.stars[i].children[4].lineStyle(1, 0xFFFFFF);
-
-      if ( this.stars[i].children[3].hovered ) {
-        if (this.stars[i].children[3].pulseRate < 70) {
+      if ( this.stars[i].children[2].hovered ) {
+        if (this.stars[i].children[2].pulseRate < 70) {
+          this.stars[i].children[2].pulseRate += 1.5;
           this.stars[i].children[3].pulseRate += 1.5;
-          this.stars[i].children[4].pulseRate += 1.5;
         }
-        this.stars[i].children[3].drawCircle(0, 0, this.stars[i].children[3].pulseRate );
-        this.stars[i].children[4].drawCircle(0, 0, this.stars[i].children[4].pulseRate / 2);
+        this.stars[i].children[2].drawCircle(0, 0, this.stars[i].children[2].pulseRate );
+        this.stars[i].children[3].drawCircle(0, 0, this.stars[i].children[3].pulseRate / 2);
       } else {
+        this.stars[i].children[2].pulseRate = 0;
         this.stars[i].children[3].pulseRate = 0;
-        this.stars[i].children[4].pulseRate = 0;
+        this.stars[i].children[2].drawCircle(0, 0, 0);
         this.stars[i].children[3].drawCircle(0, 0, 0);
-        this.stars[i].children[4].drawCircle(0, 0, 0);
       }
 
     }
@@ -443,10 +443,10 @@ export class StarmapComponent implements OnInit {
       y: relPos.y
     };
     container.addChild(systemName);
-    container.addChild(system);
     container.addChild(lineToName);
     container.addChild(pulseRing);
     container.addChild(pulseRing1);
+    container.addChild(system);
     container.pivot.x = container.width / 2;
     container.pivot.y = container.height / 2;
     container.visible = false;
