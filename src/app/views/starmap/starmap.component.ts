@@ -393,7 +393,7 @@ export class StarmapComponent implements OnInit {
   makeNewStar(texture: string, name: string, position: { x: number, y: number }, relPos: { x: number, y: number }) {
 
     const star = new PIXI.Sprite(this.loader.resources[texture].texture);
-    star.scale.set(0.2);
+    star.scale.set(0.8);
     star.interactive = true;
 
     // star name
