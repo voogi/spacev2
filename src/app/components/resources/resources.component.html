@@ -4,7 +4,7 @@
       <div class="col-lg-8 offset-lg-1">
         <div class="resource-container" *ngFor="let res of resources;">
           <span class="resource-label">{{res.name}}</span>
-          <span class="resource-value">{{res.amount}}</span>
+          <span class="resource-value">{{ res.amount | rounder}}</span>
         </div>
       </div>
     </div>

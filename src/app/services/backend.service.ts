@@ -34,7 +34,7 @@ export class BackendService {
 
   /*RESOURCE RELATED BACKEND REQUESTS*/
   getPlayerResources(systemId: string): Observable<Array<IResource>> {
-    return this.http.get('/assets/resources.json').map( (res: Response) => res.json().payload);
+    return this.http.get('http://localhost:8080/api/solarsystem/194067/resource').map( (res: Response) => res.json().payload);
   }
 
   /*PLANET RELATED REQUEST*/
@@ -93,6 +93,10 @@ export class BackendService {
   getDiscoveredSystemByUser(userId: string): Observable<Array<ISystem>> {
     return this.http.get('http://localhost:8080/api/solarsystem/user/'+userId+'/discovered')
         .map( (json: Response) => json.json().payload );
+  }
+
+  getPlanetBySystemId(systemId: string): Observable<any>{
+    return this.http.get('http://localhost:8080/api/solarsystem/'+systemId+'/planet').map( (data: Response) => data.json().payload );
   }
 
 }

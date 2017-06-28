@@ -31,7 +31,7 @@ export class ResourcesComponent implements OnInit, OnDestroy {
     const timer = TimerObservable.create(0, 1000);
     this.subscription = timer.subscribe(() => {
       for (let i = 0; i < this.resources.length; i++) {
-        this.resources[i].amount += Math.floor( this.resources[i].pps );
+        this.resources[i].amount = this.resources[i].amount + this.resources[i].rate;
       }
     });
 

@@ -31,6 +31,7 @@ import {ProgressService} from './services/progress.service';
 import { UnitBuilderComponent } from './components/unit-builder/unit-builder.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { SystemDetailsComponent } from './components/system-details/system-details.component';
+import { RounderPipe } from './pipes/rounder.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SystemDetailsComponent } from './components/system-details/system-detai
     UnitBuilderComponent,
     routedComponents,
     PlanetDetailsComponent,
-    SystemDetailsComponent
+    SystemDetailsComponent,
+    RounderPipe
   ],
   imports: [
     BrowserModule,

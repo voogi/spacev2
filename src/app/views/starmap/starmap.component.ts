@@ -8,7 +8,7 @@ import {ISystem} from '../../shared/interface/isystem';
 
 class StarContainer extends PIXI.Container {
   relativeStarCoordination: { x: number, y: number };
-  backgroundColor: any;
+  attachedSystemObject: ISystem;
 }
 
 class StarGraphics extends PIXI.Graphics {
@@ -97,8 +97,8 @@ export class StarmapComponent implements OnInit {
 
     this.positionText = new PIXI.Text('Position: ' + this.deltaX, style);
     this.positionText.scale.set(0.43);
-    this.positionText.x = window.innerWidth - 400;
-    this.positionText.y = 30;
+    this.positionText.x = 10;
+    this.positionText.y = 10;
 
     this.stage.addChild(this.positionText);
   }
@@ -222,6 +222,8 @@ export class StarmapComponent implements OnInit {
       this.deltaX = 0;
       this.deltaY = 0;
       if (event.currentTarget !== null) {
+        const selectedSystem = event.currentTarget.parent.attachedSystemObject;
+
       } else {
         this.dragStart = JSON.stringify(event.data.global);
         this.isDragging = true;
@@ -262,7 +264,7 @@ export class StarmapComponent implements OnInit {
     this.coordinates.x += this.deltaX / 6;
     this.coordinates.y += this.deltaY / 6;
 
-    this.positionText.text = 'Position: ' + Math.round(this.coordinates.x) + ' ,' + Math.round(this.coordinates.y);
+    this.positionText.text = 'Starmap coordinates: X:' + Math.round(this.coordinates.x) + ' -- Y:' + Math.round(this.coordinates.y);
 
     for (let child = 0; child < this.littleStars.children.length; child++) {
 
@@ -387,11 +389,11 @@ export class StarmapComponent implements OnInit {
       }, {
         x: _x,
         y: _y
-      });
+      }, star);
     }
   }
 
-  makeNewSystem(texture: string, name: string, position: { x: number, y: number }, relPos: { x: number, y: number }) {
+  makeNewSystem(texture: string, name: string, position: { x: number, y: number }, relPos: { x: number, y: number }, sys: ISystem) {
 
     const system = new PIXI.Sprite(this.loader.resources[texture].texture);
     system.interactive = true;
@@ -436,6 +438,7 @@ export class StarmapComponent implements OnInit {
 
 
     const container = new StarContainer();
+    container.attachedSystemObject = sys;
     container.x = position.x;
     container.y = position.y;
     container.relativeStarCoordination = {
@@ -450,9 +453,6 @@ export class StarmapComponent implements OnInit {
     container.pivot.x = container.width / 2;
     container.pivot.y = container.height / 2;
     container.visible = false;
-
-    container.backgroundColor = 0x061639
-
 
     system.on('pointerover', function () {
       pulseRing.visible = true;
