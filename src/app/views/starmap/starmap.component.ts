@@ -223,7 +223,7 @@ export class StarmapComponent implements OnInit {
       this.deltaY = 0;
       if (event.currentTarget !== null) {
         const selectedSystem = event.currentTarget.parent.attachedSystemObject;
-
+        this.onNavToSystem(selectedSystem.id);
       } else {
         this.dragStart = JSON.stringify(event.data.global);
         this.isDragging = true;

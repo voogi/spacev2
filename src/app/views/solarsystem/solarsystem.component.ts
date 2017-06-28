@@ -21,7 +21,6 @@ export class SolarSystemComponent implements OnInit {
   }
 
   public planets: Array<IPlanet>;
-  private planetSub: Subscription;
   public activePlanet: IPlanet;
 
 
@@ -29,16 +28,22 @@ export class SolarSystemComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private backendService: BackendService,
-      private routedData: RoutedDataService,
-      private progressService: ProgressService
+      private routedData: RoutedDataService
   ) { }
 
   ngOnInit() {
 
-    // this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => console.log(data));
-    this.planetSub = this.backendService.getAllPlanetBySystem().subscribe( data => {
-      this.planets = data;
-      this.activePlanet = data[0];
+    this.route.params.subscribe( (params: Params) =>  {
+      this.backendService.getPlanetBySystemId( params['id'] ).subscribe( data => {
+
+        data.forEach( d => {
+          d.img = '/assets/imgs/planet_2.png';
+          d.name = "unknown";
+          d.size = 120;
+        });
+        this.planets = data;
+        this.activePlanet = data[0];
+      });
     });
 
   }
