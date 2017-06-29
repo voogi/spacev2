@@ -32,11 +32,6 @@ export class BackendService {
     return this.http.get('/assets/buildings.json').map( (res: Response) => res.json().payload);
   }
 
-  /*RESOURCE RELATED BACKEND REQUESTS*/
-  getPlayerResources(systemId: string): Observable<Array<IResource>> {
-    return this.http.get('http://localhost:8080/api/solarsystem/194067/resource').map( (res: Response) => res.json().payload);
-  }
-
   /*PLANET RELATED REQUEST*/
   getAllPlanetBySystem(): Observable<Array<IPlanet>> {
     return this.http.get('/assets/planets.json').map( (res: Response) => res.json().payload );
@@ -52,21 +47,18 @@ export class BackendService {
     });
   }
 
-  getPlanetById(planetId: number): IPlanet {
-    return JSON.parse(localStorage.getItem('planet_' + planetId));
-  }
 
   saveBuilding(building: IBuilding, planetId: number) {
-    const planet: IPlanet = this.getPlanetById(planetId);
-    planet.buildings.push(building);
-
-    for (const construction of planet.constructions){
-      if (construction.building.id === building.id) {
-        planet.constructions.splice(planet.constructions.lastIndexOf(construction), 1);
-      }
-    }
-
-    localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
+    // const planet: IPlanet = this.getPlanetById(planetId);
+    // planet.buildings.push(building);
+    //
+    // for (const construction of planet.constructions){
+    //   if (construction.building.id === building.id) {
+    //     planet.constructions.splice(planet.constructions.lastIndexOf(construction), 1);
+    //   }
+    // }
+    //
+    // localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
   }
 
   saveShip(ship: IShip) {
@@ -83,12 +75,18 @@ export class BackendService {
   }
 
   startConstruction(construction: IConstruction, planetId: number) {
-    const planet: IPlanet = this.getPlanetById(planetId);
-    construction.startTime = new Date().getMilliseconds();
-    construction.endTime = construction.startTime + (construction.duration * 1000);
-    planet.constructions.push(construction);
-    localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
+    // const planet: IPlanet = this.getPlanetById(planetId);
+    // construction.startTime = new Date().getMilliseconds();
+    // construction.endTime = construction.startTime + (construction.duration * 1000);
+    // planet.constructions.push(construction);
+    // localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
   }
+
+  getPlanetById(planetId: number): Observable<IPlanet> {
+    return this.http.get('http://localhost:8080/api/planet/' + planetId)
+      .map( (resp: Response) => resp.json().payload );
+  }
+
 
   getDiscoveredSystemByUser(userId: string): Observable<Array<ISystem>> {
     return this.http.get('http://localhost:8080/api/solarsystem/user/'+userId+'/discovered')
@@ -97,6 +95,10 @@ export class BackendService {
 
   getPlanetBySystemId(systemId: string): Observable<any>{
     return this.http.get('http://localhost:8080/api/solarsystem/'+systemId+'/planet').map( (data: Response) => data.json().payload );
+  }
+
+  getPlayerResources(systemId: string): Observable<Array<IResource>> {
+    return this.http.get('http://localhost:8080/api/solarsystem/194067/resource').map( (res: Response) => res.json().payload);
   }
 
 }

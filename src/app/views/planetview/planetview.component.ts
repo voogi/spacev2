@@ -20,19 +20,20 @@ export class PlanetViewComponent implements OnInit {
 
   public selectedPlanet: IPlanet;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private notificationService: NotificationsService,
-    private routedData: RoutedDataService,
-    private backendService: BackendService,
-    private renderer: Renderer2,
-    private elementRef: ElementRef) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private notificationService: NotificationsService,
+              private backendService: BackendService,
+              private renderer: Renderer2,
+              private elementRef: ElementRef) {
+  }
 
   ngOnInit() {
-    this.route.params.switchMap( (params: Params) => params['id'] ).subscribe(data => {
-      this.selectedPlanet = this.backendService.getPlanetById(data[0]);
-      this.setPlanetStyle();
+    this.route.params.subscribe((params: Params) => {
+      this.backendService.getPlanetById(params['id']).subscribe((planet: IPlanet) => {
+        this.selectedPlanet = planet;
+        this.setPlanetStyle();
+      });
     });
   }
 
