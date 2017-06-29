@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment.prod';
-import {Http, Response} from '@angular/http';
+import {Http, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import {IPlanet} from '../shared/interface/iplanet';
-import {IBuilding} from '../shared/interface/ibuilding';
 import {IConstruction} from '../shared/interface/iconstruction';
 import {IResource} from '../shared/interface/iresource';
 import {IShip} from "../shared/interface/iship";
@@ -48,17 +47,9 @@ export class BackendService {
   }
 
 
-  saveBuilding(building: IBuilding, planetId: number) {
-    // const planet: IPlanet = this.getPlanetById(planetId);
-    // planet.buildings.push(building);
-    //
-    // for (const construction of planet.constructions){
-    //   if (construction.building.id === building.id) {
-    //     planet.constructions.splice(planet.constructions.lastIndexOf(construction), 1);
-    //   }
-    // }
-    //
-    // localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
+  saveBuilding(planet: any): Observable<IPlanet> {
+    return this.http.post('http://localhost:8080/api/planet/save', planet, { headers : this.headers })
+      .map( (data: Response) => data.json().payload );
   }
 
   saveShip(ship: IShip) {

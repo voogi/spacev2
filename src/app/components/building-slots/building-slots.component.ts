@@ -69,7 +69,10 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
         this.slots.forEach( (slot: ISlot) => {
           if (slot.position === builder.slot.position) {
             slot.building = builder.item;
-            this.backendService.saveBuilding(builder.item, this.planet.id);
+            this.planet.buildings.push(builder.item);
+            this.backendService.saveBuilding(this.planet).subscribe( data => {
+              console.log(data);
+            });
           }
         });
       }
