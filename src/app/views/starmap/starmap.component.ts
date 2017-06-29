@@ -56,7 +56,9 @@ export class StarmapComponent implements OnInit {
   constructor(private elementRef: ElementRef,
               private router: Router,
               private resourceLoader: ResourceLoaderService,
-              private backendService: BackendService) {
+              private backendService: BackendService)
+  {
+    this.coordinates = this.loadCoordinates();
   }
 
   ngOnInit() {
@@ -263,6 +265,7 @@ export class StarmapComponent implements OnInit {
 
     this.coordinates.x += this.deltaX / 6;
     this.coordinates.y += this.deltaY / 6;
+    this.storeCoordinates(this.coordinates);
 
     this.positionText.text = 'Starmap coordinates: X:' + Math.round(this.coordinates.x) + ' -- Y:' + Math.round(this.coordinates.y);
 
@@ -471,6 +474,14 @@ export class StarmapComponent implements OnInit {
 
   onNavToSystem(id: number) {
     this.router.navigate(['/system', id]);
+  }
+
+  storeCoordinates(coords: { x: number, y: number }) {
+    localStorage.setItem('starmapCoodinates', JSON.stringify(coords));
+  }
+
+  loadCoordinates(): { x: number, y: number} {
+    return JSON.parse( localStorage.getItem('starmapCoodinates') ) || { x: 5000, y: 5000 };
   }
 
 }
