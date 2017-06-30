@@ -19,7 +19,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
   public developmentBuildings: Array<IBuilding> = [];
   public militaryBuildings: Array<IBuilding> = [];
   public defensiveBuildings: Array<IBuilding> = [];
-  public selectedBuilding: any;
+  public selectedBuilding: IBuilding;
   private selectedSlot: ISlot;
   private buildSub: Subscription = new Subscription();
   public availableBuildings: Array<any> = [];
@@ -38,12 +38,12 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   onBuild() {
 
-    if(this.selectedBuilding === undefined) return;
+    if (this.selectedBuilding === undefined) { return; }
 
     const item: IBuilder = {
-      type: BuilderType.BULDING,
+      type: BuilderType.BUILDING,
       slot: this.selectedSlot,
-      item: this.selectedBuilding
+      item: this.selectedBuilding.type
     };
     this.builder.build(item);
     this.visible = false;

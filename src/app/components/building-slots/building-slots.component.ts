@@ -9,7 +9,7 @@ import {BackendService} from '../../services/backend.service';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {ProgressService} from '../../services/progress.service';
 import {BuilderType} from '../../shared/builder-type.enum';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'space-building-slots',
@@ -51,21 +51,20 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
 
 
     this.onBuildSubscription = this.builder.onBuild().subscribe( (builder: IBuilder) => {
-      if (builder.type === BuilderType.BULDING) {
-        this.building = builder.item;
-        this.building.position = builder.slot.position;
-
+      if (builder.type === BuilderType.BUILDING) {
         this.backendService.startConstruction({
-          building : this.building,
-          duration : this.building.time
-        }, this.planet.id);
+          buildingType: builder.item,
+          constructionType: BuilderType.BUILDING
+        }, this.planet.id).subscribe( data => {
+          console.log(data);
+        });
         this.selectedSlot.isEmpty = false;
       }
     });
 
     // when any queue completed data is a IBuilder obj
     this.progressServiceSubscription = this.progressService.onComplete().subscribe( (builder: IBuilder) => {
-      if (builder.type === BuilderType.BULDING) {
+      if (builder.type === BuilderType.BUILDING) {
         this.slots.forEach( (slot: ISlot) => {
           if (slot.position === builder.slot.position) {
             slot.building = builder.item;

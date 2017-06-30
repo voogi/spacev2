@@ -1,3 +1,3 @@
 export enum BuilderType {
-    BULDING, SHIP
+    BUILDING, SHIP, UNIT
 }

@@ -1,9 +1,9 @@
-import {IBuilding} from './ibuilding';
+import {BuildingType} from '../building-type.enum';
 export interface IConstruction {
-
-  building: IBuilding;
-  duration: number;
-  startTime?: number;
-  endTime?: number;
-
+  id?: number;
+  constructionType: any;
+  buildingType?: BuildingType;
+  unitType?: any;
+  start?: number;
+  end?: number;
 }

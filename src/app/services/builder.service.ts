@@ -22,7 +22,6 @@ export class BuilderService {
 
   build(builder: IBuilder) {
     this.subject.next(builder);
-    this.progressService.createProgress(builder);
   }
 
   onBuild(): Observable<IBuilder> {

@@ -65,12 +65,32 @@ export class BackendService {
     });
   }
 
+//   @RestController
+//   @RequestMapping("/api/construction")
+//   public class ConstructionController {
+//
+//   @Autowired
+//   private ConstructionService constructionService;
+//
+//   @Autowired
+//   private ConstructionConverter constructionConverter;
+//
+//   @RequestMapping(value = "planet/{planetId}", method = RequestMethod.POST)
+//   @ResponseBody
+//   public Response saveConstruction(@PathVariable("planetId") Long planetId,
+//   @RequestBody ConstructionDto constructionDto) throws SpaceException {
+//   Construction construction = constructionService.constructBuilding(constructionDto.getBuildingType(), planetId);
+//   return Response.createOKResponse( constructionConverter.convertToDto(construction) );
+// }
+
   startConstruction(construction: IConstruction, planetId: number) {
-    // const planet: IPlanet = this.getPlanetById(planetId);
-    // construction.startTime = new Date().getMilliseconds();
-    // construction.endTime = construction.startTime + (construction.duration * 1000);
-    // planet.constructions.push(construction);
-    // localStorage.setItem('planet_' + planetId, JSON.stringify(planet));
+      return this.http.post(this.bURL + '/api/construction/planet/' + planetId, construction, { headers: this.headers })
+          .map( (resp: Response) => resp.json().payload );
+  }
+
+  getPlanetConstructions(planetId: number): Observable<Array<IConstruction>> {
+    return this.http.get(this.bURL + '/api/construction/planet/' + planetId)
+        .map( (resp: Response) => resp.json().payload );
   }
 
   getPlanetById(planetId: number): Observable<IPlanet> {
@@ -80,12 +100,12 @@ export class BackendService {
 
 
   getDiscoveredSystemByUser(userId: string): Observable<Array<ISystem>> {
-    return this.http.get('http://localhost:8080/api/solarsystem/user/'+userId+'/discovered')
+    return this.http.get('http://localhost:8080/api/solarsystem/user/' + userId + '/discovered')
         .map( (json: Response) => json.json().payload );
   }
 
-  getPlanetBySystemId(systemId: string): Observable<any>{
-    return this.http.get('http://localhost:8080/api/solarsystem/'+systemId+'/planet').map( (data: Response) => data.json().payload );
+  getPlanetBySystemId(systemId: string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/solarsystem/' + systemId + '/planet').map( (data: Response) => data.json().payload );
   }
 
   getPlayerResources(systemId: string): Observable<Array<IResource>> {

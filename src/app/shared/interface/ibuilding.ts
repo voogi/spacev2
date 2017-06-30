@@ -1,3 +1,4 @@
+import {BuildingType} from '../building-type.enum';
 export interface IBuilding {
 
   id: number;
@@ -9,5 +10,6 @@ export interface IBuilding {
   superPlastic: number;
   time: number;
   position?: number;
+  type: BuildingType;
 
 }
