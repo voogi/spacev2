@@ -15,21 +15,12 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
   public planet: IPlanet;
   public ships: Array<IShip> = [];
 
-  private fleetsSub: Subscription;
-
   constructor(private backendService: BackendService) {
-    this.fleetsSub = new Subscription();
   }
 
   ngOnInit() {
-
-    this.backendService.getPlayerFleets().subscribe( ships => {
-      this.ships = ships;
-    });
-
   }
 
   ngOnDestroy(): void {
-    this.fleetsSub.unsubscribe();
   }
 }
