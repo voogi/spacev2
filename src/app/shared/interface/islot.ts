@@ -3,4 +3,5 @@ export interface ISlot {
   position: number;
   building: IBuilding;
   isEmpty: boolean;
+  isUnderConstruction?: boolean;
 }

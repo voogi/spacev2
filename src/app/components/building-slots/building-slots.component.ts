@@ -8,8 +8,9 @@ import {ISlot} from '../../shared/interface/islot';
 import {BackendService} from '../../services/backend.service';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {ProgressService} from '../../services/progress.service';
-import {BuilderType} from '../../shared/builder-type.enum';
+import {ConstructionType} from '../../shared/construction-type.enum';
 import {Subscription} from 'rxjs/Subscription';
+import {IConstruction} from '../../shared/interface/iconstruction';
 
 @Component({
   selector: 'space-building-slots',
@@ -51,29 +52,36 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
 
 
     this.onBuildSubscription = this.builder.onBuild().subscribe( (builder: IBuilder) => {
-      if (builder.type === BuilderType.BUILDING) {
+
+      if (builder.type === ConstructionType.BUILDING) {
+
         this.backendService.startConstruction({
           buildingType: builder.item,
-          constructionType: BuilderType.BUILDING
-        }, this.planet.id).subscribe( data => {
-          console.log(data);
+          constructionType: ConstructionType.BUILDING
+        }, this.planet.id).subscribe( (construction: IConstruction) => {
+          this.progressService.createProgress(construction);
         });
+
         this.selectedSlot.isEmpty = false;
+
       }
     });
 
     // when any queue completed data is a IBuilder obj
-    this.progressServiceSubscription = this.progressService.onComplete().subscribe( (builder: IBuilder) => {
-      if (builder.type === BuilderType.BUILDING) {
+    this.progressServiceSubscription = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
+
+      if (construction.constructionType === ConstructionType.BUILDING) {
+
         this.slots.forEach( (slot: ISlot) => {
-          if (slot.position === builder.slot.position) {
-            slot.building = builder.item;
-            this.planet.buildings.push(builder.item);
-            this.backendService.saveBuilding(this.planet).subscribe( data => {
-              console.log(data);
-            });
-          }
+          // if (slot.position === builder.slot.position) {
+          //   slot.building = builder.item;
+          //   this.planet.buildings.push(builder.item);
+          //   this.backendService.saveBuilding(this.planet).subscribe( data => {
+          //     console.log(data);
+          //   });
+          // }
         });
+
       }
     });
 

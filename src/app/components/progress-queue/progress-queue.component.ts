@@ -6,6 +6,7 @@ import {
 import {ProgressBarComponent} from '../progress-bar/progress-bar.component';
 import {ProgressService} from '../../services/progress.service';
 import {Subscription} from "rxjs/Subscription";
+import {IConstruction} from "../../shared/interface/iconstruction";
 
 @Component({
   selector: 'space-progress-queue',
@@ -25,8 +26,8 @@ export class ProgressQueueComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.processSub = this.progressServie.addedProgress().subscribe( data => {
-      this.onAddProgress(data);
+    this.processSub = this.progressServie.addedProgress().subscribe( (construction: IConstruction) => {
+      this.onAddProgress(construction);
     });
   }
 
@@ -34,11 +35,13 @@ export class ProgressQueueComponent implements OnInit, OnDestroy {
     this.processSub.unsubscribe();
   }
 
-  onAddProgress(progress: any) {
+  onAddProgress(progress: IConstruction) {
     const comp = this.container.createComponent(this.factory);
     const instance = comp.instance;
     let sub: Subscription = new Subscription();
-    instance.duration = progress.time || progress.item.time;
+    const sec = progress.end - progress.start;
+    const rounded = sec / 1000;
+    instance.duration = Math.round( rounded );
     instance.start();
     sub = instance.completed.subscribe( data => {
       this.progressServie.onCompletedProgress(progress);

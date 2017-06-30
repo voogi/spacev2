@@ -5,6 +5,7 @@ import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import * as PIXI from 'pixi.js';
 import {BackendService} from '../../services/backend.service';
 import {ISystem} from '../../shared/interface/isystem';
+import { Log, Level } from 'ng2-logger';
 
 class StarContainer extends PIXI.Container {
   relativeStarCoordination: { x: number, y: number };
@@ -49,6 +50,8 @@ export class StarmapComponent implements OnInit {
 
   private pulseRate: number = 0;
 
+  private log = Log.create('starmap', Level.ERROR, Level.WARN, Level.INFO);
+
   static randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -62,6 +65,8 @@ export class StarmapComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.log.color = 'red';
+    this.log.info('ngOnInit', 'completed');
     this.resourceLoader.loadResources(this.initStarmap.bind(this));
   }
 

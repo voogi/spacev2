@@ -5,7 +5,7 @@ import {ISlot} from '../../shared/interface/islot';
 import {Subscription} from 'rxjs/Subscription';
 import {BackendService} from '../../services/backend.service';
 import {IBuilder} from '../../shared/interface/ibuilder';
-import {BuilderType} from '../../shared/builder-type.enum';
+import {ConstructionType} from '../../shared/construction-type.enum';
 
 @Component({
   selector: 'space-builder',
@@ -41,7 +41,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
     if (this.selectedBuilding === undefined) { return; }
 
     const item: IBuilder = {
-      type: BuilderType.BUILDING,
+      type: ConstructionType.BUILDING,
       slot: this.selectedSlot,
       item: this.selectedBuilding.type
     };

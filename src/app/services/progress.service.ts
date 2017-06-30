@@ -3,6 +3,7 @@ import {Subject} from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import {IBuilder} from '../shared/interface/ibuilder';
+import {IConstruction} from "../shared/interface/iconstruction";
 
 @Injectable()
 export class ProgressService {
@@ -12,11 +13,11 @@ export class ProgressService {
 
   constructor() {}
 
-  createProgress(obj: IBuilder | any) {
+  createProgress(obj: IConstruction) {
     this.progressSubject.next(obj);
   }
 
-  addedProgress(): Observable<any> {
+  addedProgress(): Observable<IConstruction> {
     return this.progressSubject;
   }
 
@@ -24,7 +25,7 @@ export class ProgressService {
     this.completedProgressSubject.next(data);
   }
 
-  onComplete(): Observable<any> {
+  onComplete(): Observable<IConstruction> {
     return this.completedProgressSubject;
   }
 

@@ -4,10 +4,10 @@ import {ProgressService} from '../../services/progress.service';
 import {BuilderService} from '../../services/builder.service';
 import {IBuilding} from '../../shared/interface/ibuilding';
 import {IShip} from '../../shared/interface/iship';
-import {BuilderType} from '../../shared/builder-type.enum';
+import { ConstructionType} from '../../shared/construction-type.enum';
 import {IBuilder} from '../../shared/interface/ibuilder';
-import {Subscription} from "rxjs/Subscription";
-import {isUndefined} from "util";
+import {Subscription} from 'rxjs/Subscription';
+import {IConstruction} from '../../shared/interface/iconstruction';
 
 @Component({
   selector: 'space-unit-builder',
@@ -39,10 +39,10 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
 
   onBuild() {
 
-    if(this.selectedShip === undefined) return;
+    if (this.selectedShip === undefined) { return; }
 
     const item: IBuilder = {
-      type  : BuilderType.SHIP,
+      type  : ConstructionType.UNIT,
       item : this.selectedShip
     };
     this.builderService.build(item);
@@ -62,9 +62,9 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.onCompleteSub = this.progressService.onComplete().subscribe( (builder: IBuilder) => {
-      if (builder.type === BuilderType.SHIP) {
-        this.backendService.saveShip(builder.item);
+    this.onCompleteSub = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
+      console.log(construction);
+      if (construction.constructionType === ConstructionType.UNIT) {
       }
     });
 
