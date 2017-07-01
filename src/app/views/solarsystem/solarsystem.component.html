@@ -1,11 +1,4 @@
 <div class="system-container">
-  <space-resources></space-resources>
-  <div class="row">
-    <div class="col">
-      <space-button (click)="onNavigateToStarMap()" [name]="'Starmap'"></space-button>
-      <!--<space-button (click)="dialog.show()" [name]="'Dialog'"></space-button>-->
-    </div>
-  </div>
   <div class="row planet-holder-row">
     <div class="col solar-system-background row">
       <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
@@ -26,5 +19,4 @@
     </space-tabs>
   </space-dialog>
   <!--<space-progress-queue></space-progress-queue>-->
-  <space-footer></space-footer>
 </div>

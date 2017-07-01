@@ -347,7 +347,7 @@ export class StarmapComponent implements OnInit {
       this.stars[i].children[3].lineStyle(1, 0xFFFFFF);
 
       if ( this.stars[i].children[2].hovered ) {
-        if (this.stars[i].children[2].pulseRate < 70) {
+        if (this.stars[i].children[2].pulseRate < 40) {
           this.stars[i].children[2].pulseRate += 1.5;
           this.stars[i].children[3].pulseRate += 1.5;
         }

@@ -48,10 +48,6 @@ export class SolarSystemComponent implements OnInit {
 
   }
 
-  onNavigateToStarMap() {
-    this.router.navigate(['/starmap']);
-  }
-
   onNavigateToPlanet(planet: IPlanet) {
     this.router.navigate(['/planet', planet.id]);
   }

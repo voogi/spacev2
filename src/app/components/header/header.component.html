@@ -1,19 +1,14 @@
-<!--<space-resouces></space-resouces>-->
-<div class="row">
-  <div [ngClass]="{ 'active' : activePage == 0 }" (mouseenter)="act($event, 0)" (mouseleave)="deact($event)" class="col text-center menuItem">
-    <span>space</span>
-    <div class="menu-overlay"></div>
-  </div>
-  <div [ngClass]="{ 'active' : activePage == 1}" (mouseenter)="act($event, 1)" (mouseleave)="deact($event)" class="col text-center menuItem">
-    <span>player</span>
-    <div class="menu-overlay"></div>
-  </div>
-  <div [ngClass]="{ 'active' : activePage == 2}" (mouseenter)="act($event, 2)" (mouseleave)="deact($event)" class="col text-center menuItem">
-    <span>stats</span>
-    <div class="menu-overlay"></div>
-  </div>
-  <div [ngClass]="{ 'active' : activePage == 3 }" (mouseenter)="act($event, 3)" (mouseleave)="deact($event)" class="col text-center menuItem">
-    <span>options</span>
-    <div class="menu-overlay"></div>
+<div class="row background no-gutters">
+  <div class="col text-left">
+    <div class="row">
+      <div class="col-lg-6 header-offset">
+        <div class="resource-container" *ngFor="let h of menuItems;">
+          <span (click)="onNavigate(h.route)" class="resource-label">{{h.name}}</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <space-resources></space-resources>
+      </div>
+    </div>
   </div>
 </div>

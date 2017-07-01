@@ -19,6 +19,7 @@ export class PlanetViewComponent implements OnInit {
   }
 
   public selectedPlanet: IPlanet;
+  public systemId: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
