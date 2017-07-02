@@ -1,5 +1,5 @@
 <div (click)="close()" class="system-detail-overlay" *ngIf="visible"></div>
-<div *ngIf="visible" [ngStyle]="{ 'left': _left+'px', 'top': _top+'px' }" class="system-detail container-fluid">
+<div [@fadeInAnimation2] *ngIf="visible" [ngStyle]="{ 'left': _left+'px', 'top': _top+'px' }" class="system-detail container-fluid">
   <div class="row">
     <div class="col text-center">Actions</div>
   </div>

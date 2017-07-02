@@ -78,6 +78,20 @@ export const slideInOutAnimation =
 //
 //   ]);
 
+export const fadeInAnimation2 =
+  trigger('fadeInAnimation2', [
+    // state('void', style({opacity : 0}) ),
+    // state('*', style({opacity : 1}) ),
+    transition(':enter', [  // before 2.1: transition('void => *', [
+      style({opacity : 0}),
+      animate('0.3s ease-in-out', style({opacity : 1}))
+    ]),
+    transition(':leave', [  // before 2.1: transition('* => void', [
+      style({opacity : 1}),
+      animate('0.3s ease-in-out', style({opacity : 0}))
+    ])
+  ]);
+
 export const fadeInAnimation =
   trigger('fadeInAnimation', [
     state('void', style({position: 'fixed', width: '100%'}) ),

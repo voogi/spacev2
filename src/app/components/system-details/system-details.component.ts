@@ -1,11 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 import {ISystem} from "../../shared/interface/isystem";
 import {Router} from "@angular/router";
+import {fadeInAnimation, fadeInAnimation2} from "../../animations/slide-in-out.animation";
 
 @Component({
   selector: 'space-system-details',
   templateUrl: './system-details.component.html',
-  styleUrls: ['./system-details.component.css']
+  styleUrls: ['./system-details.component.css'],
+  animations: [fadeInAnimation2]
 })
 export class SystemDetailsComponent implements OnInit {
 
