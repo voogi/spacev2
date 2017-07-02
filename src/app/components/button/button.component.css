@@ -21,6 +21,8 @@
   float: left;
   padding-top: 11px;
   text-transform: uppercase;
+  min-width: 68px;
+  text-align: center;
 }
 .button-container .button-right {
   background-image: url(../../../assets/imgs/normalbtnRightSide.png);

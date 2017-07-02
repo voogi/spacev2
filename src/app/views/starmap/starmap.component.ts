@@ -25,9 +25,15 @@ class StarGraphics extends PIXI.Graphics {
 })
 export class StarmapComponent implements OnInit {
 
+  private log = Log.create('starmap', Level.ERROR, Level.WARN, Level.INFO);
+
   @HostBinding('@fadeInAnimation') get fadeInAnimation() {
     return '@fadeInAnimation';
   }
+
+  private systemDetailComponentVisible: boolean = false;
+  private systemDetailPosition: { left: number, top: number } = { left: 0, top: 0 };
+  public selectedSystem: ISystem;
 
   private renderer: any;
   private stage: PIXI.Container;
@@ -47,10 +53,7 @@ export class StarmapComponent implements OnInit {
   private zoom_factor_counter: number = 0;
   private positionText: PIXI.Text;
   private coordinates: { x: number, y: number } = {x: 5000, y: 5000};
-
   private pulseRate: number = 0;
-
-  private log = Log.create('starmap', Level.ERROR, Level.WARN, Level.INFO);
 
   static randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -229,8 +232,13 @@ export class StarmapComponent implements OnInit {
       this.deltaX = 0;
       this.deltaY = 0;
       if (event.currentTarget !== null) {
-        const selectedSystem = event.currentTarget.parent.attachedSystemObject;
-        this.onNavToSystem(selectedSystem.id);
+        this.selectedSystem = event.currentTarget.parent.attachedSystemObject;
+        const mouse_loc = _this.renderer.plugins.interaction.eventData.data.global;
+
+        this.systemDetailComponentVisible = true;
+        this.systemDetailPosition.top = mouse_loc.y;
+        this.systemDetailPosition.left = mouse_loc.x;
+
       } else {
         this.dragStart = JSON.stringify(event.data.global);
         this.isDragging = true;
@@ -477,16 +485,16 @@ export class StarmapComponent implements OnInit {
     this.stars.push(container);
   }
 
-  onNavToSystem(id: number) {
-    this.router.navigate(['/system', id]);
-  }
-
   storeCoordinates(coords: { x: number, y: number }) {
     localStorage.setItem('starmapCoodinates', JSON.stringify(coords));
   }
 
   loadCoordinates(): { x: number, y: number} {
     return JSON.parse( localStorage.getItem('starmapCoodinates') ) || { x: 5000, y: 5000 };
+  }
+
+  systemDetailComponentClosed(visible: boolean) {
+    this.systemDetailComponentVisible = visible;
   }
 
 }

@@ -1,3 +1,16 @@
-<div class="row">
-  <div class="col">system details</div>
+<div (click)="close()" class="system-detail-overlay" *ngIf="visible"></div>
+<div *ngIf="visible" [ngStyle]="{ 'left': _left+'px', 'top': _top+'px' }" class="system-detail container-fluid">
+  <div class="row">
+    <div class="col text-center">Actions</div>
+  </div>
+  <div class="row">
+    <div class="col d-flex align-items-center">
+      <space-button (click)="onNavToSystem()" [name]="'Enter'"></space-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex align-items-center">
+      <space-button (click)="onNavToSystem()" [name]="'discover'"></space-button>
+    </div>
+  </div>
 </div>
