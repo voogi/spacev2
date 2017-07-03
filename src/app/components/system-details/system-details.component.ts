@@ -15,7 +15,7 @@ export class SystemDetailsComponent implements OnInit {
   public visible: boolean = false;
 
   @Input()
-  public system: ISystem;
+  public system: any;
 
   public _left: number = 60;
   public _top: number = -30;
@@ -32,6 +32,8 @@ export class SystemDetailsComponent implements OnInit {
 
   @Output() closed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output() scout: EventEmitter<ISystem> = new EventEmitter<ISystem>();
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -45,7 +47,12 @@ export class SystemDetailsComponent implements OnInit {
   }
 
   onNavToSystem() {
-    this.router.navigate(['/system', this.system.id]);
+    this.router.navigate(['/system', this.system.attachedSystemObject.id]);
+  }
+
+  sendToAnotherSystem(){
+    this.scout.emit(this.system);
+    this.close();
   }
 
 }

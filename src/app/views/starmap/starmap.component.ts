@@ -46,6 +46,7 @@ export class StarmapComponent implements OnInit {
   private interactionManager: PIXI.interaction.InteractionManager;
   private loader: any = PIXI.loader;
   private stars: Array<any> = [];
+  private ships: Array<any> = [];
   private dragStart: string = '';
 
   private deltaX: number = 0;
@@ -232,7 +233,7 @@ export class StarmapComponent implements OnInit {
       this.deltaX = 0;
       this.deltaY = 0;
       if (event.currentTarget !== null) {
-        this.selectedSystem = event.currentTarget.parent.attachedSystemObject;
+        this.selectedSystem = event.currentTarget.parent;
         const mouse_loc = _this.renderer.plugins.interaction.eventData.data.global;
 
         this.systemDetailComponentVisible = true;
@@ -369,6 +370,18 @@ export class StarmapComponent implements OnInit {
       }
 
     }
+
+    for (let i = 0; i < this.ships.length; i++) {
+
+      let ship = this.ships[i];
+
+      const deltaX = ship.ship.x - ship.destination.x;
+      const deltaY = ship.ship.y - ship.destination.y;
+
+      ship.ship.x -= deltaX / 500;
+      ship.ship.y -= deltaY / 500;
+
+    }
   }
 
   gameLoop() {
@@ -495,6 +508,24 @@ export class StarmapComponent implements OnInit {
 
   systemDetailComponentClosed(visible: boolean) {
     this.systemDetailComponentVisible = visible;
+  }
+
+  scoutSystem(system: any){
+    const ship = new PIXI.Sprite(this.loader.resources['assets/imgs/spaceship.png'].texture);
+    ship.x = system.x;
+    ship.y = system.y;
+    ship.pivot.x = ship.width / 2;
+    ship.pivot.y = ship.height / 2;
+    ship.scale.set(0.2);
+    this.stage.addChild(ship);
+
+    const destination = this.stars[16 /*StarmapComponent.randomInt(0,this.stars.length-1)*/ ];
+
+    this.ships.push({
+      ship: ship,
+      destination: destination
+    });
+
   }
 
 }
