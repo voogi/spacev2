@@ -1,22 +1,17 @@
-<div class="system-container">
-  <div class="row planet-holder-row">
-    <div class="col solar-system-background row">
-      <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
-        <div [ngStyle]="setPlanetStyle(planet)" class="planet-background"(click)="setActivePlanet(planet)" (dblclick)="onNavigateToPlanet(planet)"></div>
-        <div class="planet-name">{{planet.name}}</div>
-      </div>
+<div class="row planet-holder-row">
+    <div class="col solar-system-background">
+        <div class="row">
+            <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
+                <div [ngStyle]="setPlanetStyle(planet)" class="planet-background" (click)="setActivePlanet(planet)"
+                     (dblclick)="onNavigateToPlanet(planet)"></div>
+                <div class="planet-name">{{planet.name}}</div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <space-planet-details [planet]="activePlanet"></space-planet-details>
-    </div>
-  </div>
-  <space-dialog #dialog [hasOverlay]="true" [draggable]="true" [width]="1000" [title]="'Dialog'">
-    <space-tabs>
-      <space-tab [name]="'Építmények'"></space-tab>
-      <space-tab [name]="'Egységek'"></space-tab>
-    </space-tabs>
-  </space-dialog>
-  <!--<space-progress-queue></space-progress-queue>-->
 </div>
+<div class="row">
+    <div class="col">
+        <space-planet-details [planet]="activePlanet"></space-planet-details>
+    </div>
+</div>
+<!--<space-progress-queue></space-progress-queue>-->
