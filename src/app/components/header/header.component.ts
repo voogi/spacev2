@@ -15,6 +15,10 @@ export class HeaderComponent implements OnInit {
       {
         name: 'starmap',
         route: '/starmap'
+      },
+      {
+        name: 'leaderboard',
+        route: '/leaderboard'
       }
     ];
   }

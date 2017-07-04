@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {SolarSystemComponent} from './views/solarsystem/solarsystem.component';
-import {PlanetViewComponent} from './views/planetview/planetview.component';
-import {StarmapComponent} from './views/starmap/starmap.component';
+import {SolarSystemComponent, StarmapComponent, PlanetViewComponent, LeaderboardComponent} from './views/index';
 
 const routes: Routes = [
   {
@@ -22,6 +20,10 @@ const routes: Routes = [
   {
     path: 'planet/:id',
     component: PlanetViewComponent
+  },
+  {
+    path: 'leaderboard',
+    component: LeaderboardComponent
   }
 
 ];
@@ -36,4 +38,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routedComponents = [SolarSystemComponent, StarmapComponent, PlanetViewComponent];
+export const routedComponents = [SolarSystemComponent, StarmapComponent, PlanetViewComponent, LeaderboardComponent];

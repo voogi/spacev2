@@ -20,7 +20,15 @@ class StarGraphics extends PIXI.Graphics {
 @Component({
   selector: 'space-starmap',
   templateUrl: './starmap.component.html',
-  styleUrls: ['./starmap.component.css'],
+  // styleUrls: ['./starmap.component.css'],
+  styles : [`
+      .kanvas  {
+          background: url("../../../assets/imgs/solar_system_background.png") no-repeat;
+          background-size: cover;
+          overflow: hidden;
+          z-index: 50;
+      }
+  `],
   animations: [fadeInAnimation]
 })
 export class StarmapComponent implements OnInit {

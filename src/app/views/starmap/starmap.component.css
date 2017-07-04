@@ -4,10 +4,3 @@
   overflow: hidden;
   z-index: 50;
 }
-
-.system-container {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  z-index: 100;
-}
