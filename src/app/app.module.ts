@@ -32,6 +32,7 @@ import { UnitBuilderComponent } from './components/unit-builder/unit-builder.com
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { SystemDetailsComponent } from './components/system-details/system-details.component';
 import { RounderPipe } from './pipes/rounder.pipe';
+import {WebSocketService} from "./services/websocket.service";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { RounderPipe } from './pipes/rounder.pipe';
     SimpleNotificationsModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [BackendService, ResourceLoaderService, BuilderService, RoutedDataService, ProgressService],
+  providers: [BackendService, ResourceLoaderService, BuilderService, RoutedDataService, ProgressService, WebSocketService],
   entryComponents : [ProgressBarComponent],
   bootstrap: [AppComponent]
 })

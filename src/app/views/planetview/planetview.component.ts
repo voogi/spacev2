@@ -5,6 +5,8 @@ import {IPlanet} from '../../shared/interface/iplanet';
 import {NotificationsService} from 'angular2-notifications/dist';
 import {RoutedDataService} from '../../services/routed-data.service';
 import {BackendService} from '../../services/backend.service';
+import {IConstruction} from "../../shared/interface/iconstruction";
+import {ProgressService} from "../../services/progress.service";
 
 @Component({
   selector: 'space-planetview',
@@ -24,6 +26,7 @@ export class PlanetViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private notificationService: NotificationsService,
+              private progressService: ProgressService,
               private backendService: BackendService,
               private renderer: Renderer2,
               private elementRef: ElementRef) {
@@ -33,9 +36,17 @@ export class PlanetViewComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.backendService.getPlanetById(params['id']).subscribe((planet: IPlanet) => {
         this.selectedPlanet = planet;
+        this.addConstructions(planet.constructions);
         this.setPlanetStyle();
       });
     });
+  }
+
+  addConstructions(constructions: Array<IConstruction>){
+    for (let i = 0; i < constructions.length; i++) {
+      const construction: IConstruction = constructions[i];
+      this.progressService.createProgress(construction);
+    }
   }
 
   onNavigateToSystem(id: number) {

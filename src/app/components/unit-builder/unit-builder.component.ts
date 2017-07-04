@@ -63,7 +63,6 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
     });
 
     this.onCompleteSub = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
-      console.log(construction);
       if (construction.constructionType === ConstructionType.UNIT) {
       }
     });

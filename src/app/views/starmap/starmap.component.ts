@@ -383,11 +383,32 @@ export class StarmapComponent implements OnInit {
 
       let ship = this.ships[i];
 
+      console.log(ship.destination)
+
       const deltaX = ship.ship.x - ship.destination.x;
       const deltaY = ship.ship.y - ship.destination.y;
 
-      ship.ship.x -= deltaX / 500;
-      ship.ship.y -= deltaY / 500;
+      console.log(deltaY,deltaX)
+
+      ship.ship.x -= deltaX / (500 + (this.deltaX == 0? 1 : this.deltaX));
+      ship.ship.y -= deltaY / (500 + (this.deltaY == 0? 1 : this.deltaY));
+
+      // let ship = this.ships[i];
+      //
+      // const deltaX = ship.ship.x - ship.destination.x;
+      // const deltaY = ship.ship.y - ship.destination.y;
+      //
+      // let distance = Math.sqrt( deltaX*deltaX + deltaY*deltaY );
+      //
+      // var angleRadians = Math.atan2(ship.destination.y - ship.ship.y, ship.destination.x - ship.ship.x);
+      //
+      // let result = { x:0,y:0};
+      //
+      // result.x = ship.ship.x + Math.round(Math.cos(angleRadians * Math.PI / 180) * distance);
+      // result.y = ship.ship.y - Math.round(Math.sin(angleRadians * Math.PI / 180) * distance);
+      //
+      // ship.ship.x -= result.x / 500;
+      // ship.ship.y -= result.y / 500;
 
     }
   }
@@ -524,7 +545,7 @@ export class StarmapComponent implements OnInit {
     ship.y = system.y;
     ship.pivot.x = ship.width / 2;
     ship.pivot.y = ship.height / 2;
-    ship.scale.set(0.2);
+    ship.scale.set(0.8);
     this.stage.addChild(ship);
 
     const destination = this.stars[16 /*StarmapComponent.randomInt(0,this.stars.length-1)*/ ];
