@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {Observer} from "rxjs/Observer";
+import {Observer} from 'rxjs/Observer';
 
 @Injectable()
 export class WebSocketService {
   private subject: Subject<MessageEvent>;
   private subjectData: Subject<number>;
 
-  // For chat box
   public connect(url: string): Subject<MessageEvent> {
     if (!this.subject) {
       this.subject = this.create(url);
@@ -17,9 +16,9 @@ export class WebSocketService {
   }
 
   private create(url: string): Subject<MessageEvent> {
-    let ws = new WebSocket(url);
+    const ws = new WebSocket(url);
 
-    let observable = Observable.create(
+    const observable = Observable.create(
       (obs: Observer<MessageEvent>) => {
         ws.onmessage = obs.next.bind(obs);
         ws.onerror   = obs.error.bind(obs);
@@ -27,7 +26,7 @@ export class WebSocketService {
         return ws.close.bind(ws);
       });
 
-    let observer = {
+    const observer = {
       next: (data: Object) => {
         if (ws.readyState === WebSocket.OPEN) {
           ws.send(JSON.stringify(data));
@@ -47,9 +46,9 @@ export class WebSocketService {
   }
 
   private createData(url: string): Subject<number> {
-    let ws = new WebSocket(url);
+    const ws = new WebSocket(url);
 
-    let observable = Observable.create(
+    const observable = Observable.create(
       (obs: Observer<number>) => {
         ws.onmessage = obs.next.bind(obs);
         ws.onerror   = obs.error.bind(obs);
@@ -58,7 +57,7 @@ export class WebSocketService {
         return ws.close.bind(ws);
       });
 
-    let observer = {
+    const observer = {
       next: (data: Object) => {
         if (ws.readyState === WebSocket.OPEN) {
           ws.send(JSON.stringify(data));
