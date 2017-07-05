@@ -27,7 +27,6 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
         (users: Array<IUser>) => {
           this.tableOptions.headers = ['Name', 'Email', 'Rank'];
           this.tableOptions.data = users;
-          this.tableOptions.keys = ['name', 'email', 'rank'];
         }
     );
   }

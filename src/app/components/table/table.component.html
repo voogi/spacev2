@@ -4,7 +4,7 @@
   </div>
   <div class="content">
     <div class="row table-row" *ngFor="let row of options.data">
-      <div class="table-cell col" *ngFor="let cell of options.keys">{{row[cell]}}</div>
+      <div class="table-cell col" *ngFor="let cell of Object.keys(row)">{{row[cell]}}</div>
     </div>
   </div>
 </div>

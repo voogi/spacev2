@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // DISABLE DEFAULT PIXI CONSOLE MESSAGE
     PIXI.utils.skipHello();
   }
 

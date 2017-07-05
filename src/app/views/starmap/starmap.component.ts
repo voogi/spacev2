@@ -20,7 +20,6 @@ class StarGraphics extends PIXI.Graphics {
 @Component({
   selector: 'space-starmap',
   templateUrl: './starmap.component.html',
-  // styleUrls: ['./starmap.component.css'],
   styles : [`
       .kanvas  {
           background: url("../../../assets/imgs/solar_system_background.png") no-repeat;
@@ -523,8 +522,8 @@ export class StarmapComponent implements OnInit {
         pulseRing1.visible = false;
       });
 
-    this.stage.addChild(container);
     this.stars.push(container);
+    this.stage.addChild(container);
   }
 
   storeCoordinates(coords: { x: number, y: number }) {
