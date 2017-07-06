@@ -36,11 +36,11 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
 
     for (let i = 0; i < this.planet.slots; i++) {
 
-      const hasBuilding = this.planet.buildings.filter( data => data.position === i )[0];
+      const hasBuilding = this.planet.buildings.filter( data => data.slot === i )[0];
 
       let building: IBuilding;
       if (hasBuilding) {
-        building = hasBuilding;
+        building = hasBuilding.type;
       }
 
       this.slots.push({
@@ -57,7 +57,8 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
 
         this.backendService.startConstruction({
           buildingType: builder.item,
-          constructionType: ConstructionType.BUILDING
+          constructionType: ConstructionType.BUILDING,
+          slot: builder.slot.position
         }, this.planet.id).subscribe( (construction: IConstruction) => {
           this.progressService.createProgress(construction);
         });

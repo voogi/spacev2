@@ -6,4 +6,5 @@ export interface IConstruction {
   unitType?: any;
   start?: number;
   end?: number;
+  slot?: number;
 }

@@ -9,7 +9,8 @@ export interface IBuilding {
   titanium: number;
   superPlastic: number;
   time: number;
-  position?: number;
-  type: BuildingType;
+  slot?: number;
+  buildingType: BuildingType;
+  type: any;
 
 }
