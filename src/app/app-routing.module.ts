@@ -18,7 +18,7 @@ const routes: Routes = [
     component: StarmapComponent
   },
   {
-    path: 'planet/:id',
+    path: 'planet/:system/:id',
     component: PlanetViewComponent
   },
   {

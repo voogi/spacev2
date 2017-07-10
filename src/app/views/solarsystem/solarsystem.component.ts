@@ -22,6 +22,7 @@ export class SolarSystemComponent implements OnInit {
 
   public planets: Array<IPlanet>;
   public activePlanet: IPlanet;
+  private systemId: number;
 
 
   constructor(
@@ -34,8 +35,8 @@ export class SolarSystemComponent implements OnInit {
   ngOnInit() {
 
     this.route.params.subscribe( (params: Params) =>  {
+      this.systemId = params['id'];
       this.backendService.getPlanetBySystemId( params['id'] ).subscribe( data => {
-
         data.forEach( d => {
           d.img = '/assets/imgs/planet_2.png';
           d.name = "unknown";
@@ -49,7 +50,7 @@ export class SolarSystemComponent implements OnInit {
   }
 
   onNavigateToPlanet(planet: IPlanet) {
-    this.router.navigate(['/planet', planet.id]);
+    this.router.navigate(['/planet', this.systemId, planet.id]);
   }
 
   public setPlanetStyle(planet: IPlanet) {

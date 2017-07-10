@@ -34,6 +34,7 @@ export class PlanetViewComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
+      this.systemId = params['system'];
       this.backendService.getPlanetById(params['id']).subscribe((planet: IPlanet) => {
         this.selectedPlanet = planet;
         this.addConstructions(planet.constructions);
@@ -49,8 +50,8 @@ export class PlanetViewComponent implements OnInit {
     }
   }
 
-  onNavigateToSystem(id: number) {
-    this.router.navigate(['/system', id]);
+  onNavigateToSystem() {
+    this.router.navigate(['/system', this.systemId]);
   }
 
   onShowNotification() {
