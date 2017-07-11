@@ -18,13 +18,14 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
 
   private usersSubscription: Subscription = new Subscription();
 
-  public tableOptions: any = { headers: [], data: [], keys: [] };
+  public tableOptions: any;
 
   constructor(private backendService: BackendService) { }
 
   ngOnInit() {
     this.usersSubscription = this.backendService.getAllUsers().subscribe(
         (users: Array<IUser>) => {
+          this.tableOptions = { headers: [], data: [] };
           this.tableOptions.headers = ['Name', 'Email', 'Rank'];
           this.tableOptions.data = users;
         }

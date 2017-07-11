@@ -33,6 +33,7 @@ import { PlanetDetailsComponent } from './components/planet-details/planet-detai
 import { SystemDetailsComponent } from './components/system-details/system-details.component';
 import { RounderPipe } from './pipes/rounder.pipe';
 import {WebSocketService} from "./services/websocket.service";
+import { TableRowComponent } from './components/table/table-row/table-row.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {WebSocketService} from "./services/websocket.service";
     routedComponents,
     PlanetDetailsComponent,
     SystemDetailsComponent,
-    RounderPipe
+    RounderPipe,
+    TableRowComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,7 @@ import {WebSocketService} from "./services/websocket.service";
     AppRoutingModule
   ],
   providers: [BackendService, ResourceLoaderService, BuilderService, RoutedDataService, ProgressService, WebSocketService],
-  entryComponents : [ProgressBarComponent],
+  entryComponents : [ProgressBarComponent, TableRowComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

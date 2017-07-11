@@ -1,19 +1,47 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  Component, ComponentFactory, ComponentFactoryResolver, Input, OnChanges, OnInit, SimpleChange, SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {TableRowComponent} from "./table-row/table-row.component";
 
 @Component({
-    selector: 'space-table',
-    templateUrl: './table.component.html',
-    styleUrls: ['./table.component.css']
+  selector: 'space-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
 
-    @Input()
-    public options: any;
+  private _options: any;
 
-    constructor() {
-    }
+  @Input() set options(value: any){
+        if( value === void 0) return;
+        this._options = value;
+        this.create();
+  }
 
-    ngOnInit() {
-    }
+
+  @ViewChild('rowContainer', {read: ViewContainerRef})
+  private container;
+
+  private factory: ComponentFactory<TableRowComponent>;
+
+  constructor(private resolver: ComponentFactoryResolver) {
+    this.factory = this.resolver.resolveComponentFactory(TableRowComponent);
+  }
+
+  create() {
+    this._options.data.forEach( data => {
+      this.createRow(data);
+    });
+  }
+
+  createRow(data: any) {
+      const comp = this.container.createComponent(this.factory);
+  }
+
+  ngOnInit() {
+
+  }
 
 }
