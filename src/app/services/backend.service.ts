@@ -12,6 +12,7 @@ import {ISystem} from "../shared/interface/isystem";
 import {Log, Level} from 'ng2-logger';
 import {IUser} from "../shared/interface/iuser";
 import {IOffer} from "../shared/interface/ioffer";
+import {IBuilding} from "../shared/interface/ibuilding";
 
 @Injectable()
 export class BackendService {
@@ -52,8 +53,11 @@ export class BackendService {
     }
 
     /*BUILDING RELATED REQUESTS*/
-    getAllBuilding() {
-        return this.http.get('/assets/buildings.json').map((res: Response) => res.json().payload);
+    getAllBuilding(): Observable<Array<IBuilding>> {
+        return this.http.get(this.bURL + '/api/enum/BuildingType')
+            .map(BackendService.extractData)
+            .catch(BackendService.handleError);
+        // return this.http.get('/assets/buildings.json').map((res: Response) => res.json().payload);
     }
 
     startConstruction(construction: IConstruction, planetId: number) {

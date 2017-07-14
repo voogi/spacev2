@@ -18,7 +18,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
   public producerBuildings: Array<IBuilding> = [];
   public developmentBuildings: Array<IBuilding> = [];
   public militaryBuildings: Array<IBuilding> = [];
-  public defensiveBuildings: Array<IBuilding> = [];
+  public utilityBuildings: Array<IBuilding> = [];
   public selectedBuilding: IBuilding;
   private selectedSlot: ISlot;
   private buildSub: Subscription = new Subscription();
@@ -56,12 +56,24 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.allBuildingSub = this.backendService.getAllBuilding().subscribe( buildings => {
-      this.buildings = buildings;
-      this.producerBuildings = this.buildings.producer;
-      this.militaryBuildings = this.buildings.military;
-      this.defensiveBuildings = this.buildings.defensive;
-      this.developmentBuildings = this.buildings.development;
 
+      this.buildings = buildings;
+      this.buildings.forEach( building => {
+        switch ( building.baseType ) {
+          case 'MILITARY':
+            this.militaryBuildings.push(building);
+            break;
+          case 'PRODUCER':
+            this.producerBuildings.push(building);
+            break;
+          case 'RESEARCH':
+            this.developmentBuildings.push(building);
+            break;
+          case 'UTILITY':
+            this.utilityBuildings.push(building);
+            break;
+        }
+      });
       this.availableBuildings.push({
         name : 'Producer buildings',
         buildings : this.producerBuildings
@@ -71,8 +83,8 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
         buildings : this.militaryBuildings
       });
       this.availableBuildings.push({
-        name : 'Defensive buildings',
-        buildings : this.defensiveBuildings
+        name : 'Utility buildings',
+        buildings : this.utilityBuildings
       });
       this.availableBuildings.push({
         name : 'Development buildings',

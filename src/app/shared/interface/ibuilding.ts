@@ -3,14 +3,16 @@ export interface IBuilding {
 
   id: number;
   name: string;
-  desc: string;
-  tooltip: string;
-  energy: number;
-  titanium: number;
-  superPlastic: number;
-  time: number;
+  buildingTime: number;
   slot?: number;
   buildingType: BuildingType;
   type: any;
+  baseType: any;
+  crewCost: number;
+  description: string;
+  energyCost: number;
+  modifierRules: any;
+  titaniumCost: number;
+  value: string;
 
 }
