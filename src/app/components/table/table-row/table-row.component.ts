@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'space-table-row',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-row.component.css']
 })
 export class TableRowComponent implements OnInit {
+
+  @Input()
+  public data: any;
 
   constructor() { }
 

@@ -3,6 +3,7 @@ import {BackendService} from '../../services/backend.service';
 import {Subscription} from 'rxjs/Subscription';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {IUser} from '../../shared/interface/iuser';
+import {TableOptions} from "../../components/table/table.component";
 
 @Component({
   selector: 'space-leaderboard',
@@ -18,16 +19,18 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
 
   private usersSubscription: Subscription = new Subscription();
 
-  public tableOptions: any;
+  public tableOptions: TableOptions;
 
   constructor(private backendService: BackendService) { }
 
   ngOnInit() {
     this.usersSubscription = this.backendService.getAllUsers().subscribe(
         (users: Array<IUser>) => {
-          this.tableOptions = { headers: [], data: [] };
-          this.tableOptions.headers = ['Name', 'Email', 'Rank'];
-          this.tableOptions.data = users;
+          this.tableOptions = {
+            headers : ['Name', 'Email', 'Rank'],
+            json : ["name", "email", "rank.name"],
+            data : users
+          };
         }
     );
   }
