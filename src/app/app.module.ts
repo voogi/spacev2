@@ -32,7 +32,7 @@ import { UnitBuilderComponent } from './components/unit-builder/unit-builder.com
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { SystemDetailsComponent } from './components/system-details/system-details.component';
 import { RounderPipe } from './pipes/rounder.pipe';
-import {WebSocketService} from "./services/websocket.service";
+import {WebSocketService} from './services/websocket.service';
 import { TableRowComponent } from './components/table/table-row/table-row.component';
 
 @NgModule({

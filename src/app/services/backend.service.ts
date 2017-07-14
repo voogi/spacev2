@@ -11,6 +11,7 @@ import {IResource} from '../shared/interface/iresource';
 import {ISystem} from "../shared/interface/isystem";
 import {Log, Level} from 'ng2-logger';
 import {IUser} from "../shared/interface/iuser";
+import {IOffer} from "../shared/interface/ioffer";
 
 @Injectable()
 export class BackendService {
@@ -99,6 +100,13 @@ export class BackendService {
     getAllUsers(): Observable<Array<IUser>> {
         this.log.info('GET::/api/user/all');
         return this.http.get(this.bURL + '/api/user/all')
+            .map(BackendService.extractData)
+            .catch(BackendService.handleError);
+    }
+
+    getAllOffers(): Observable<Array<IOffer>> {
+        this.log.info('GET::/api/trade/offers');
+        return this.http.get(this.bURL + '/api/trade/offers')
             .map(BackendService.extractData)
             .catch(BackendService.handleError);
     }

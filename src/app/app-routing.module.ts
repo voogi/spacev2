@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SolarSystemComponent, StarmapComponent, PlanetViewComponent, LeaderboardComponent} from './views/index';
+import {MarketComponent} from "./views/market/market.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'leaderboard',
     component: LeaderboardComponent
+  },
+  {
+    path: 'market',
+    component: MarketComponent
   }
 
 ];
@@ -38,4 +43,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routedComponents = [SolarSystemComponent, StarmapComponent, PlanetViewComponent, LeaderboardComponent];
+export const routedComponents = [SolarSystemComponent, StarmapComponent, PlanetViewComponent, LeaderboardComponent, MarketComponent];

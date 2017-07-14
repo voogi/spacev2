@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
       {
         name: 'leaderboard',
         route: '/leaderboard'
+      },
+      {
+        name: 'market',
+        route: '/market'
       }
     ];
   }

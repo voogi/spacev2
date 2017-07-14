@@ -3,12 +3,13 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {TableRowComponent} from "./table-row/table-row.component";
+import R from 'ramda';
+import {TableRowComponent} from './table-row/table-row.component';
 
 export interface TableOptions {
   data: Array<any>;
-  headers : Array<string>;
-  json : Array<string>;
+  headers: Array<string>;
+  json: Array<string>;
 }
 
 @Component({
@@ -19,10 +20,14 @@ export interface TableOptions {
 export class TableComponent implements OnInit {
 
   private _options: TableOptions;
+  private propMap: any = {};
 
   @Input() set options(value: any){
-        if( value === void 0) return;
+        if ( value === void 0) {
+          return;
+        }
         this._options = value;
+        this._options.json.forEach( prop => this.propMap[prop] = {});
         this.create();
   }
 
@@ -35,14 +40,14 @@ export class TableComponent implements OnInit {
     this.factory = this.resolver.resolveComponentFactory(TableRowComponent);
   }
 
-  resolveData(data:any){
-    let resolvedArray = [];
+  resolveData(data: any) {
+    const resolvedArray = [];
     this._options.json.forEach( prop => {
-      function findProp(_data,_prop){
-        let splitted = _prop.split(".");
-        if(splitted.length === 1){
+      function findProp(_data, _prop) {
+        const splitted = _prop.split('.');
+        if (splitted.length === 1) {
           return _data[_prop];
-        }else{
+        }else {
           let value = _data;
           splitted.forEach(pro_p => {
             value = value[pro_p];
@@ -50,15 +55,29 @@ export class TableComponent implements OnInit {
           return value;
         }
       }
-      resolvedArray.push( findProp(data,prop) )
+      resolvedArray.push( findProp(data, prop) );
     });
     return resolvedArray;
   }
 
-  filterTable(filter:string){
+  headerClick(prop: string) {
+    this.container.clear();
+    let sortedArray = R.sortBy(R.prop(prop), this._options.data);
+    if (this.propMap[prop].asc !== false) {
+      sortedArray = R.reverse(sortedArray);
+      this.propMap[prop].asc = false;
+    } else {
+      this.propMap[prop].asc = true;
+    }
+    sortedArray.forEach( data => {
+      this.createRow(this.resolveData(data));
+    });
+  }
+
+  filterTable(filter: string) {
     this.container.clear();
     this._options.data.forEach( data => {
-      if( JSON.stringify(data).toLowerCase().indexOf(filter.toLowerCase()) != -1){
+      if ( JSON.stringify(data).toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         this.createRow(this.resolveData(data));
       }
     });

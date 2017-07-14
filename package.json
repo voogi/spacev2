@@ -27,6 +27,7 @@
     "modernizr": "^3.5.0",
     "ng2-logger": "^1.0.3",
     "pixi.js": "^4.5.3",
+    "ramda": "^0.24.1",
     "rxjs": "^5.1.0",
     "typescript": "^2.3.4",
     "zone.js": "^0.8.4"
