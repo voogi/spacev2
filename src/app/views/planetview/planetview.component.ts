@@ -3,10 +3,9 @@ import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IPlanet} from '../../shared/interface/iplanet';
 import {NotificationsService} from 'angular2-notifications/dist';
-import {RoutedDataService} from '../../services/routed-data.service';
 import {BackendService} from '../../services/backend.service';
-import {IConstruction} from "../../shared/interface/iconstruction";
-import {ProgressService} from "../../services/progress.service";
+import {IConstruction} from '../../shared/interface/iconstruction';
+import {ProgressService} from '../../services/progress.service';
 
 @Component({
   selector: 'space-planetview',

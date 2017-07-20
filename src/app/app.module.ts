@@ -23,7 +23,6 @@ import {BuildingBuilderComponent} from './components/building-builder/building-b
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BuilderService} from './services/builder.service';
-import {RoutedDataService} from './services/routed-data.service';
 import {DraggableDirective} from './directives/draggable.directive';
 
 import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
@@ -70,7 +69,7 @@ import { BTimePipe } from './pipes/b-time.pipe';
     SimpleNotificationsModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [BackendService, ResourceLoaderService, BuilderService, RoutedDataService, ProgressService, WebSocketService],
+  providers: [BackendService, ResourceLoaderService, BuilderService, ProgressService, WebSocketService],
   entryComponents : [ProgressBarComponent, TableRowComponent],
   bootstrap: [AppComponent]
 })

@@ -4,9 +4,6 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {BackendService} from '../../services/backend.service';
-import {Subscription} from 'rxjs/Subscription';
-import {RoutedDataService} from '../../services/routed-data.service';
-import {ProgressService} from "../../services/progress.service";
 
 @Component({
   selector: 'space-solarsystem',
@@ -28,8 +25,7 @@ export class SolarSystemComponent implements OnInit {
   constructor(
       private route: ActivatedRoute,
       private router: Router,
-      private backendService: BackendService,
-      private routedData: RoutedDataService
+      private backendService: BackendService
   ) { }
 
   ngOnInit() {
@@ -39,7 +35,7 @@ export class SolarSystemComponent implements OnInit {
       this.backendService.getPlanetBySystemId( params['id'] ).subscribe( data => {
         data.forEach( d => {
           d.img = '/assets/imgs/planet_2.png';
-          d.name = "unknown";
+          d.name = 'unknown';
           d.size = 120;
         });
         this.planets = data;
@@ -61,7 +57,6 @@ export class SolarSystemComponent implements OnInit {
 
   public setActivePlanet(planet: IPlanet) {
     this.activePlanet = planet;
-    this.routedData.routedPlanet = planet;
   }
 
 }
