@@ -34,6 +34,7 @@ import { SystemDetailsComponent } from './components/system-details/system-detai
 import { RounderPipe } from './pipes/rounder.pipe';
 import {WebSocketService} from './services/websocket.service';
 import { TableRowComponent } from './components/table/table-row/table-row.component';
+import { BTimePipe } from './pipes/b-time.pipe';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TableRowComponent } from './components/table/table-row/table-row.compon
     PlanetDetailsComponent,
     SystemDetailsComponent,
     RounderPipe,
-    TableRowComponent
+    TableRowComponent,
+    BTimePipe
   ],
   imports: [
     BrowserModule,

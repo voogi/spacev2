@@ -35,23 +35,19 @@
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Desc</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.desc}}</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.description}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Time</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.time}}</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.buildingTime | bTime}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Energy</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.energy}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Plastic</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.superPlastic}}</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.energyCost}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Titanium</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.titanium}}</span>
+        <span class="col-lg-10 info-value">{{selectedShip?.titaniumCost}}</span>
       </div>
     </div>
   </div>

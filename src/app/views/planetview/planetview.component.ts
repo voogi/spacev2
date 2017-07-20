@@ -59,8 +59,9 @@ export class PlanetViewComponent implements OnInit {
   }
 
   setPlanetStyle() {
+    this.selectedPlanet.size = 200;
     this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
-      'background-image', 'url(' + this.selectedPlanet.img + ')');
+      'background-image', 'url(' + (this.selectedPlanet.img || '/assets/imgs/planet_2.png') + ')');
     this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
       'background-size', this.selectedPlanet.size + 'px');
     this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),

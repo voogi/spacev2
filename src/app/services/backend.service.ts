@@ -49,7 +49,9 @@ export class BackendService {
 
     /*SHIPS RELATED REQUESTS*/
     getAllShips() {
-        return this.http.get('/assets/ships.json').map((res: Response) => res.json().payload);
+        return this.http.get(this.bURL + '/api/enum/ShipType')
+            .map(BackendService.extractData)
+            .catch(BackendService.handleError);
     }
 
     /*BUILDING RELATED REQUESTS*/
@@ -57,7 +59,6 @@ export class BackendService {
         return this.http.get(this.bURL + '/api/enum/BuildingType')
             .map(BackendService.extractData)
             .catch(BackendService.handleError);
-        // return this.http.get('/assets/buildings.json').map((res: Response) => res.json().payload);
     }
 
     startConstruction(construction: IConstruction, planetId: number) {
