@@ -93,15 +93,14 @@ export const fadeInAnimation2 =
   ]);
 
 export const fadeInAnimation =
-  trigger('fadeInAnimation', [
-    state('void', style({position: 'fixed', width: '100%'}) ),
-    state('*', style({position: 'fixed', width: '100%'}) ),
-    transition(':enter', [  // before 2.1: transition('void => *', [
-      style({transform: 'translateX(100%)'}),
-      animate('0.3s ease-in-out', style({transform: 'translateX(0%)'}))
-    ]),
-    transition(':leave', [  // before 2.1: transition('* => void', [
-      style({transform: 'translateX(0%)'}),
-      animate('0.3s ease-in-out', style({transform: 'translateX(-100%)'}))
-    ])
-]);
+    trigger('fadeInAnimation', [
+        // route 'enter' transition
+        transition(':enter', [
+
+            // styles at start of transition
+            style({ opacity: 0 }),
+
+            // animation and styles at end of transition
+            animate('3s', style({ opacity: 1 }))
+        ]),
+    ]);

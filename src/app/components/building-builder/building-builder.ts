@@ -43,7 +43,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
     const item: IBuilder = {
       type: ConstructionType.BUILDING,
       slot: this.selectedSlot,
-      item: this.selectedBuilding.type
+      item: this.selectedBuilding.value
     };
     this.builder.build(item);
     this.visible = false;
@@ -103,5 +103,6 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
     this.buildSub.unsubscribe();
     this.allBuildingSub.unsubscribe();
   }
+
 
 }
