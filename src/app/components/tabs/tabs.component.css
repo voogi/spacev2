@@ -63,7 +63,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #6a1d01;
+  background:#71bfe6;
   content: '';
   -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
   transition: background-color 0.3s, transform 0.3s;
@@ -81,7 +81,7 @@
 .tabs nav a:hover::after,
 .tabs nav a:focus::after,
 .tabs nav li.tab-current a::after {
-  background: #6a1d01;
+  background: #71bfe6;
 }
 
 .tabs nav a:hover span {

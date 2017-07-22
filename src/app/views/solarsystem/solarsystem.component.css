@@ -23,6 +23,11 @@
   margin: 20px;
 }
 
+.planet {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .planet.active .glass-container {
   opacity: 1;
 }
