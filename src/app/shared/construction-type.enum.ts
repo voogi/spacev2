@@ -1,3 +1,3 @@
 export enum ConstructionType {
-    BUILDING, UNIT
+    BUILDING,SHIP
 }

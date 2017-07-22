@@ -42,8 +42,8 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
     if (this.selectedShip === undefined) { return; }
 
     const item: IBuilder = {
-      type  : ConstructionType.UNIT,
-      item : this.selectedShip
+      type  : ConstructionType.SHIP,
+      item : this.selectedShip.kind
     };
     this.builderService.build(item);
     this.visible = false;
@@ -62,10 +62,10 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.onCompleteSub = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
-      if (construction.constructionType === ConstructionType.UNIT) {
-      }
-    });
+    // this.onCompleteSub = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
+    //   if (construction.constructionType === ConstructionType.SHIP) {
+    //   }
+    // });
 
   }
 

@@ -66,6 +66,14 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
         this.selectedSlot.isEmpty = false;
 
       }
+      else if (builder.type === ConstructionType.SHIP) {
+        this.backendService.startConstruction({
+          shipType: builder.item,
+          constructionType: ConstructionType.SHIP
+        }, this.planet.id).subscribe( (construction: IConstruction) => {
+          this.progressService.createProgress(construction);
+        });
+      }
     });
 
     // when any queue completed data is a IBuilder obj

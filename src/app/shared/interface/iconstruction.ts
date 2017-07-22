@@ -4,6 +4,7 @@ export interface IConstruction {
   constructionType: any;
   buildingType?: BuildingType;
   unitType?: any;
+  shipType?: any;
   start?: number;
   end?: number;
   slot?: number;

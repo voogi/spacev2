@@ -9,4 +9,5 @@ export interface IShip {
     attack: number;
     defense: number;
     speed: number;
+    kind : string;
 }
