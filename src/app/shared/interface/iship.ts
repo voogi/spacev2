@@ -10,4 +10,5 @@ export interface IShip {
     defense: number;
     speed: number;
     kind : string;
+    shipType: any;
 }

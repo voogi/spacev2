@@ -13,12 +13,19 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
 
   @Input()
   public planet: IPlanet;
+
+  @Input()
+  public ssId: string;
+
   public ships: Array<IShip> = [];
 
   constructor(private backendService: BackendService) {
   }
 
   ngOnInit() {
+    this.backendService.getSystemShips(this.ssId).subscribe( (data:Array<IShip>) => {
+      this.ships = data.map( x => x.shipType );
+    });
   }
 
   ngOnDestroy(): void {
