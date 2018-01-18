@@ -1,6 +1,6 @@
 <div class="building-container">
   <div class="building-header">Buildings</div>
-  <div class="row justify-content-left no-gutters">
+  <div class="row justify-content-center no-gutters">
     <div *ngFor="let slot of slots;" class="slot-container">
       <div (click)="onSelectSlot(slot)" class="building-slot">
         <div class="building" *ngIf="!slot.isEmpty"></div>
