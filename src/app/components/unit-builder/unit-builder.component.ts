@@ -57,7 +57,7 @@ export class UnitBuilderComponent implements OnInit, OnDestroy {
 
     this.onSelectedBuildingSub = this.builderService.onSelectedBuilding().subscribe( (building: IBuilding) => {
       this.visible = true;
-      this.getAllShipSub = this.backendService.getAllShips().subscribe( data => {
+      this.getAllShipSub = this.backendService.getAllShips().subscribe( (data: Array<IShip>) => {
         this.ships = data;
       });
     });

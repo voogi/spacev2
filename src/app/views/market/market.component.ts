@@ -25,7 +25,7 @@ export class MarketComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.offersSubscription = this.backendService.getAllOffers().subscribe(
-        (offers: Array<IOffer>) => {
+      (offers: Array<IOffer>) => {
           this.tableOptions = {
             headers : ['id', 'fromType', 'fromValue', 'toType', 'toValue', 'solarSystemId'],
             json : ['id', 'fromType', 'fromValue', 'toType', 'toValue', 'solarSystemId'],

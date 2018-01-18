@@ -103,8 +103,8 @@ export class StarmapComponent implements OnInit {
 
     // dummy userUUID
     this.backendService.getDiscoveredSystemByUser('3f22ac02-243a-46d3-a0ff-cb6284f1f97e')
-      .subscribe((data: Array<ISystem>) => {
-        this.initStars(data);
+      .subscribe((systems: Array<ISystem>) => {
+        this.initStars(systems);
       });
 
     this.addInfoToCanvas();

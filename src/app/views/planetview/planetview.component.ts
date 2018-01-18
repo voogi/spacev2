@@ -1,8 +1,7 @@
-import {Component, ElementRef, HostBinding, OnInit, Renderer, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit, Renderer2} from '@angular/core';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IPlanet} from '../../shared/interface/iplanet';
-import {NotificationsService} from 'angular2-notifications/dist';
 import {BackendService} from '../../services/backend.service';
 import {IConstruction} from '../../shared/interface/iconstruction';
 import {ProgressService} from '../../services/progress.service';
@@ -24,7 +23,6 @@ export class PlanetViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private notificationService: NotificationsService,
               private progressService: ProgressService,
               private backendService: BackendService,
               private renderer: Renderer2,
@@ -54,7 +52,6 @@ export class PlanetViewComponent implements OnInit {
   }
 
   onShowNotification() {
-    this.notificationService.success('Success', 'Sucessfully created a notification');
   }
 
   setPlanetStyle() {
