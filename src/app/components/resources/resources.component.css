@@ -18,17 +18,16 @@
   min-width: 80px;
   display: inline-block;
   vertical-align: top;
+  text-align: center;
+  font-size: 1.2em;
 }
 
 .resource-container:after {
   content: " ";
-  background: url("../../../assets/imgs/menu-border.png");
-  background-size: 100% 100%;
   display: inline-block;
-  height: 45px;
-  width: 6px;
-  color: #71bfe6;
-  padding-left: 4px;
+  height: 23px;
+  border-right: 2px solid #1299d5;
+  padding-left: 15px;
   vertical-align: top;
   margin-top: 8px;
 }
