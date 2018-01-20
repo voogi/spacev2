@@ -57,6 +57,7 @@ export class BackendService {
   startConstruction(construction: IConstruction, planetId: number) {
     this.log.info('POST::/api/construction/planet/' + planetId);
     return this.http.post(this.bURL + '/api/construction/planet/' + planetId, construction, {headers: this.headers})
+      .map( (data:any) => data.payload);
   }
 
   getPlanetConstructions(planetId: number): Observable<Array<IConstruction>> {
