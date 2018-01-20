@@ -30,15 +30,19 @@
 
 .building-slot:hover {
   cursor: pointer;
-  border: 2px solid #1299d5;
+  outline: 2px solid #1299d5;
 }
 
 
 .building{
   background-image: url("../../../assets/imgs/building.png");
-  height: 80px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60px 60px;
+  background-size: 40px 40px;
+  height: 55px;
+}
+
+.building-title {
+  text-align: center;
 }
 
