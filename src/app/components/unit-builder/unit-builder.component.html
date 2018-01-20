@@ -1,5 +1,5 @@
 <div *ngIf="visible" class="builder-overlay"></div>
-<div *ngIf="visible" class="builder-container container-fluid">
+<div *ngIf="visible" class="builder-container container">
 
   <div class="row">
     <div class="col builder-header text-center">
@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div title="{{b?.tooltip}}" (click)="onSelectShip(b)" *ngFor="let b of ships;"
-             class="col-md-2 col-lg-2">
+             class="col-md-1 col-lg-1">
           <div class="building"></div>
         </div>
       </div>
