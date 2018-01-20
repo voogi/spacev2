@@ -30,7 +30,7 @@
 
 .building-slot:hover {
   cursor: pointer;
-  border: 2px solid #1299d5;
+  outline: 2px solid #1299d5;
 }
 
 

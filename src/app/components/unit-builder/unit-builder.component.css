@@ -37,11 +37,14 @@
     margin-top: 1em;
     background-position: center;
     background-size: 60px 60px;
+
+  -webkit-box-shadow: 1px 2px 4px 0px rgb(0, 0, 0);
+  box-shadow: 1px 2px 4px 0px rgb(0, 0, 0);
 }
 
 .building:hover{
     cursor: pointer;
-    outline: 1px solid whitesmoke;
+    outline: 2px solid #1299d5;
 }
 
 .button-container {
