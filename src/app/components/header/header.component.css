@@ -28,16 +28,16 @@
 }
 
 .resource-container:after {
-  content: " ";
-  background: url("../../../assets/imgs/menu-border.png");
-  background-size: 100% 100%;
-  display: inline-block;
-  height: 45px;
-  width: 6px;
-  color: #71bfe6;
-  padding-left: 4px;
-  vertical-align: top;
-  margin-top: 8px;
+  /*content: " ";*/
+  /*background: url("../../../assets/imgs/menu-border.png");*/
+  /*background-size: 100% 100%;*/
+  /*display: inline-block;*/
+  /*height: 45px;*/
+  /*width: 6px;*/
+  /*color: #71bfe6;*/
+  /*padding-left: 4px;*/
+  /*vertical-align: top;*/
+  /*margin-top: 8px;*/
 }
 
 .header-offset {

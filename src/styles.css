@@ -41,10 +41,6 @@ body {
   /*image-rendering: -webkit-optimize-contrast;*/
 }
 
-.button-container {
-  line-height: 0;
-}
-
 p {
   word-wrap: break-word;
   word-break: break-all;

@@ -2,88 +2,25 @@
   display: inline-block;
 }
 
-.button-container .button-left {
-  background-image: url(../../../assets/imgs/normalbtnLeftSide.png);
-  background-repeat: no-repeat;
-  height: 43px;
-  float: left;
-  width: 52px;
-}
-.button-container .button-middle {
-  background-image: url(../../../assets/imgs/normalbtnMiddle.png);
-  background-repeat: repeat-x;
-  background-position-y: 1px;
-  font-size: 14px;
-  color: white;
-  line-height: 1.5em;
-  min-height: 1.5em;
-  height: 43px;
-  float: left;
-  padding-top: 11px;
-  text-transform: uppercase;
-  min-width: 68px;
+button {
+  height: 26px;
+  line-height: 26px;
+  vertical-align: middle;
   text-align: center;
-}
-.button-container .button-right {
-  background-image: url(../../../assets/imgs/normalbtnRightSide.png);
-  background-repeat: no-repeat;
-  float: left;
-  height: 43px;
-  width: 52px;
-
+  background-color: #3b6897;
+  border: none;
+  padding: 0 28px;
 }
 
-.button-container:hover {
+button:hover {
   cursor: pointer;
+  color: white;
 }
 
-.button-container:hover .button-left {
-  background-image: url(../../../assets/imgs/hoverbtnLeftSide.png);
-}
-.button-container:hover .button-middle {
-  background-image: url(../../../assets/imgs/hoverbtnMiddle.png);
-}
-.button-container:hover .button-right {
-  background-image: url(../../../assets/imgs/hoverbtnRightSide.png);
+button:focus {
+  outline: none;
 }
 
-.button-container:active .button-left{
-  background-image: url(../../../assets/imgs/btnLeftSide.png);
+button:active {
+  color: initial;
 }
-.button-container:active .button-middle{
-  background-image: url(../../../assets/imgs/btnMiddle.png);
-}
-.button-container:active .button-right{
-  background-image: url(../../../assets/imgs/btnRightSide.png);
-}
-
-/*button {*/
-  /*font-size: 14px;*/
-  /*color: white;*/
-  /*line-height: 1.5em;*/
-  /*min-height: 1.5em;*/
-  /*height: 43px;*/
-  /*!*background-position-y: 1px;*!*/
-  /*text-transform: uppercase;*/
-  /*background: transparent;*/
-  /*background-image: url(assets/imgs/normalbtnMiddle.png), url(assets/imgs/normalbtnRightSide.png), url(assets/imgs/normalbtnLeftSide.png);*/
-  /*background-position: center, right, left;*/
-  /*background-repeat: repeat-x, no-repeat, no-repeat;*/
-/*}*/
-
-/*button:hover {*/
-  /*cursor: pointer;*/
-  /*background-image: url(assets/imgs/hoverbtnMiddle.png), url(assets/imgs/hoverbtnRightSide.png), url(assets/imgs/hoverbtnLeftSide.png);*/
-  /*background-position: center, right, left;*/
-  /*background-repeat: repeat-x, no-repeat, no-repeat;*/
-/*}*/
-
-/*button:focus {*/
-  /*outline: none;*/
-/*}*/
-
-/*button:active {*/
-  /*background-image: url(assets/imgs/btnMiddle.png), url(assets/imgs/btnRightSide.png), url(assets/imgs/btnLeftSide.png);*/
-  /*background-position: center, right, left;*/
-  /*background-repeat: repeat-x, no-repeat, no-repeat;*/
-/*}*/
