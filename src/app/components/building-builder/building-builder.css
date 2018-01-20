@@ -2,7 +2,7 @@
   position: fixed;
   top: 30px;
   right: 0;
-  background-color: #363636;
+  background-color: #265789;
   color: white;
   z-index: 401;
   min-width: 600px;
@@ -54,15 +54,18 @@
 }
 
 .builder-header {
-  background: url("../../../assets/imgs/header.png");
+  background: #1f4871;
   height: 53px;
-  background-size: 100% 53px;
-  background-repeat: no-repeat;
   text-align: center;
   color: #ffffff;
   line-height: 53px;
   text-transform: uppercase;
-  font-size: 1.3em;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  margin-bottom: 1em;
+  border-bottom: 3px solid #1299d5;
+  -webkit-box-shadow: 1px 1px 3px 1px rgb(0, 0, 0);
+  box-shadow: 1px 1px 3px 1px rgb(0, 0, 0);
 }
 
 .info-label {

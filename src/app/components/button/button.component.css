@@ -10,11 +10,13 @@ button {
   background-color: #3b6897;
   border: none;
   padding: 0 28px;
+  color: white;
+  min-width: 120px;
 }
 
 button:hover {
   cursor: pointer;
-  color: white;
+  color: #1299d5;
 }
 
 button:focus {
