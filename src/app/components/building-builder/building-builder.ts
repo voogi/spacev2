@@ -23,7 +23,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
   private selectedSlot: ISlot;
   private buildSub: Subscription = new Subscription();
   public availableBuildings: Array<any> = [];
-  private allBuildingSub: Subscription;
+  private allBuildingSub: Subscription = new Subscription();
 
   @Input()
   public visible: boolean = false;
@@ -33,7 +33,6 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   onSelectBuilding(building: IBuilding) {
     this.selectedBuilding = building;
-    this.allBuildingSub = new Subscription();
   }
 
   onBuild() {

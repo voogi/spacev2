@@ -14,6 +14,7 @@ import {IOffer} from "../shared/interface/ioffer";
 import {IBuilding} from "../shared/interface/ibuilding";
 import {IShip} from "../shared/interface/iship";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {IResponse} from "../shared/interface/iresponse";
 
 @Injectable()
 export class BackendService {
@@ -111,6 +112,12 @@ export class BackendService {
   getBuildingInfo(buildId: string | number): Observable<any> {
     this.log.info('GET::/api/building/' + buildId);
     return this.http.get<any>(this.bURL + '/api/building/' + buildId)
+      .map( (data:any) => data.payload);
+  }
+
+  upgradeBuilding(buildId: string | number): Observable<any> {
+    this.log.info('GET::/api/building/' + buildId + "/upgrade");
+    return this.http.get<any>(this.bURL + '/api/building/' + buildId + '/upgrade')
       .map( (data:any) => data.payload);
   }
 

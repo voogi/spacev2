@@ -1,4 +1,4 @@
-export interface IShip {
+export interface IShip{
     id: number;
     name: string;
     description: string;

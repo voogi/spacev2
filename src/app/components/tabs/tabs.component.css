@@ -47,7 +47,7 @@
 .tabs nav a span {
   vertical-align: middle;
   font-size: 0.95em;
-  color: rgb(142, 147, 145);
+  /*color: rgb(142, 147, 145);*/
   transition: color 0.3s;
 }
 
@@ -56,14 +56,14 @@
   color: #fff;
 }
 
-.tabs nav a::after {
+.tabs nav a:after {
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
   width: 100%;
   height: 100%;
-  background:#07458c;
+  background:#1299d5;
   content: '';
   -webkit-transition: background-color 0.3s, -webkit-transform 0.3s;
   transition: background-color 0.3s, transform 0.3s;
@@ -81,7 +81,7 @@
 .tabs nav a:hover::after,
 .tabs nav a:focus::after,
 .tabs nav li.tab-current a::after {
-  background: #07458c;
+  background: #1299d5;
 }
 
 .tabs nav a:hover span {

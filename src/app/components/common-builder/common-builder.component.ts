@@ -2,12 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BackendService} from '../../services/backend.service';
 import {ProgressService} from '../../services/progress.service';
 import {BuilderService} from '../../services/builder.service';
-import {IBuilding} from '../../shared/interface/ibuilding';
 import {IShip} from '../../shared/interface/iship';
 import { ConstructionType} from '../../shared/construction-type.enum';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {Subscription} from 'rxjs/Subscription';
-import {IConstruction} from '../../shared/interface/iconstruction';
 import {BuildingType} from "../../shared/building-type.enum";
 import {ISlot} from "../../shared/interface/islot";
 
@@ -25,9 +23,11 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
   public onCompleteSub: Subscription;
   public getAllShipSub: Subscription;
   public infoSub: Subscription;
+  public upgradeSub: Subscription;
   public title: string = "";
   public subtitle: string = "";
   public level: number = 1;
+  public buildingId: string | number;
 
   constructor(
       private backendService: BackendService,
@@ -38,6 +38,7 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
     this.onCompleteSub = new Subscription();
     this.getAllShipSub = new Subscription();
     this.infoSub = new Subscription();
+    this.upgradeSub = new Subscription();
   }
 
   onSelectShip(ship: IShip) {
@@ -64,6 +65,7 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
 
     this.onSelectedBuildingSub = this.builderService.onSelectedBuilding().subscribe( (slot: ISlot) => {
       this.level = slot.level;
+      this.buildingId = slot.buildingId;
       this.infoSub = this.backendService.getBuildingInfo(slot.buildingId).subscribe( data => {
         if(slot.building.value === BuildingType.SHIPYARD) {
             this.ships = data.buildingItems;
@@ -79,6 +81,10 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
     //   }
     // });
 
+  }
+
+  onUpgrade(){
+    this.upgradeSub = this.backendService.upgradeBuilding(this.buildingId).subscribe( data => console.log(data) );
   }
 
 
