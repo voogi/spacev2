@@ -46,12 +46,12 @@ export class StarmapComponent implements OnInit {
   private renderer: any;
   private root: PIXI.Container;
   private stage: PIXI.Container;
-  private littleStarsContainer: PIXI.Container;
+  private blueStarsContainer: PIXI.Container;
   private backgroundStarLength: number = 500;
   private isDragging: boolean = false;
 
-  private littleStars: PIXI.particles.ParticleContainer;
-  private littleStars1: PIXI.particles.ParticleContainer;
+  private blueStars: PIXI.particles.ParticleContainer;
+  private yellowStars: PIXI.particles.ParticleContainer;
 
   private interactionManager: PIXI.interaction.InteractionManager;
   private loader: any = PIXI.loader;
@@ -93,8 +93,8 @@ export class StarmapComponent implements OnInit {
 
     this.root = new PIXI.Container();
     this.stage = new PIXI.Container();
-    this.littleStarsContainer = new PIXI.Container();
-    this.root.addChild(this.littleStarsContainer);
+    this.blueStarsContainer = new PIXI.Container();
+    this.root.addChild(this.blueStarsContainer);
     this.root.addChild(this.stage);
 
     this.bindMouseEvents();
@@ -125,14 +125,14 @@ export class StarmapComponent implements OnInit {
     this.positionText.x = 10;
     this.positionText.y = 10;
 
-    this.littleStarsContainer.addChild(this.positionText);
+    this.blueStarsContainer.addChild(this.positionText);
   }
 
   makeDraggableParticles() {
 
     const container = new PIXI.Container();
 
-    this.littleStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
+    this.blueStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
       scale: true,
       position: true,
       rotation: true,
@@ -140,7 +140,7 @@ export class StarmapComponent implements OnInit {
       alpha: true
     });
 
-    this.littleStars1 = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
+    this.yellowStars = new PIXI.particles.ParticleContainer(this.backgroundStarLength, {
       scale: true,
       position: true,
       rotation: true,
@@ -148,10 +148,10 @@ export class StarmapComponent implements OnInit {
       alpha: true
     });
 
-    container.addChild(this.littleStars);
-    container.addChild(this.littleStars1);
+    container.addChild(this.blueStars);
+    container.addChild(this.yellowStars);
 
-    this.littleStarsContainer.addChild(container);
+    this.blueStarsContainer.addChild(container);
 
 
     // const texture = this.renderer.generateTexture();
@@ -162,7 +162,7 @@ export class StarmapComponent implements OnInit {
       const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
       p.x = w;
       p.y = h;
-      this.littleStars.addChild(p);
+      this.blueStars.addChild(p);
     }
     for (let i = 0; i < this.backgroundStarLength / 2; i++) {
       const p = new PIXI.Sprite(this.loader.resources['assets/imgs/stars/yellow_dwarf60.png'].texture);
@@ -171,7 +171,7 @@ export class StarmapComponent implements OnInit {
       const h = StarmapComponent.randomInt(20, window.innerHeight - 20);
       p.x = w;
       p.y = h;
-      this.littleStars1.addChild(p);
+      this.yellowStars.addChild(p);
     }
   }
 
@@ -299,56 +299,56 @@ export class StarmapComponent implements OnInit {
     this.stage.x -= this.deltaX / 6;
     this.stage.y -= this.deltaY / 6;
 
-    for (let child = 0; child < this.littleStars.children.length; child++) {
+    for (let child = 0; child < this.blueStars.children.length; child++) {
 
       const speed = child / 8;
 
-      this.littleStars.children[child].x -= this.deltaX / speed;
+      this.blueStars.children[child].x -= this.deltaX / speed;
 
-      if (this.littleStars.children[child].x < 0) {
-        this.littleStars.children[child].x = window.innerWidth;
+      if (this.blueStars.children[child].x < 0) {
+        this.blueStars.children[child].x = window.innerWidth;
       }
 
-      if (this.littleStars.children[child].x > window.innerWidth) {
-        this.littleStars.children[child].x = 0;
+      if (this.blueStars.children[child].x > window.innerWidth) {
+        this.blueStars.children[child].x = 0;
       }
 
 
-      this.littleStars.children[child].y -= this.deltaY / speed;
+      this.blueStars.children[child].y -= this.deltaY / speed;
 
-      if (this.littleStars.children[child].y > window.innerHeight) {
-        this.littleStars.children[child].y = 0;
+      if (this.blueStars.children[child].y > window.innerHeight) {
+        this.blueStars.children[child].y = 0;
       }
 
-      if (this.littleStars.children[child].y < 0) {
-        this.littleStars.children[child].y = window.innerHeight;
+      if (this.blueStars.children[child].y < 0) {
+        this.blueStars.children[child].y = window.innerHeight;
       }
 
     }
 
-    for (let child = 0; child < this.littleStars1.children.length; child++) {
+    for (let child = 0; child < this.yellowStars.children.length; child++) {
 
       const speed = child / 8;
 
-      this.littleStars1.children[child].x -= this.deltaX / speed;
+      this.yellowStars.children[child].x -= this.deltaX / speed;
 
-      if (this.littleStars1.children[child].x < 0) {
-        this.littleStars1.children[child].x = window.innerWidth;
+      if (this.yellowStars.children[child].x < 0) {
+        this.yellowStars.children[child].x = window.innerWidth;
       }
 
-      if (this.littleStars1.children[child].x > window.innerWidth) {
-        this.littleStars1.children[child].x = 0;
+      if (this.yellowStars.children[child].x > window.innerWidth) {
+        this.yellowStars.children[child].x = 0;
       }
 
 
-      this.littleStars1.children[child].y -= this.deltaY / speed;
+      this.yellowStars.children[child].y -= this.deltaY / speed;
 
-      if (this.littleStars1.children[child].y > window.innerHeight) {
-        this.littleStars1.children[child].y = 0;
+      if (this.yellowStars.children[child].y > window.innerHeight) {
+        this.yellowStars.children[child].y = 0;
       }
 
-      if (this.littleStars1.children[child].y < 0) {
-        this.littleStars1.children[child].y = window.innerHeight;
+      if (this.yellowStars.children[child].y < 0) {
+        this.yellowStars.children[child].y = window.innerHeight;
       }
 
     }

@@ -11,6 +11,7 @@ import {ProgressService} from '../../services/progress.service';
 import {ConstructionType} from '../../shared/construction-type.enum';
 import {Subscription} from 'rxjs/Subscription';
 import {IConstruction} from '../../shared/interface/iconstruction';
+import has = Reflect.has;
 
 @Component({
   selector: 'space-building-slots',
@@ -38,16 +39,25 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
 
       const hasBuilding = this.planet.buildings.filter( data => data.slot === i )[0];
 
-      let building: IBuilding;
       if (hasBuilding) {
-        building = hasBuilding.type;
+
+        this.slots.push({
+          isEmpty : false,
+          building : hasBuilding.type,
+          position : i,
+          level: hasBuilding.level,
+          buildingId: hasBuilding.id
+        });
+
+      }
+      else{
+        this.slots.push({
+          isEmpty : true,
+          building : null,
+          position : i
+        });
       }
 
-      this.slots.push({
-        isEmpty : hasBuilding ? false : true,
-        building : building || null,
-        position : i
-      });
     }
 
 
@@ -106,7 +116,7 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
       this.builder.selectedSlot(slot);
       this.selectedSlot = slot;
     }else {
-      this.builder.selectedBuilding(slot.building);
+      this.builder.selectedBuilding(slot);
     }
   }
 

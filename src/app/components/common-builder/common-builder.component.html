@@ -3,14 +3,23 @@
 
   <div class="row">
     <div class="col builder-header text-center">
-      Available ships
+      {{title}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="section-header col">
+      Level {{level}}
+    </div>
+    <div class="col">
+      <space-button [name]="'Upgrade'"></space-button>
     </div>
   </div>
 
   <div class="row text-center">
     <div class="col">
       <div class="row">
-        <div class="section-header col">Ships</div>
+        <div class="section-header col">{{subtitle}}</div>
       </div>
       <div class="row">
         <div title="{{b?.tooltip}}" (click)="onSelectShip(b)" *ngFor="let b of ships;"
@@ -20,34 +29,32 @@
       </div>
     </div>
 
-    <hr>
-
   </div>
 
   <div class="row">
     <div class="col">
       <div class="row preview-header">
-        <span class="col info-label">Ship preview</span>
+        <span class="col info-label">Info</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Name</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.name}}</span>
+        <span class="col-lg-10 info-value">{{selectedItem?.name}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Desc</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.description}}</span>
+        <span class="col-lg-10 info-value">{{selectedItem?.description}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Time</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.buildingTime | bTime}}</span>
+        <span class="col-lg-10 info-value">{{selectedItem?.buildingTime | bTime}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Energy</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.energyCost}}</span>
+        <span class="col-lg-10 info-value">{{selectedItem?.energyCost}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Titanium</span>
-        <span class="col-lg-10 info-value">{{selectedShip?.titaniumCost}}</span>
+        <span class="col-lg-10 info-value">{{selectedItem?.titaniumCost}}</span>
       </div>
     </div>
   </div>

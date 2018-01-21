@@ -12,7 +12,7 @@ export class BuilderService {
 
   private subject: Subject<IBuilder>;
   private selectedSlotSubject: Subject<ISlot>;
-  private selectedBuildingSubject: Subject<IBuilding>;
+  private selectedBuildingSubject: Subject<ISlot>;
 
   constructor(private progressService: ProgressService) {
     this.subject = new Subject();
@@ -36,11 +36,11 @@ export class BuilderService {
     return this.selectedSlotSubject;
   }
 
-  selectedBuilding(building: IBuilding) {
+  selectedBuilding(building: ISlot) {
     this.selectedBuildingSubject.next(building);
   }
 
-  onSelectedBuilding(): Observable<IBuilding> {
+  onSelectedBuilding(): Observable<ISlot> {
     return this.selectedBuildingSubject;
   }
 

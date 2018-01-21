@@ -4,4 +4,6 @@ export interface ISlot {
   building: IBuilding;
   isEmpty: boolean;
   isUnderConstruction?: boolean;
+  level?: number;
+  buildingId?: string | number;
 }

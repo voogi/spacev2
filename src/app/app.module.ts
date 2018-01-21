@@ -25,7 +25,7 @@ import {DraggableDirective} from './directives/draggable.directive';
 
 import { ProgressQueueComponent } from './components/progress-queue/progress-queue.component';
 import {ProgressService} from './services/progress.service';
-import { UnitBuilderComponent } from './components/unit-builder/unit-builder.component';
+import { CommonBuilderComponent } from './components/common-builder/common-builder.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { SystemDetailsComponent } from './components/system-details/system-details.component';
 import { RounderPipe } from './pipes/rounder.pipe';
@@ -52,7 +52,7 @@ import {HttpClientModule} from "@angular/common/http";
     ButtonComponent,
     BuildingBuilderComponent,
     ProgressQueueComponent,
-    UnitBuilderComponent,
+    CommonBuilderComponent,
     routedComponents,
     PlanetDetailsComponent,
     SystemDetailsComponent,

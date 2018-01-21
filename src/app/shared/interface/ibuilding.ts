@@ -14,5 +14,6 @@ export interface IBuilding {
   modifierRules: any;
   titaniumCost: number;
   value: string;
+  level: number;
 
 }

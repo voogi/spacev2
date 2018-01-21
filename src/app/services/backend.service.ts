@@ -108,4 +108,10 @@ export class BackendService {
       .map( (data:any) => data.payload);
   }
 
+  getBuildingInfo(buildId: string | number): Observable<any> {
+    this.log.info('GET::/api/building/' + buildId);
+    return this.http.get<any>(this.bURL + '/api/building/' + buildId)
+      .map( (data:any) => data.payload);
+  }
+
 }

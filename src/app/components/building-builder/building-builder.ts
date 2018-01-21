@@ -55,46 +55,49 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.allBuildingSub = this.backendService.getAllBuilding().subscribe( buildings => {
-
-      this.buildings = buildings;
-      this.buildings.forEach( building => {
-        switch ( building.baseType ) {
-          case 'MILITARY':
-            this.militaryBuildings.push(building);
-            break;
-          case 'PRODUCER':
-            this.producerBuildings.push(building);
-            break;
-          case 'RESEARCH':
-            this.developmentBuildings.push(building);
-            break;
-          case 'UTILITY':
-            this.utilityBuildings.push(building);
-            break;
-        }
-      });
-      this.availableBuildings.push({
-        name : 'Producer buildings',
-        buildings : this.producerBuildings
-      });
-      this.availableBuildings.push({
-        name : 'Military buildings',
-        buildings : this.militaryBuildings
-      });
-      this.availableBuildings.push({
-        name : 'Utility buildings',
-        buildings : this.utilityBuildings
-      });
-      this.availableBuildings.push({
-        name : 'Development buildings',
-        buildings : this.developmentBuildings
-      });
-    });
-
     this.buildSub = this.builder.onSelectedSlot().subscribe( (slot) => {
+
       this.selectedSlot = slot;
-      this.visible = true;
+
+      this.allBuildingSub = this.backendService.getAllBuilding().subscribe( buildings => {
+
+        this.buildings = buildings;
+        this.buildings.forEach( building => {
+          switch ( building.baseType ) {
+            case 'MILITARY':
+              this.militaryBuildings.push(building);
+              break;
+            case 'PRODUCER':
+              this.producerBuildings.push(building);
+              break;
+            case 'RESEARCH':
+              this.developmentBuildings.push(building);
+              break;
+            case 'UTILITY':
+              this.utilityBuildings.push(building);
+              break;
+          }
+        });
+        this.availableBuildings.push({
+          name : 'Producer buildings',
+          buildings : this.producerBuildings
+        });
+        this.availableBuildings.push({
+          name : 'Military buildings',
+          buildings : this.militaryBuildings
+        });
+        this.availableBuildings.push({
+          name : 'Utility buildings',
+          buildings : this.utilityBuildings
+        });
+        this.availableBuildings.push({
+          name : 'Development buildings',
+          buildings : this.developmentBuildings
+        });
+        this.visible = true;
+
+      });
+
     });
 
   }
