@@ -33,6 +33,7 @@ import {WebSocketService} from './services/websocket.service';
 import { TableRowComponent } from './components/table/table-row/table-row.component';
 import { BTimePipe } from './pipes/b-time.pipe';
 import {HttpClientModule} from "@angular/common/http";
+import {AvailablePipe} from "./pipes/available.pipe";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {HttpClientModule} from "@angular/common/http";
     SystemDetailsComponent,
     RounderPipe,
     TableRowComponent,
-    BTimePipe
+    BTimePipe,
+    AvailablePipe
   ],
   imports: [
     BrowserModule,
