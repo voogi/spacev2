@@ -557,4 +557,8 @@ export class StarmapComponent implements OnInit {
 
   }
 
+  onNavigateToTestSystem() {
+    this.router.navigate(['/system/194067']);
+  }
+
 }
