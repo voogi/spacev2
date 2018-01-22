@@ -22,14 +22,14 @@
   font-size: 1.2em;
 }
 
-.resource-container:after {
+.resource-container:not(:last-child):after {
   content: " ";
   display: inline-block;
   height: 23px;
   border-right: 2px solid #1299d5;
   padding-left: 15px;
   vertical-align: top;
-  margin-top: 8px;
+  margin-top: 13px;
 }
 
 

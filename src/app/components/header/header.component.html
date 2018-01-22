@@ -1,12 +1,12 @@
 <div class="row background">
   <div class="col text-left">
     <div class="row">
-      <div class="col-lg-6 header-offset">
+      <div class="col-lg-4 header-offset">
         <div class="resource-container" *ngFor="let h of menuItems;">
           <span (click)="onNavigate(h.route)" class="resource-label">{{h.name}}</span>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <space-resources></space-resources>
       </div>
     </div>
