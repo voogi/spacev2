@@ -28,3 +28,11 @@ button:focus {
 button:active {
   color: initial;
 }
+
+button[disabled]  {
+  opacity: .3;
+}
+
+button[disabled]:hover {
+  color: white;
+}

@@ -43,11 +43,11 @@
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Energy</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.energyCost}}</span>
+        <span class="col-lg-10 info-value">{{selectedBuilding?.energyCost | enoughMat: resources[3]}}</span>
       </div>
       <div class="row">
         <span class="col-lg-2 info-label">Titanium</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.titaniumCost}}</span>
+        <span class="col-lg-10 info-value">{{selectedBuilding?.titaniumCost | enoughMat: resources[0]}}</span>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@
     <div class="col">
       <div class="row">
         <div class="col text-right">
-          <space-button (click)="onBuild()" [name]="'Build'"></space-button>
+          <space-button [disabled]="buildButtonDisabled" (click)="onBuild()" [name]="'Build'"></space-button>
           <space-button (click)="onCancel()" [name]="'Cancel'"></space-button>
         </div>
       </div>

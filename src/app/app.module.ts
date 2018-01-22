@@ -34,6 +34,8 @@ import { TableRowComponent } from './components/table/table-row/table-row.compon
 import { BTimePipe } from './pipes/b-time.pipe';
 import {HttpClientModule} from "@angular/common/http";
 import {AvailablePipe} from "./pipes/available.pipe";
+import {ResourceService} from "./services/resource.service";
+import { EnoughMatPipe } from './pipes/enough-mat.pipe';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import {AvailablePipe} from "./pipes/available.pipe";
     RounderPipe,
     TableRowComponent,
     BTimePipe,
-    AvailablePipe
+    AvailablePipe,
+    EnoughMatPipe
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,7 @@ import {AvailablePipe} from "./pipes/available.pipe";
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [BackendService, ResourceLoaderService, BuilderService, ProgressService, WebSocketService],
+  providers: [BackendService, ResourceLoaderService, BuilderService, ProgressService, WebSocketService, ResourceService],
   entryComponents : [ProgressBarComponent, TableRowComponent],
   bootstrap: [AppComponent]
 })
