@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, Input, OnDestroy
+  Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges
 } from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
 import {BuilderService} from '../../services/builder.service';
@@ -11,17 +11,21 @@ import {ProgressService} from '../../services/progress.service';
 import {ConstructionType} from '../../shared/construction-type.enum';
 import {Subscription} from 'rxjs/Subscription';
 import {IConstruction} from '../../shared/interface/iconstruction';
-import has = Reflect.has;
 
 @Component({
   selector: 'space-building-slots',
   templateUrl: './building-slots.component.html',
-  styleUrls: ['./building-slots.component.css']
+  styleUrls: ['./building-slots.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BuildingSlotsComponent implements OnInit, OnDestroy {
+export class BuildingSlotsComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input()
   public planet: IPlanet;
+
+  @Output()
+  public constructionDone = new EventEmitter();
+
   public slots: Array<ISlot> = [];
   public selectedSlot: ISlot;
   public building: IBuilding;
@@ -31,6 +35,10 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
   constructor(private builder: BuilderService, private backendService: BackendService, private progressService: ProgressService) {
     this.onBuildSubscription = new Subscription();
     this.progressServiceSubscription = new Subscription();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
   }
 
   ngOnInit() {
@@ -71,36 +79,18 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy {
           slot: builder.slot.position
         }, this.planet.id).subscribe( (construction: IConstruction) => {
           this.progressService.createProgress(construction);
+          this.selectedSlot.isUnderConstruction = true;
         });
 
         this.selectedSlot.isEmpty = false;
 
       }
-      else if (builder.type === ConstructionType.SHIP) {
-        this.backendService.startConstruction({
-          shipType: builder.item,
-          constructionType: ConstructionType.SHIP
-        }, this.planet.id).subscribe( (construction: IConstruction) => {
-          this.progressService.createProgress(construction);
-        });
-      }
     });
 
     // when any queue completed data is a IBuilder obj
     this.progressServiceSubscription = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
-
       if (construction.constructionType === ConstructionType.BUILDING) {
-
-        this.slots.forEach( (slot: ISlot) => {
-          // if (slot.position === builder.slot.position) {
-          //   slot.building = builder.item;
-          //   this.planet.buildings.push(builder.item);
-          //   this.backendService.saveBuilding(this.planet).subscribe( data => {
-          //     console.log(data);
-          //   });
-          // }
-        });
-
+        this.constructionDone.emit(construction);
       }
     });
 

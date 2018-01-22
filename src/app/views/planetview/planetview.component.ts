@@ -20,6 +20,7 @@ export class PlanetViewComponent implements OnInit {
 
   public selectedPlanet: IPlanet;
   public systemId: string;
+  public planetId: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -32,11 +33,19 @@ export class PlanetViewComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.systemId = params['system'];
-      this.backendService.getPlanetById(params['id']).subscribe((planet: IPlanet) => {
+      this.planetId = params['id'];
+      this.backendService.getPlanetById(this.planetId).subscribe((planet: IPlanet) => {
         this.selectedPlanet = planet;
         this.addConstructions(planet.constructions);
         this.setPlanetStyle();
       });
+    });
+  }
+
+  onConstructionDone(){
+    this.backendService.getPlanetById(this.planetId).subscribe( (planet: IPlanet) => {
+      this.selectedPlanet = null;
+      this.selectedPlanet = planet;
     });
   }
 
