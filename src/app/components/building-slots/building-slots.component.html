@@ -3,9 +3,13 @@
   <div class="row justify-content-center no-gutters">
     <div *ngFor="let slot of slots;" class="slot-container">
       <div (click)="onSelectSlot(slot)" class="building-slot">
-        <div *ngIf="!slot.isEmpty">
+        <div *ngIf="!slot.isEmpty && slot.building">
           <div class="building"></div>
           <div class="building-title">{{slot.building.value}}</div>
+        </div>
+        <div *ngIf="slot?.isUnderConstruction">
+          <div class="building"></div>
+          <div class="building-title">U.C</div>
         </div>
       </div>
     </div>

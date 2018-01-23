@@ -1,3 +1,5 @@
 export enum ConstructionType {
-    BUILDING,SHIP
+    BUILDING = "BUILDING",
+    SHIP = "SHIP",
+    RESEARCH = "RESEARCH"
 }

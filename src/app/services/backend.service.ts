@@ -121,4 +121,10 @@ export class BackendService {
       .map( (data:any) => data.payload);
   }
 
+  deconstructBuilding(buildId: string | number): Observable<any> {
+    this.log.info('DELETE::/api/building/' + buildId);
+    return this.http.delete<any>(this.bURL + '/api/building/' + buildId)
+      .map( (data:any) => data.payload);
+  }
+
 }
