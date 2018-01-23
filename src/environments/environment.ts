@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  backendURL: 'http://80.211.3.139:8080'
+  backendURL: 'http://localhost:8080',
+  webSocketUrl: 'ws://localhost:8080'
 };

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WebSocketService} from './services/websocket.service';
 import {INotification} from './shared/interface/inotification';
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'space-root',
@@ -9,8 +10,7 @@ import {INotification} from './shared/interface/inotification';
 export class AppComponent implements OnInit {
 
   constructor(private webSocket: WebSocketService) {
-    const webSocketUrl: string = 'ws://localhost:8080/notification';
-    this.webSocket.connect(webSocketUrl).subscribe( (notification: INotification) => {
+    this.webSocket.connect(environment.webSocketUrl).subscribe( (notification: INotification) => {
     } );
   }
 
