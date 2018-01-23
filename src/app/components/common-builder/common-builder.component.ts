@@ -42,6 +42,7 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
     this.getAllShipSub = new Subscription();
     this.infoSub = new Subscription();
     this.upgradeSub = new Subscription();
+    this.deconstructSub = new Subscription();
   }
 
   onSelectItem(ship: any) {
