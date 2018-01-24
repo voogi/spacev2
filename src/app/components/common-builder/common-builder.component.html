@@ -21,42 +21,41 @@
       <div class="row">
         <div class="section-header col">{{subtitle}}</div>
       </div>
-      <div class="row">
-        <div title="{{b?.tooltip}}" (click)="onSelectItem(b)" *ngFor="let b of buildingItems | available;"
-             class="col-md-1 col-lg-1">
-          <div class="building"></div>
+      <div class="row scroller">
+        <div title="{{b?.tooltip}}" (click)="onSelectItem(b)" *ngFor="let b of buildingItems | available;" class="item-card p-2 m-2">
+          <div class="row align-items-center h-100">
+            <div class="col-5"><div class="item-img"></div></div>
+            <div class="col-7">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col info-label">Name</div>
+                    <div class="col info-value">{{b?.shipType.name || b?.researchType.name}}</div>
+                  </div>
+                  <!--<div class="row">-->
+                    <!--<div class="col info-label">Desc</div>-->
+                    <!--<div class="col info-value">{{b.shipType.description}}</div>-->
+                  <!--</div>-->
+                  <div class="row">
+                    <div class="col info-label">Time</div>
+                    <div class="col info-value">{{b.shipType.buildingTime | bTime}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col info-label">Energy</div>
+                    <div class="col info-value">{{b.shipType.energyCost}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col info-label">Titanium</div>
+                    <div class="col info-value">{{b.shipType.titaniumCost}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="row preview-header">
-        <span class="col info-label">Info</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Name</span>
-        <span class="col-lg-10 info-value">{{selectedItem?.name}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Desc</span>
-        <span class="col-lg-10 info-value">{{selectedItem?.description}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Time</span>
-        <span class="col-lg-10 info-value">{{selectedItem?.buildingTime | bTime}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Energy</span>
-        <span class="col-lg-10 info-value">{{selectedItem?.energyCost}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Titanium</span>
-        <span class="col-lg-10 info-value">{{selectedItem?.titaniumCost}}</span>
-      </div>
-    </div>
   </div>
 
   <div class="row button-group">
