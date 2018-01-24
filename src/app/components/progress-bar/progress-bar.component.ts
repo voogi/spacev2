@@ -44,7 +44,7 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
       }
 
       this.ended = false;
-      this.currentWidth = Math.round(((time + 1) / this.duration) * 100);
+      this.currentWidth = Math.max(0, Math.round(((time + 1) / this.duration) * 100));
       this.remainingTime -= 1;
       if ((time + 1) === this.duration) {
         this.ended = true;
