@@ -17,6 +17,8 @@ export class ProgressBarComponent implements OnInit, OnDestroy {
   public remainingTime: number;
   @Input()
   public elapsedTime: number;
+  @Input()
+  public type: string;
   @Output()
   completed: EventEmitter<boolean> = new EventEmitter<boolean>();
   private ended: boolean = false;

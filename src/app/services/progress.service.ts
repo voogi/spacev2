@@ -8,8 +8,8 @@ import {IConstruction} from "../shared/interface/iconstruction";
 @Injectable()
 export class ProgressService {
 
-  private progressSubject: Subject<any> = new Subject();
-  private completedProgressSubject: Subject<any> = new Subject();
+  private progressSubject: Subject<any> = new Subject<any>();
+  private completedProgressSubject: Subject<any> = new Subject<any>();
 
   constructor() {}
 
