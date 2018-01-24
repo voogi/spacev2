@@ -44,6 +44,7 @@ export class ProgressQueueComponent implements OnInit, OnDestroy {
     instance.duration = Math.round( rounded );
     const elaspedTime = (Date.now() - progress.start) / 1000;
     instance.elapsedTime = Math.round(elaspedTime);
+    instance.type = progress.constructionType;
     instance.start();
     sub = instance.completed.subscribe( data => {
       this.progressServie.onCompletedProgress(progress);
