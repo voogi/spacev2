@@ -8,11 +8,11 @@ export class BTimePipe implements PipeTransform {
     getDuration = function(millis){
         const dur = {};
         const units = [
-            {label: 'millis',    mod: 1000},
-            {label: 'seconds',   mod: 60},
-            {label: 'minutes',   mod: 60},
-            {label: 'hours',     mod: 24},
-            {label: 'days',      mod: 31}
+            {label: 'ms',    mod: 1000},
+            {label: 's',   mod: 60},
+            {label: 'm',   mod: 60},
+            {label: 'h',     mod: 24},
+            {label: 'd',      mod: 31}
         ];
         // calculate the individual unit values...
         units.forEach(function(u){

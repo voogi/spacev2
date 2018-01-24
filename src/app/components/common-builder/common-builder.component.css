@@ -36,6 +36,17 @@
     box-shadow: 0px 0px 4px 0px rgb(0, 0, 0);
 }
 
+.item-card.active {
+  -webkit-box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+}
+
+.item-card:hover {
+  -webkit-box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+  cursor: pointer;
+}
+
 .item-img {
     /*background-size: 76px 48px;*/
     background: url("../../../assets/imgs/spaceship.png") no-repeat center;

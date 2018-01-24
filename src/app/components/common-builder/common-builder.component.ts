@@ -30,7 +30,7 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
   public buildingId: string | number;
 
   @Output()
-  public deconstructionDone = new EventEmitter();
+  public refreshSlot = new EventEmitter();
 
   constructor(
       private backendService: BackendService,
@@ -46,7 +46,7 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
   }
 
   onSelectItem(ship: any) {
-    this.selectedItem = ship.shipType;
+    this.selectedItem = ship.item;
   }
 
   onBuild() {
@@ -92,7 +92,7 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
 
   onDeconstruct(): void {
     this.deconstructSub = this.backendService.deconstructBuilding(this.buildingId).subscribe( data => {
-      this.deconstructionDone.emit(data);
+      this.refreshSlot.emit(data);
       this.visible = false;
     })
   }
