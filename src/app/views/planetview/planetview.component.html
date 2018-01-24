@@ -6,7 +6,7 @@
     <div class="planet"></div>
   </div>
   <div *ngIf="selectedPlanet" class="col-lg-6">
-    <space-building-slots (refreshSlot)="onRefresh($event)" [planet]="selectedPlanet"></space-building-slots>
+    <space-building-slots [planet]="selectedPlanet"></space-building-slots>
   </div>
 </div>
 <space-builder></space-builder>

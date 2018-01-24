@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, HostBinding, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit, Renderer2} from '@angular/core';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IPlanet} from '../../shared/interface/iplanet';
@@ -26,6 +26,7 @@ export class PlanetViewComponent implements OnInit {
   public systemId: string;
   public planetId: number;
   public onBuildSubscription: Subscription = new Subscription();
+  public progressServiceSubscription: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -58,6 +59,13 @@ export class PlanetViewComponent implements OnInit {
           this.onRefresh();
           this.progressService.createProgress(construction);
         });
+      }
+    });
+
+    // when any queue completed data is a IBuilder obj
+    this.progressServiceSubscription = this.progressService.onComplete().subscribe((construction: IConstruction) => {
+      if (construction.constructionType === ConstructionType.BUILDING) {
+        this.onRefresh();
       }
     });
   }

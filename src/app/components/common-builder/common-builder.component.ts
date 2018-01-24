@@ -67,7 +67,6 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.onSelectedBuildingSub = this.builderService.onSelectedBuilding().subscribe( (slot: ISlot) => {
       this.level = slot.level;
       this.buildingId = slot.buildingId;
@@ -78,12 +77,6 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
           this.visible = true;
       });
     });
-
-    // this.onCompleteSub = this.progressService.onComplete().subscribe( (construction: IConstruction) => {
-    //   if (construction.constructionType === ConstructionType.SHIP) {
-    //   }
-    // });
-
   }
 
   onUpgrade(){
