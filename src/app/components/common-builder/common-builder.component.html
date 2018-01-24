@@ -30,7 +30,7 @@
                 <div class="col">
                   <div class="row">
                     <div class="col info-label">Name</div>
-                    <div class="col info-value">{{b?.shipType.name || b?.researchType.name}}</div>
+                    <div class="col info-value">{{b.item.name}}</div>
                   </div>
                   <!--<div class="row">-->
                     <!--<div class="col info-label">Desc</div>-->
@@ -38,15 +38,15 @@
                   <!--</div>-->
                   <div class="row">
                     <div class="col info-label">Time</div>
-                    <div class="col info-value">{{b.shipType.buildingTime | bTime}}</div>
+                    <div class="col info-value">{{b.item.buildingTime | bTime}}</div>
                   </div>
                   <div class="row">
                     <div class="col info-label">Energy</div>
-                    <div class="col info-value">{{b.shipType.energyCost}}</div>
+                    <div class="col info-value">{{b.item.energyCost}}</div>
                   </div>
                   <div class="row">
                     <div class="col info-label">Titanium</div>
-                    <div class="col info-value">{{b.shipType.titaniumCost}}</div>
+                    <div class="col info-value">{{b.item.titaniumCost}}</div>
                   </div>
                 </div>
               </div>
