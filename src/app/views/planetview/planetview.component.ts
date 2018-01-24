@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostBinding, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, HostBinding, OnInit, Renderer2} from '@angular/core';
 import {fadeInAnimation} from '../../animations/slide-in-out.animation';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {IPlanet} from '../../shared/interface/iplanet';
@@ -7,71 +7,70 @@ import {IConstruction} from '../../shared/interface/iconstruction';
 import {ProgressService} from '../../services/progress.service';
 
 @Component({
-  selector: 'space-planetview',
-  templateUrl: './planetview.component.html',
-  styleUrls: ['./planetview.component.css'],
-  animations: [fadeInAnimation]
+    selector: 'space-planetview',
+    templateUrl: './planetview.component.html',
+    styleUrls: ['./planetview.component.css'],
+    animations: [fadeInAnimation]
 })
 export class PlanetViewComponent implements OnInit {
 
-  @HostBinding('@fadeInAnimation') get fadeInAnimation() {
-    return '@fadeInAnimation';
-  }
-
-  public selectedPlanet: IPlanet;
-  public systemId: string;
-  public planetId: number;
-
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private progressService: ProgressService,
-              private backendService: BackendService,
-              private renderer: Renderer2,
-              private elementRef: ElementRef) {
-  }
-
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.systemId = params['system'];
-      this.planetId = params['id'];
-      this.backendService.getPlanetById(this.planetId).subscribe((planet: IPlanet) => {
-        this.selectedPlanet = planet;
-        this.addConstructions(planet.constructions);
-        this.setPlanetStyle();
-      });
-    });
-  }
-
-  onConstructionDone(){
-    this.backendService.getPlanetById(this.planetId).subscribe( (planet: IPlanet) => {
-      this.selectedPlanet = null;
-      this.selectedPlanet = planet;
-    });
-  }
-
-  addConstructions(constructions: Array<IConstruction>){
-    for (let i = 0; i < constructions.length; i++) {
-      const construction: IConstruction = constructions[i];
-      this.progressService.createProgress(construction);
+    @HostBinding('@fadeInAnimation') get fadeInAnimation() {
+        return '@fadeInAnimation';
     }
-  }
 
-  onNavigateToSystem() {
-    this.router.navigate(['/system', this.systemId]);
-  }
+    public selectedPlanet: IPlanet;
+    public systemId: string;
+    public planetId: number;
 
-  onShowNotification() {
-  }
+    constructor(private route: ActivatedRoute,
+                private router: Router,
+                private progressService: ProgressService,
+                private backendService: BackendService,
+                private renderer: Renderer2,
+                private elementRef: ElementRef) {
+    }
 
-  setPlanetStyle() {
-    this.selectedPlanet.size = 200;
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
-      'background-image', 'url(' + (this.selectedPlanet.img || '/assets/imgs/planet_2.png') + ')');
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
-      'background-size', this.selectedPlanet.size + 'px');
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
-      'height', this.selectedPlanet.size + 'px');
-    this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
-      'width', this.selectedPlanet.size + 'px');
-  }
+    ngOnInit() {
+        this.route.params.subscribe((params: Params) => {
+            this.systemId = params['system'];
+            this.planetId = params['id'];
+            this.backendService.getPlanetById(this.planetId).subscribe((planet: IPlanet) => {
+                this.selectedPlanet = planet;
+                this.addConstructions(planet.constructions);
+                this.setPlanetStyle();
+            });
+        });
+    }
+
+    onConstructionDone() {
+        this.backendService.getPlanetById(this.planetId).subscribe((planet: IPlanet) => {
+            this.selectedPlanet = planet;
+        });
+    }
+
+    addConstructions(constructions: Array<IConstruction>) {
+        for (let i = 0; i < constructions.length; i++) {
+            const construction: IConstruction = constructions[i];
+            this.progressService.createProgress(construction);
+        }
+    }
+
+    onNavigateToSystem() {
+        this.router.navigate(['/system', this.systemId]);
+    }
+
+    onShowNotification() {
+    }
+
+    setPlanetStyle() {
+        this.selectedPlanet.size = 200;
+        this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
+            'background-image', 'url(' + (this.selectedPlanet.img || '/assets/imgs/planet_2.png') + ')');
+        this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
+            'background-size', this.selectedPlanet.size + 'px');
+        this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
+            'height', this.selectedPlanet.size + 'px');
+        this.renderer.setStyle(this.elementRef.nativeElement.querySelector('.planet'),
+            'width', this.selectedPlanet.size + 'px');
+    }
 }
