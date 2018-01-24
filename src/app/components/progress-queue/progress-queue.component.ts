@@ -20,13 +20,13 @@ export class ProgressQueueComponent implements OnInit, OnDestroy {
 
   private processSub: Subscription;
 
-  constructor(private resolver: ComponentFactoryResolver, private progressServie: ProgressService) {
+  constructor(private resolver: ComponentFactoryResolver, private progressService: ProgressService) {
     this.factory = this.resolver.resolveComponentFactory(ProgressBarComponent);
     this.processSub = new Subscription();
   }
 
   ngOnInit() {
-    this.processSub = this.progressServie.addedProgress().subscribe( (construction: IConstruction) => {
+    this.processSub = this.progressService.addedProgress().subscribe( (construction: IConstruction) => {
       this.onAddProgress(construction);
     });
   }
@@ -47,7 +47,7 @@ export class ProgressQueueComponent implements OnInit, OnDestroy {
     instance.type = progress.constructionType;
     instance.start();
     sub = instance.completed.subscribe( data => {
-      this.progressServie.onCompletedProgress(progress);
+      this.progressService.onCompletedProgress(progress);
       this.container.remove(this.container.indexOf(comp));
       sub.unsubscribe();
     });

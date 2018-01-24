@@ -3,13 +3,6 @@
     <div class="row details-body">
       <div class="col">
         <space-tabs>
-          <space-tab [name]="'Planet'">
-            <div class="row">
-              <div class="col">
-                {{planet?.name}}
-              </div>
-            </div>
-          </space-tab>
           <space-tab [name]="'Buildings'"></space-tab>
           <space-tab [name]="'Unit'">
             <div *ngFor="let s of ships;" class="row">{{s.name}}</div>

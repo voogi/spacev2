@@ -2,9 +2,23 @@
     <div class="col solar-system-background">
         <div class="row">
             <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
-                <div [ngStyle]="setPlanetStyle(planet)" class="planet-background" (click)="setActivePlanet(planet)"
-                     (dblclick)="onNavigateToPlanet(planet)"></div>
-                <div class="planet-name">{{planet.name}}</div>
+                <div class="row">
+                  <div class="col">
+                    <div [ngStyle]="setPlanetStyle(planet)" class="planet-background" (click)="setActivePlanet(planet)"
+                         (dblclick)="onNavigateToPlanet(planet)"></div>
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <div class="planet-name col">Name: {{planet.name}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col planet-type">Type: {{planet.planetType}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col planet-type">Slots: {{planet.slots}}</div>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -14,4 +28,3 @@
         <space-planet-details [ssId]="systemId" [planet]="activePlanet"></space-planet-details>
     </div>
 </div>
-<!--<space-progress-queue></space-progress-queue>-->

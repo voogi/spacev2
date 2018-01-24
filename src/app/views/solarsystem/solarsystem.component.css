@@ -14,8 +14,8 @@
 
 .planet-background:hover {
   cursor: pointer;
-  transition: all .3s ease;
-  background-size: 140px!important;
+  /*transition: all .3s ease;*/
+  /*background-size: 140px!important;*/
 }
 
 .planet-buildings {
@@ -58,7 +58,6 @@
 
 
 .planet-name {
-  text-align: center;
 }
 
 

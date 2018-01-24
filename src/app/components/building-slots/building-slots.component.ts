@@ -1,11 +1,10 @@
 import {
-    Component, OnInit, Input, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy, OnChanges
+    Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy, OnChanges
 } from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
 import {BuilderService} from '../../services/builder.service';
 import {IBuilding} from '../../shared/interface/ibuilding';
 import {ISlot} from '../../shared/interface/islot';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'space-building-slots',
