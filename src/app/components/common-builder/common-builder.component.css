@@ -5,12 +5,11 @@
     background-color: #265789;
     color: white;
     z-index: 401;
-    min-width: 600px;
+    max-width: 800px;
 }
 
 .builder-overlay {
     background-color: rgba(0, 0, 0, 0.5);
-    height: 100vh;
     min-width: 100%;
     position: fixed;
     transform: translateZ(0);
@@ -30,21 +29,21 @@
 }
 
 .item-card {
-    height: 100px;
-    width: 350px;
-    -webkit-box-shadow: 0px 0px 4px 0px rgb(0, 0, 0);
-    box-shadow: 0px 0px 4px 0px rgb(0, 0, 0);
+    -webkit-box-shadow: 1px 2px 4px 0px rgb(0, 0, 0);
+    box-shadow: 1px 2px 4px 0px rgb(0, 0, 0);
+    margin-bottom: 1rem;
+    background: #1f4871;
 }
 
 .item-card.active {
-  -webkit-box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
-  box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+    /*-webkit-box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);*/
+    /*box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);*/
 }
 
 .item-card:hover {
-  -webkit-box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
-  box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
-  cursor: pointer;
+    /*-webkit-box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);*/
+    /*box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);*/
+    /*cursor: pointer;*/
 }
 
 .item-img {
@@ -52,6 +51,7 @@
     background: url("../../../assets/imgs/spaceship.png") no-repeat center;
     background-size: contain;
     height: 80px;
+    padding: 60px;
 }
 
 .building:hover {
@@ -87,11 +87,9 @@
     padding-left: 10px;
     min-width: 100px;
     text-align: left;
-    font-size: 12px;
 }
 
 .info-value {
-    font-size: 12px;
     text-align: right;
 }
 
@@ -102,4 +100,8 @@
 .scroller {
     overflow: auto;
     max-height: 500px;
+}
+
+input.sizeInput {
+    width: 40px;
 }
