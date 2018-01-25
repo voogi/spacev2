@@ -36,6 +36,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AvailablePipe} from "./pipes/available.pipe";
 import {ResourceService} from "./services/resource.service";
 import { EnoughMatPipe } from './pipes/enough-mat.pipe';
+import {ResIconComponent} from './components/res-icon/res-icon.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { EnoughMatPipe } from './pipes/enough-mat.pipe';
     TableRowComponent,
     BTimePipe,
     AvailablePipe,
-    EnoughMatPipe
+      EnoughMatPipe,
+      ResIconComponent
   ],
   imports: [
     BrowserModule,

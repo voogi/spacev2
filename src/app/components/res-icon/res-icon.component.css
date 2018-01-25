@@ -1,0 +1,20 @@
+span.res-wrapper {
+    line-height: 0rem;
+}
+
+span.res-value {
+    padding-left: 4px;
+    vertical-align: middle;
+}
+
+span.res-icon {
+    background-color: #71bfe6;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 6px;
+    vertical-align: middle;
+    color: whitesmoke;
+    display: inline-block;
+    height: 20px;
+    line-height: 10px;
+}
