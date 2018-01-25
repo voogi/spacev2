@@ -25,7 +25,7 @@
                     <div class="row mt-2">
                         <div class="col-8 offset-4 text-right">
                             <input *ngIf="isUnit(item)" class="sizeInput p-0 text-center" type="text">
-                            <space-button [name]="'Build'"></space-button>
+                            <space-button (click)="emitBtnClick(item)" [name]="'Build'"></space-button>
                         </div>
                     </div>
                 </div>

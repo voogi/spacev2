@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ConstructionType} from "../../shared/construction-type.enum";
 
 @Component({
@@ -11,6 +11,9 @@ export class CardItemComponent implements OnInit {
     @Input()
     public item: any;
 
+    @Output()
+    public buildBtnClick: EventEmitter<any> = new EventEmitter();
+
     constructor() {
     }
 
@@ -20,5 +23,9 @@ export class CardItemComponent implements OnInit {
     isUnit(item: any): boolean {
         return item.constructionType === ConstructionType.SHIP;
     }
+
+  emitBtnClick(item:any){
+      this.buildBtnClick.emit(item);
+  }
 
 }

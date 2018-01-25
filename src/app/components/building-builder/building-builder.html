@@ -10,22 +10,22 @@
     <space-tabs>
         <space-tab [name]="'Producer'">
             <div class="row scroller p-4">
-                <space-card-item *ngFor="let b of buildings | filterByBase:'PRODUCER';" [item]="b"></space-card-item>
+                <space-card-item (buildBtnClick)="onBuild($event)" *ngFor="let b of buildings | filterByBase:'PRODUCER';" [item]="b"></space-card-item>
             </div>
         </space-tab>
         <space-tab [name]="'Military'">
             <div class="row scroller p-4">
-                <space-card-item *ngFor="let b of buildings | filterByBase:'MILITARY';" [item]="b"></space-card-item>
+                <space-card-item (buildBtnClick)="onBuild($event)" *ngFor="let b of buildings | filterByBase:'MILITARY';" [item]="b"></space-card-item>
             </div>
         </space-tab>
         <space-tab [name]="'Utility'">
             <div class="row scroller p-4">
-                <space-card-item *ngFor="let b of buildings | filterByBase:'UTILITY';" [item]="b"></space-card-item>
+                <space-card-item (buildBtnClick)="onBuild($event)" *ngFor="let b of buildings | filterByBase:'UTILITY';" [item]="b"></space-card-item>
             </div>
         </space-tab>
         <space-tab [name]="'Research'">
             <div class="row scroller p-4">
-                <space-card-item *ngFor="let b of buildings | filterByBase:'RESEARCH';" [item]="b"></space-card-item>
+                <space-card-item (buildBtnClick)="onBuild($event)" *ngFor="let b of buildings | filterByBase:'RESEARCH';" [item]="b"></space-card-item>
             </div>
         </space-tab>
     </space-tabs>

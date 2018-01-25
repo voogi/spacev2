@@ -30,18 +30,13 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
     constructor(private builder: BuilderService, private backendService: BackendService, private resourceService: ResourceService) {
     }
 
-    onBuild() {
-
-        if (this.selectedBuilding === undefined) {
-            return;
-        }
-
-        const item: IBuilder = {
+    onBuild(item:any) {
+        const builder: IBuilder = {
             type: ConstructionType.BUILDING,
             slot: this.selectedSlot,
-            item: this.selectedBuilding.value
+            item: item.value
         };
-        this.builder.build(item);
+        this.builder.build(builder);
         this.visible = false;
     }
 

@@ -51,7 +51,7 @@ export class PlanetViewComponent implements OnInit {
 
     this.onBuildSubscription = this.builder.onBuild().subscribe((builder: IBuilder) => {
       if (builder.type === ConstructionType.BUILDING) {
-        this.backendService.startConstruction({
+        this.backendService.startBuildingConstruction({
           buildingType: builder.item,
           constructionType: ConstructionType.BUILDING,
           slot: builder.slot.position
