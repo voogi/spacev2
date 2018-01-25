@@ -20,11 +20,11 @@
                     </div>
                     <div class="row">
                         <div class="col-4 info-label">Desc</div>
-                        <div class="col-8 info-value">{{item.escription}}</div>
+                        <div class="col-8 info-value">{{item.description}}</div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-8 offset-4 text-right">
-                            <input *ngIf="!isResearch(item)" class="sizeInput p-0 text-center" type="text">
+                            <input *ngIf="isUnit(item)" class="sizeInput p-0 text-center" type="text">
                             <space-button [name]="'Build'"></space-button>
                         </div>
                     </div>

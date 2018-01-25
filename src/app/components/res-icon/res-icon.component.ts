@@ -14,6 +14,12 @@ export class ResIconComponent implements OnInit {
     @Input()
     public value: string;
 
+    @Input()
+    public addClass: boolean = false;
+
+    @Input()
+    public tit: string;
+
     constructor() {
     }
 

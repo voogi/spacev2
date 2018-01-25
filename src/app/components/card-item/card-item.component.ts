@@ -17,8 +17,8 @@ export class CardItemComponent implements OnInit {
     ngOnInit() {
     }
 
-    isResearch(item: any): boolean {
-        return item.constructionType === ConstructionType.RESEARCH;
+    isUnit(item: any): boolean {
+        return item.constructionType === ConstructionType.SHIP;
     }
 
 }

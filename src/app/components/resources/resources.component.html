@@ -1,8 +1,14 @@
-<div class="no-gutters">
-  <div class="row justify-content-center text-center">
-    <div class="resource-container" *ngFor="let res of resources;">
-      <span class="resource-label">{{res.name}}</span>
-      <span class="resource-value">{{ res.amount | rounder}}</span>
+<div class="row text-right">
+  <div class="col">
+    <div class="resource-container">
+      <space-res-icon [tit]="titanium?.name" [addClass]="true" [text]="'N'"
+                      [value]="titanium?.amount | rounder | number"></space-res-icon>
+      <space-res-icon [tit]="energy?.name" [addClass]="true" [text]="'E'"
+                      [value]="energy?.amount | rounder | number"></space-res-icon>
+      <space-res-icon [tit]="plastic?.name" [addClass]="true" [text]="'P'"
+                      [value]="plastic?.amount | rounder | number"></space-res-icon>
+      <space-res-icon [tit]="crew?.name" [addClass]="true" [text]="'C'"
+                      [value]="crew?.amount | rounder | number"></space-res-icon>
     </div>
   </div>
 </div>
