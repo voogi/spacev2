@@ -5,5 +5,6 @@ export interface IBuilder {
   item: any;
   slot?: ISlot;
   type: ConstructionType;
+  id?: string;
 
 }

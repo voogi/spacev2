@@ -55,9 +55,9 @@ export class BackendService {
       .map( (data:any) => data.payload);
   }
 
-  startConstruction(construction: IConstruction, planetId: number) {
-    this.log.info('POST::/api/construction/planet/' + planetId);
-    return this.http.post(this.bURL + '/api/construction/planet/' + planetId, construction, {headers: this.headers})
+  startUnitConstruction(construction: IConstruction, buildingId: string | number) {
+    this.log.info('POST::/api/construction/building/' + buildingId + '/ship');
+    return this.http.post(this.bURL + '/api/construction/building/' + buildingId + '/ship', construction, {headers: this.headers})
       .map( (data:any) => data.payload);
   }
 

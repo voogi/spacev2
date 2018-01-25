@@ -24,7 +24,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-8 offset-4 text-right">
-                            <input *ngIf="isUnit(item)" class="sizeInput p-0 text-center" type="text">
+                            <input #ipt (change)="onValueChange(ipt.value, item)" *ngIf="isUnit(item)" class="sizeInput p-0 text-center" type="text">
                             <space-button *ngIf="!isUnit(item)" (click)="emitBtnClick(item)" [name]="'Build'"></space-button>
                         </div>
                     </div>

@@ -37,7 +37,7 @@
                 <div class="section-header col">{{subtitle}}</div>
             </div>
             <div class="row scroller p-4">
-                <space-card-item (buildBtnClick)="onBuild($event)" *ngFor="let b of buildingItems | available;" [item]="b.item"></space-card-item>
+                <space-card-item (buildValueChanged)="onUnitBuild($event)" (buildBtnClick)="onBuild($event)" *ngFor="let b of buildingItems | available;" [item]="b.item"></space-card-item>
             </div>
         </div>
     </div>

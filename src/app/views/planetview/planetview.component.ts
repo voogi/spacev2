@@ -50,6 +50,7 @@ export class PlanetViewComponent implements OnInit {
 
 
     this.onBuildSubscription = this.builder.onBuild().subscribe((builder: IBuilder) => {
+
       if (builder.type === ConstructionType.BUILDING) {
         this.backendService.startBuildingConstruction({
           buildingType: builder.item,
@@ -60,6 +61,14 @@ export class PlanetViewComponent implements OnInit {
           this.progressService.createProgress(construction);
         });
       }
+      if(builder.type === ConstructionType.SHIP){
+        this.backendService.startUnitConstruction({
+          buildList : this.convertMapToObj(builder.item)
+        }, builder.id).subscribe((construction: IConstruction) => {
+          this.progressService.createProgress(construction);
+        });
+      }
+
     });
 
     // when any queue completed data is a IBuilder obj
@@ -68,6 +77,12 @@ export class PlanetViewComponent implements OnInit {
         this.onRefresh();
       }
     });
+  }
+
+  convertMapToObj(strMap: any){
+    let obj = Object.create(null);
+    strMap.forEach( (v,k) => obj[k] = v);
+    return obj;
   }
 
   onRefresh() {

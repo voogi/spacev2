@@ -28,6 +28,8 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
     public item: any;
     public buildingId: string | number;
 
+    public unitMap : Map<string,string> = new Map();
+
     @Output()
     public refreshSlot = new EventEmitter();
 
@@ -42,14 +44,17 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
         this.deconstructSub = new Subscription();
     }
 
+    onUnitBuild(item:any){
+      this.unitMap.set(item.item.kind,item.value);
+    }
+
     onBuild() {
-        //TODO build ships / upgrades
-        // const item: IBuilder = {
-        //     type: ConstructionType.SHIP,
-        //     item: this.selectedItem.kind
-        // };
-        //
-        // this.builderService.build(item);
+        const item: IBuilder = {
+            type: ConstructionType.SHIP,
+            item: this.unitMap,
+            id: this.item.id
+        };
+        this.builderService.build(item);
         this.visible = false;
     }
 
