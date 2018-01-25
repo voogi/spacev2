@@ -16,14 +16,9 @@ import {ResourceService} from "../../services/resource.service";
 export class BuildingBuilderComponent implements OnInit, OnDestroy {
 
     public buildings: any = {};
-    public producerBuildings: Array<IBuilding> = [];
-    public developmentBuildings: Array<IBuilding> = [];
-    public militaryBuildings: Array<IBuilding> = [];
-    public utilityBuildings: Array<IBuilding> = [];
     public selectedBuilding: IBuilding;
     private selectedSlot: ISlot;
     private buildSub: Subscription = new Subscription();
-    public availableBuildings: Array<any> = [];
     private allBuildingSub: Subscription = new Subscription();
     private resourceStatus: Subscription = new Subscription();
     public resources: any;
@@ -33,10 +28,6 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
     public visible: boolean = false;
 
     constructor(private builder: BuilderService, private backendService: BackendService, private resourceService: ResourceService) {
-    }
-
-    onSelectBuilding(building: IBuilding) {
-        this.selectedBuilding = building;
     }
 
     onBuild() {
@@ -55,11 +46,6 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
     }
 
     onCancel() {
-        this.militaryBuildings = [];
-        this.producerBuildings = [];
-        this.developmentBuildings = [];
-        this.utilityBuildings = [];
-        this.availableBuildings = [];
         this.visible = false;
     }
 
@@ -70,42 +56,7 @@ export class BuildingBuilderComponent implements OnInit, OnDestroy {
             this.selectedSlot = slot;
 
             this.allBuildingSub = this.backendService.getAllBuilding().subscribe(buildings => {
-
                 this.buildings = buildings;
-                this.buildings.forEach(building => {
-                    switch (building.baseType) {
-                        case 'MILITARY':
-                            this.militaryBuildings.push(building);
-                            break;
-                        case 'PRODUCER':
-                            this.producerBuildings.push(building);
-                            break;
-                        case 'RESEARCH':
-                            this.developmentBuildings.push(building);
-                            break;
-                        case 'UTILITY':
-                            this.utilityBuildings.push(building);
-                            break;
-                    }
-                });
-
-                this.availableBuildings.push({
-                    name: 'Producer buildings',
-                    buildings: this.producerBuildings
-                });
-                this.availableBuildings.push({
-                    name: 'Military buildings',
-                    buildings: this.militaryBuildings
-                });
-                this.availableBuildings.push({
-                    name: 'Utility buildings',
-                    buildings: this.utilityBuildings
-                });
-                this.availableBuildings.push({
-                    name: 'Development buildings',
-                    buildings: this.developmentBuildings
-                });
-
                 this.visible = true;
 
             });

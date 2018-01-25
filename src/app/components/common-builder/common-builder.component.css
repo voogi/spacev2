@@ -10,6 +10,7 @@
 
 .builder-overlay {
     background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
     min-width: 100%;
     position: fixed;
     transform: translateZ(0);

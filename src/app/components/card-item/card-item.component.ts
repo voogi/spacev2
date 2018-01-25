@@ -18,7 +18,7 @@ export class CardItemComponent implements OnInit {
     }
 
     isResearch(item: any): boolean {
-        return item.item.constructionType === ConstructionType.RESEARCH;
+        return item.constructionType === ConstructionType.RESEARCH;
     }
 
 }

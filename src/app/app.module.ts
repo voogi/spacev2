@@ -38,6 +38,7 @@ import {ResourceService} from "./services/resource.service";
 import { EnoughMatPipe } from './pipes/enough-mat.pipe';
 import {ResIconComponent} from './components/res-icon/res-icon.component';
 import {CardItemComponent} from './components/card-item/card-item.component';
+import {FilterByBasePipe} from './pipes/filter-by-base.pipe';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {CardItemComponent} from './components/card-item/card-item.component';
     AvailablePipe,
       EnoughMatPipe,
       ResIconComponent,
-      CardItemComponent
+      CardItemComponent,
+      FilterByBasePipe
   ],
   imports: [
     BrowserModule,

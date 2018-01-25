@@ -8,20 +8,19 @@
                 <div class="col">
                     <div class="row">
                         <div class="col-4 info-label">Name</div>
-                        <div class="col-8 info-value">{{item.item.name}}</div>
+                        <div class="col-8 info-value">{{item.name}}</div>
                     </div>
                     <div class="row">
                         <div class="col-4 info-label">Cost</div>
                         <div class="col-8 text-right">
-                            <space-res-icon [text]="'E'" [value]="item.item.energyCost"></space-res-icon>
-                            <space-res-icon [text]="'N'" [value]="item.item.titaniumCost"></space-res-icon>
-                            <space-res-icon [text]="'T'"
-                                            [value]="item.item.buildingTime | bTime"></space-res-icon>
+                            <space-res-icon [text]="'E'" [value]="item.energyCost"></space-res-icon>
+                            <space-res-icon [text]="'N'" [value]="item.titaniumCost"></space-res-icon>
+                            <space-res-icon [text]="'T'" [value]="item.buildingTime | bTime"></space-res-icon>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4 info-label">Desc</div>
-                        <div class="col-8 info-value">{{item.item.description}}</div>
+                        <div class="col-8 info-value">{{item.escription}}</div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-8 offset-4 text-right">

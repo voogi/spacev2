@@ -84,3 +84,8 @@
 .button-group {
   margin: 10px;
 }
+
+.scroller {
+    overflow: auto;
+    max-height: 540px;
+}
