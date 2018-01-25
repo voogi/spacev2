@@ -37,56 +37,7 @@
                 <div class="section-header col">{{subtitle}}</div>
             </div>
             <div class="row scroller p-4">
-                <div [class.active]="b.item == selectedItem" title="{{b?.tooltip}}" (click)="onSelectItem(b)"
-                     *ngFor="let b of buildingItems | available;" class="item-card col-12 pt-2 pb-2">
-                    <div class="row align-items-center">
-                        <div class="col-5">
-                            <div class="item-img"></div>
-                        </div>
-                        <div class="col-7">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col-4 info-label">Name</div>
-                                        <div class="col-8 info-value">{{b.item.name}}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4 info-label">Cost</div>
-                                        <div class="col-8 text-right">
-                                            <space-res-icon [text]="'E'" [value]="b.item.energyCost"></space-res-icon>
-                                            <space-res-icon [text]="'N'" [value]="b.item.titaniumCost"></space-res-icon>
-                                            <space-res-icon [text]="'T'"
-                                                            [value]="b.item.buildingTime | bTime"></space-res-icon>
-                                        </div>
-                                    </div>
-                                    <!--<div class="row">-->
-                                    <!--<div class="col-4 info-label">Time</div>-->
-                                    <!--&lt;!&ndash;<div class="col-8 info-value">{{b.item.buildingTime | bTime}}</div>&ndash;&gt;-->
-                                    <!--<div class="col-8 info-value"><space-res-icon [text]="'T'" [value]="b.item.buildingTime | bTime"></space-res-icon></div>-->
-                                    <!--</div>-->
-                                    <!--<div class="row">-->
-                                    <!--<div class="col-4 info-label">Energy</div>-->
-                                    <!--<div class="col-8 info-value">{{b.item.energyCost}}</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="row">-->
-                                    <!--<div class="col-4 info-label">Titanium</div>-->
-                                    <!--<div class="col-8 info-value">{{b.item.titaniumCost}}</div>-->
-                                    <!--</div>-->
-                                    <div class="row">
-                                        <div class="col-4 info-label">Desc</div>
-                                        <div class="col-8 info-value">{{b.item.description}}</div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-8 offset-4 text-right">
-                                            <input *ngIf="!isResearch(b)" class="sizeInput p-0 text-center" type="text">
-                                            <space-button [name]="'Build'"></space-button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <space-card-item *ngFor="let b of buildingItems | available;" [item]="b"></space-card-item>
             </div>
         </div>
 

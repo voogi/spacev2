@@ -7,50 +7,56 @@
     </div>
   </div>
 
-  <div *ngFor="let bArr of availableBuildings;" class="row text-center">
-    <div class="col">
-      <div class="row">
-        <div class="section-header col">{{bArr.name}}</div>
-      </div>
-      <div class="row">
-        <div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of bArr.buildings;"
-             class="col-md-1 col-lg-1">
-          <div class="building"></div>
-        </div>
-      </div>
-    </div>
+  <space-tabs>
+    <space-tab [name]="'Producer'"></space-tab>
+    <space-tab [name]="'Military'">
+      <!--<div *ngFor="let s of ships;" class="row">{{s.name}}</div>-->
+    </space-tab>
+    <space-tab [name]="'Utility'"></space-tab>
+    <space-tab [name]="'Research'"></space-tab>
+  </space-tabs>
 
-    <hr>
+  <!--<div *ngFor="let bArr of availableBuildings;" class="row text-center">-->
+  <!--<div class="col">-->
+  <!--<div class="row">-->
+  <!--<div class="section-header col">{{bArr.name}}</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<div title="{{b.tooltip}}" (click)="onSelectBuilding(b)" *ngFor="let b of bArr.buildings;"-->
+  <!--class="col-md-1 col-lg-1">-->
+  <!--<div class="building"></div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
 
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="row preview-header">
-        <span class="col info-label">Building preview</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Name</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.name}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Desc</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.description}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Time</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.buildingTime | bTime}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Energy</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.energyCost | enoughMat: resources[3]}}</span>
-      </div>
-      <div class="row">
-        <span class="col-lg-2 info-label">Titanium</span>
-        <span class="col-lg-10 info-value">{{selectedBuilding?.titaniumCost | enoughMat: resources[0]}}</span>
-      </div>
-    </div>
-  </div>
+  <!--<div class="row">-->
+  <!--<div class="col">-->
+  <!--<div class="row preview-header">-->
+  <!--<span class="col info-label">Building preview</span>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<span class="col-lg-2 info-label">Name</span>-->
+  <!--<span class="col-lg-10 info-value">{{selectedBuilding?.name}}</span>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<span class="col-lg-2 info-label">Desc</span>-->
+  <!--<span class="col-lg-10 info-value">{{selectedBuilding?.description}}</span>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<span class="col-lg-2 info-label">Time</span>-->
+  <!--<span class="col-lg-10 info-value">{{selectedBuilding?.buildingTime | bTime}}</span>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<span class="col-lg-2 info-label">Energy</span>-->
+  <!--<span class="col-lg-10 info-value">{{selectedBuilding?.energyCost | enoughMat: resources[3]}}</span>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+  <!--<span class="col-lg-2 info-label">Titanium</span>-->
+  <!--<span class="col-lg-10 info-value">{{selectedBuilding?.titaniumCost | enoughMat: resources[0]}}</span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
 
   <div class="row button-group">
     <div class="col">

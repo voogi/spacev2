@@ -1,0 +1,36 @@
+<div class="item-card col-12 pt-2 pb-2">
+    <div class="row align-items-center">
+        <div class="col-5">
+            <div class="item-img"></div>
+        </div>
+        <div class="col-7">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4 info-label">Name</div>
+                        <div class="col-8 info-value">{{item.item.name}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 info-label">Cost</div>
+                        <div class="col-8 text-right">
+                            <space-res-icon [text]="'E'" [value]="item.item.energyCost"></space-res-icon>
+                            <space-res-icon [text]="'N'" [value]="item.item.titaniumCost"></space-res-icon>
+                            <space-res-icon [text]="'T'"
+                                            [value]="item.item.buildingTime | bTime"></space-res-icon>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 info-label">Desc</div>
+                        <div class="col-8 info-value">{{item.item.description}}</div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-8 offset-4 text-right">
+                            <input *ngIf="!isResearch(item)" class="sizeInput p-0 text-center" type="text">
+                            <space-button [name]="'Build'"></space-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

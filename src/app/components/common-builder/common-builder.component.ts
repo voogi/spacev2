@@ -17,7 +17,6 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
 
     public buildingItems: Array<any> = [];
     public visible: boolean = false;
-    public selectedItem: IShip;
     public onSelectedBuildingSub: Subscription;
     public onCompleteSub: Subscription;
     public getAllShipSub: Subscription;
@@ -43,22 +42,14 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
         this.deconstructSub = new Subscription();
     }
 
-    onSelectItem(ship: any) {
-        this.selectedItem = ship.item;
-    }
-
     onBuild() {
-
-        if (this.selectedItem === undefined) {
-            return;
-        }
-
-        const item: IBuilder = {
-            type: ConstructionType.SHIP,
-            item: this.selectedItem.kind
-        };
-
-        this.builderService.build(item);
+        //TODO build ships / upgrades
+        // const item: IBuilder = {
+        //     type: ConstructionType.SHIP,
+        //     item: this.selectedItem.kind
+        // };
+        //
+        // this.builderService.build(item);
         this.visible = false;
     }
 
@@ -80,10 +71,6 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
 
     onUpgrade() {
         this.upgradeSub = this.backendService.upgradeBuilding(this.buildingId).subscribe(data => console.log(data));
-    }
-
-    isResearch(item: any): boolean {
-        return item.item.constructionType === ConstructionType.RESEARCH;
     }
 
     onDeconstruct(): void {
