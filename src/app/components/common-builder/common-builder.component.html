@@ -9,12 +9,13 @@
 
     <div class="row">
         <div class="section-header col">
-            {{title}} level {{level}}
+            {{title}} level {{item.level}}
         </div>
     </div>
     <div class="row align-items-center">
         <div class="col">
-            Upgrade cost
+            Upgrade cost {{item.upgradeCrewCost}} | {{item.upgradeEnergyCost}} | {{item.upgradeTitaniumCost}} | {{
+            item.upgradeTime | bTime}}
         </div>
         <div class="col">
             <space-button (click)="onUpgrade()" [name]="'Upgrade'"></space-button>
@@ -58,7 +59,7 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-8 offset-4 text-right">
-                                            <input class="sizeInput p-0 text-center" type="text">
+                                            <input *ngIf="!isResearch(b)" class="sizeInput p-0 text-center" type="text">
                                             <space-button [name]="'Build'"></space-button>
                                         </div>
                                     </div>

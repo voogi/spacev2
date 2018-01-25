@@ -99,7 +99,7 @@
 
 .scroller {
     overflow: auto;
-    max-height: 500px;
+    max-height: 540px;
 }
 
 input.sizeInput {

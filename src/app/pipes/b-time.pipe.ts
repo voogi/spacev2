@@ -25,9 +25,9 @@ export class BTimePipe implements PipeTransform {
                 .reverse()
                 .filter(nonZero)
                 .map(function(u){
-                    return dur[u.label] + ' ' + (dur[u.label] === 1 ? u.label.slice(0, -1) : u.label);
+                    return dur[u.label] + (dur[u.label] === 1 ? u.label.slice(0, -1) : u.label);
                 })
-                .join(', ');
+                .join(':');
         };
         return dur;
     };

@@ -57,3 +57,24 @@ p {
   padding-right: 0;
   padding-left: 0;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1f4871;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #71bfe6;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #71bfe6;
+  cursor: pointer;
+}
