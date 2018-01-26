@@ -5,6 +5,7 @@ import {IResource} from "../shared/interface/iresource";
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
+import {NgProgressService} from "ng2-progressbar";
 
 @Injectable()
 export class ResourceService {
@@ -15,7 +16,7 @@ export class ResourceService {
     private resourceSubject: Subject<any> = new Subject();
 
     //TODO lecserelni a beegetett systemId-t
-    constructor(private backendService: BackendService) {
+    constructor(private backendService: BackendService, private pService: NgProgressService) {
         this.getResourcesSub = this.backendService.getPlayerResources('194067').subscribe(data => {
             this.resources = data;
         });

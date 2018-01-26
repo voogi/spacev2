@@ -15,6 +15,8 @@ import {IBuilding} from "../shared/interface/ibuilding";
 import {IShip} from "../shared/interface/iship";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {IResponse} from "../shared/interface/iresponse";
+import {ProgressService} from "./progress.service";
+import {NgProgressService} from "ng2-progressbar";
 
 @Injectable()
 export class BackendService {
@@ -22,7 +24,6 @@ export class BackendService {
   private bURL: string = environment.backendURL;
 
   private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-
 
   private log = Log.create('backend', Level.ERROR, Level.WARN, Level.INFO);
 
@@ -39,7 +40,7 @@ export class BackendService {
   //   return Observable.throw(errMsg);
   // }
 
-  constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private pService: NgProgressService) {
     this.log.color = 'green';
   }
 

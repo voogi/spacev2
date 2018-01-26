@@ -50,27 +50,27 @@ export class DraggableDirective implements OnInit {
     this.md = false;
   }
 
-  @HostListener('touchstart', ['$event'])
-  onTouchStart(event: TouchEvent) {
-    this.md = true;
-    this.topStart = event.changedTouches[0].clientY - this.element.nativeElement.style.top.replace('px', '');
-    this.leftStart = event.changedTouches[0].clientX - this.element.nativeElement.style.left.replace('px', '');
-    event.stopPropagation();
-  }
-
-  @HostListener('document:touchend', ['$event'])
-  onTouchEnd() {
-    this.md = false;
-  }
-
-  @HostListener('document:touchmove', ['$event'])
-  onTouchMove(event: TouchEvent) {
-    if (this.md && this._allowDrag) {
-      this.element.nativeElement.style.top = ( event.changedTouches[0].clientY - this.topStart ) + 'px';
-      this.element.nativeElement.style.left = ( event.changedTouches[0].clientX - this.leftStart ) + 'px';
-    }
-    event.stopPropagation();
-  }
+    // @HostListener('touchstart', ['$event'])
+    // onTouchStart(event: TouchEvent) {
+    //   this.md = true;
+    //   this.topStart = event.changedTouches[0].clientY - this.element.nativeElement.style.top.replace('px', '');
+    //   this.leftStart = event.changedTouches[0].clientX - this.element.nativeElement.style.left.replace('px', '');
+    //   event.stopPropagation();
+    // }
+    //
+    // @HostListener('document:touchend', ['$event'])
+    // onTouchEnd() {
+    //   this.md = false;
+    // }
+    //
+    // @HostListener('document:touchmove', ['$event'])
+    // onTouchMove(event: TouchEvent) {
+    //   if (this.md && this._allowDrag) {
+    //     this.element.nativeElement.style.top = ( event.changedTouches[0].clientY - this.topStart ) + 'px';
+    //     this.element.nativeElement.style.left = ( event.changedTouches[0].clientX - this.leftStart ) + 'px';
+    //   }
+    //   event.stopPropagation();
+    // }
 
   @Input('spaceDraggable')
   set allowDrag(value: boolean) {
