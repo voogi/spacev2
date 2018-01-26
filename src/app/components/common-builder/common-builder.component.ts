@@ -7,6 +7,7 @@ import {ConstructionType} from '../../shared/construction-type.enum';
 import {IBuilder} from '../../shared/interface/ibuilder';
 import {Subscription} from 'rxjs/Subscription';
 import {ISlot} from "../../shared/interface/islot";
+import {IPlanet} from "../../shared/interface/iplanet";
 
 @Component({
     selector: 'space-common-builder',
@@ -75,14 +76,12 @@ export class CommonBuilderComponent implements OnInit, OnDestroy {
     }
 
     onUpgrade() {
-        this.upgradeSub = this.backendService.upgradeBuilding(this.buildingId).subscribe(data => console.log(data));
+        this.upgradeSub = this.backendService.upgradeBuilding(this.item.id).subscribe(data => console.log(data));
     }
 
     onDeconstruct(): void {
-        this.deconstructSub = this.backendService.deconstructBuilding(this.buildingId).subscribe(data => {
-            this.refreshSlot.emit(data);
-            this.visible = false;
-        })
+        this.builderService.deconstruct(this.item.id);
+        this.visible = false;
     }
 
     ngOnDestroy(): void {

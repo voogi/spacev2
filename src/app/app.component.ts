@@ -10,8 +10,9 @@ import {environment} from "../environments/environment";
 export class AppComponent implements OnInit {
 
   constructor(private webSocket: WebSocketService) {
-    this.webSocket.connect(environment.webSocketUrl).subscribe( (notification: INotification) => {
-    } );
+      //TODO temporarily disabled until fixed in backend or frontend
+      // this.webSocket.connect(environment.webSocketUrl).subscribe( (notification: INotification) => {
+      // } );
   }
 
   ngOnInit(): void {

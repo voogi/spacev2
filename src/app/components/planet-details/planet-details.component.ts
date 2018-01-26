@@ -1,8 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
-import {BackendService} from "../../services/backend.service";
 import {IShip} from "../../shared/interface/iship";
-import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'space-planet-details',
@@ -19,13 +17,13 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
 
   public ships: Array<IShip> = [];
 
-  constructor(private backendService: BackendService) {
+    constructor() {
   }
 
   ngOnInit() {
-    this.backendService.getSystemShips(this.ssId).subscribe( (data:Array<IShip>) => {
-      this.ships = data.map( x => x.shipType );
-    });
+      // this.backendService.getSystemShips(this.ssId).subscribe( (data:Array<IShip>) => {
+      //   this.ships = data.map( x => x.shipType );
+      // });
   }
 
   ngOnDestroy(): void {
