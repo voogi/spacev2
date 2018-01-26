@@ -6,5 +6,6 @@ export interface IBuilder {
   slot?: ISlot;
   type: ConstructionType;
   id?: string;
+    planetId?: string | number;
 
 }

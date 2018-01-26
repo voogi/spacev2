@@ -54,12 +54,13 @@ export class BuildingSlotsComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit(): void {}
+
     ngOnDestroy(): void {}
 
-    onSelectSlot(slot: ISlot) {
+    onSelectSlot(slot: ISlot): void {
         if(slot.isUnderConstruction) return;
         if (slot.isEmpty) {
-            this.builder.selectedSlot(slot);
+            this.builder.selectedSlot(slot, this.planet);
         } else {
             this.builder.selectedBuilding(slot);
         }

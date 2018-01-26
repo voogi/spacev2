@@ -4,8 +4,8 @@
             <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
                 <div class="row">
                   <div class="col">
-                    <div [ngStyle]="setPlanetStyle(planet)" class="planet-background" (click)="setActivePlanet(planet)"
-                         (dblclick)="onNavigateToPlanet(planet)"></div>
+                      <div [ngStyle]="setPlanetStyle(planet)" class="planet-background"
+                           (click)="setActivePlanet(planet)"></div>
                   </div>
                   <div class="col">
                     <div class="row">
@@ -25,6 +25,8 @@
 </div>
 <div class="row">
     <div class="col p-0">
-        <space-planet-details [ssId]="systemId" [planet]="activePlanet"></space-planet-details>
+        <space-planet-details *ngIf="activePlanet" [ssId]="systemId" [planet]="activePlanet"></space-planet-details>
     </div>
 </div>
+<space-builder></space-builder>
+<space-common-builder (refreshSlot)="onRefresh($event)"></space-common-builder>
