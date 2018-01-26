@@ -19,10 +19,10 @@
             </div>
             <div class="row mt-2 mb-2">
                 <div class="col">
-                    <space-res-icon [text]="'C'" [value]="item.upgradeCrewCost"></space-res-icon>
+                    <space-res-icon [text]="'T'" [value]="item.upgradeTitaniumCost"></space-res-icon>
                     <space-res-icon [text]="'E'" [value]="item.upgradeEnergyCost"></space-res-icon>
-                    <space-res-icon [text]="'N'" [value]="item.upgradeTitaniumCost"></space-res-icon>
-                    <space-res-icon [text]="'T'" [value]="item.upgradeTime | bTime"></space-res-icon>
+                    <space-res-icon [text]="'C'" [value]="item.upgradeCrewCost"></space-res-icon>
+                    <space-res-icon [text]="'X'" [value]="item.upgradeTime | bTime"></space-res-icon>
                 </div>
                 <div class="col">
                     <space-button (click)="onUpgrade()" [name]="'Upgrade'"></space-button>

@@ -1,3 +1,4 @@
 <span title="{{tit}}" [class.pr-4]="addClass" class="res-wrapper">
-  <span class="res-icon">{{text}}</span><span class="res-value">{{value}}</span>
+  <span [class.clock]="text == 'X'" class="res-icon">{{text == 'X' ? "" : text}}</span><span
+        class="res-value">{{value}}</span>
 </span>
