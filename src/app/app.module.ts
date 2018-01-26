@@ -41,6 +41,8 @@ import {CardItemComponent} from './components/card-item/card-item.component';
 import {FilterByBasePipe} from './pipes/filter-by-base.pipe';
 import {NgProgressModule} from "ng2-progressbar";
 import {SpaceInterceptor} from "./services/space-interceptor";
+import { AssetsService } from "./services/assets.service";
+import { SystemAsset } from "./shared/assets/system-asset";
 
 @NgModule({
     declarations: [
@@ -81,7 +83,7 @@ import {SpaceInterceptor} from "./services/space-interceptor";
         AppRoutingModule,
         NgProgressModule
     ],
-    providers: [BackendService, ResourceLoaderService, BuilderService, ProgressService, WebSocketService, ResourceService, {
+    providers: [BackendService, ResourceLoaderService, BuilderService, ProgressService, WebSocketService, ResourceService, AssetsService, {
         provide: HTTP_INTERCEPTORS,
         useClass: SpaceInterceptor,
         multi: true

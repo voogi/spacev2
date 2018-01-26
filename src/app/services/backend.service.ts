@@ -86,6 +86,12 @@ export class BackendService {
       .map( (data:any) => data.payload);
   }
 
+  getSolarSystem(): Observable<Array<ISystem>> {
+    this.log.info('GET::/api/solarsystem');
+    return this.http.get<Array<ISystem>>(this.bURL + '/api/solarsystem')
+      .map( (data:any) => data.payload);
+  }
+
   getPlanetBySystemId(systemId: string): Observable<any> {
     this.log.info('GET::/api/solarsystem/' + systemId + '/planet');
     return this.http.get<any>(this.bURL + '/api/solarsystem/' + systemId + '/planet')
