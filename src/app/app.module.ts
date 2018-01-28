@@ -43,6 +43,7 @@ import {NgProgressModule} from "ng2-progressbar";
 import {SpaceInterceptor} from "./services/space-interceptor";
 import { AssetsService } from "./services/assets.service";
 import { SystemAsset } from "./shared/assets/system-asset";
+import {StarDateComponent} from "./components/stardate/stardate.component";
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import { SystemAsset } from "./shared/assets/system-asset";
         EnoughMatPipe,
         ResIconComponent,
         CardItemComponent,
-        FilterByBasePipe
+        FilterByBasePipe,
+        StarDateComponent
     ],
     imports: [
         BrowserModule,

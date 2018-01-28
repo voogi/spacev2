@@ -17,12 +17,24 @@ export class HeaderComponent implements OnInit {
         route: '/starmap'
       },
       {
+        name: "system",
+        route: "/system"
+      },
+      {
         name: 'leaderboard',
         route: '/leaderboard'
       },
       {
         name: 'market',
         route: '/market'
+      },
+      {
+        name: "clan",
+        route: "/clan"
+      },
+      {
+        name: "profile",
+        route: "/profile"
       }
     ];
   }
