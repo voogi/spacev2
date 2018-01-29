@@ -44,6 +44,7 @@ import {SpaceInterceptor} from "./services/space-interceptor";
 import { AssetsService } from "./services/assets.service";
 import { SystemAsset } from "./shared/assets/system-asset";
 import {StarDateComponent} from "./components/stardate/stardate.component";
+import { PlanetListComponent } from './components/planet-list/planet-list.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +76,8 @@ import {StarDateComponent} from "./components/stardate/stardate.component";
         ResIconComponent,
         CardItemComponent,
         FilterByBasePipe,
-        StarDateComponent
+        StarDateComponent,
+        PlanetListComponent
     ],
     imports: [
         BrowserModule,

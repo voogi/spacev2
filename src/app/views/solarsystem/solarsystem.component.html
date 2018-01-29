@@ -1,32 +1,44 @@
+<!--<div class="row">-->
+    <!--<div class="col solar-system-background">-->
+        <!--<div class="row">-->
+            <!--<div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">-->
+                <!--<div class="row">-->
+                  <!--<div class="col">-->
+                      <!--<div [ngStyle]="setPlanetStyle(planet)" class="planet-background"-->
+                           <!--(click)="setActivePlanet(planet)"></div>-->
+                  <!--</div>-->
+                  <!--<div class="col">-->
+                    <!--<div class="row">-->
+                      <!--<div class="planet-name col">Name: {{planet.name}}</div>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                      <!--<div class="col planet-type">Type: {{planet.planetType}}</div>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                      <!--<div class="col planet-type">Slots: {{planet.slots}}</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+    <!--<div class="col p-0">-->
+      <!---->
+    <!--</div>-->
+<!--</div>-->
+
 <div class="row">
-    <div class="col solar-system-background">
-        <div class="row">
-            <div class="planet col" *ngFor="let planet of planets;" [class.active]="planet == activePlanet">
-                <div class="row">
-                  <div class="col">
-                      <div [ngStyle]="setPlanetStyle(planet)" class="planet-background"
-                           (click)="setActivePlanet(planet)"></div>
-                  </div>
-                  <div class="col">
-                    <div class="row">
-                      <div class="planet-name col">Name: {{planet.name}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col planet-type">Type: {{planet.planetType}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col planet-type">Slots: {{planet.slots}}</div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="col-4">
+    <space-planet-list [planets]="planets"></space-planet-list>
+  </div>
+  <div class="col-8">
+    <space-planet-details *ngIf="activePlanet" [ssId]="systemId" [planet]="activePlanet"></space-planet-details>
+  </div>
 </div>
-<div class="row">
-    <div class="col p-0">
-        <space-planet-details *ngIf="activePlanet" [ssId]="systemId" [planet]="activePlanet"></space-planet-details>
-    </div>
-</div>
+
+
+
 <space-builder></space-builder>
-<space-common-builder (refreshSlot)="onRefresh($event)"></space-common-builder>
+<space-common-builder (refreshSlot)="onRefresh()"></space-common-builder>

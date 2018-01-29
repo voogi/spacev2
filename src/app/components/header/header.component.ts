@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
-  private menuItems: Array<{ name: string , route: string}>;
+  public menuItems: Array<{ name: string , route: string}>;
 
   constructor( private router: Router) {
     this.menuItems = [

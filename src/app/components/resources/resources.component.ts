@@ -12,10 +12,10 @@ export class ResourcesComponent implements OnInit, OnDestroy {
 
     private updateSub: Subscription = new Subscription();
     public resources: Array<IResource> = [];
-    public titanium: number;
-    public energy: number;
-    public crew: number;
-    public plastic: number;
+    public titanium: IResource;
+    public energy: IResource;
+    public crew: IResource;
+    public plastic: IResource;
 
     constructor(private resourceService: ResourceService) {}
 

@@ -19,7 +19,7 @@ export interface TableOptions {
 })
 export class TableComponent implements OnInit {
 
-  private _options: TableOptions;
+  public _options: TableOptions;
   private propMap: any = {};
 
   @Input() set options(value: any){

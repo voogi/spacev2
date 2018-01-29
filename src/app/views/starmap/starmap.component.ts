@@ -39,8 +39,8 @@ export class StarmapComponent implements OnInit {
     return '@fadeInAnimation';
   }
 
-  private systemDetailComponentVisible: boolean = false;
-  private systemDetailPosition: { left: number, top: number } = {left: 0, top: 0};
+  public systemDetailComponentVisible: boolean = false;
+  public systemDetailPosition: { left: number, top: number } = {left: 0, top: 0};
   public selectedSystem: ISystem;
 
   private renderer: any;

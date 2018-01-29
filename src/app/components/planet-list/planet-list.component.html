@@ -1,0 +1,22 @@
+<div class="row" *ngFor="let planet of planets;">
+  <div class="col-4">
+    image
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        {{planet.name}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{planet.planetType}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{planet.slots}}
+      </div>
+    </div>
+  </div>
+</div>

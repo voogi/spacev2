@@ -1,20 +1,15 @@
-<div class="row details-container">
+<div class="row details-container mb-1 mt-1">
   <div class="col">
     <div class="row details-body">
+        <div *ngIf="planet" class="col">
+          Buildings
+          <space-building-slots [planet]="planet"></space-building-slots>
+      </div>
+    </div>
+    <div class="row">
       <div class="col">
-        <space-tabs>
-          <space-tab [name]="'Buildings'">
-            <div *ngIf="planet" class="col-lg-6">
-              <space-building-slots [planet]="planet"></space-building-slots>
-            </div>
-          </space-tab>
-          <space-tab [name]="'Unit'">
-            <div *ngFor="let s of ships;" class="row">{{s.name}}</div>
-          </space-tab>
-          <space-tab [name]="'Constructions'">
-            <space-progress-queue [constructions]="planet.constructions"></space-progress-queue>
-          </space-tab>
-        </space-tabs>
+        Progress stack
+        <space-progress-queue [constructions]="planet.constructions"></space-progress-queue>
       </div>
     </div>
   </div>
