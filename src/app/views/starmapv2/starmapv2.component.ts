@@ -69,8 +69,11 @@ export class StarmapComponentV2 implements OnInit {
       p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
 
-        self.context.size.width = p.windowWidth;
-        self.context.size.height = p.windowHeight;
+        p.imageMode(p.CENTER);
+        p.angleMode(p.DEGREES);
+
+        self.context.size.x = p.windowWidth;
+        self.context.size.y = p.windowHeight;
 
         self.assetsService.setP5(p);
 
@@ -92,27 +95,39 @@ export class StarmapComponentV2 implements OnInit {
       p.draw = function() {
         p.clear();
 
-        self.context.coordinates.x += self.context.velocity.x;
-        self.context.coordinates.y += self.context.velocity.y;
+        self.context.position.x += self.context.velocity.x;
+        self.context.position.y += self.context.velocity.y;
 
         p.push();
         p.scale(self.context.scale);
-        p.translate(self.context.coordinates.x, self.context.coordinates.y);
+        p.translate(self.context.position.x, self.context.position.y);
 
         // Draw systems
         let drawn = 0;
         for(let i = 0; i < self.systemAssets.length; i++) {
+          if (i == self.systemAssets.length - 2) {
+            self.systemAssets[i].debugDraw(self.context, p);
+          }
           if(self.systemAssets[i].draw(self.context, p)) {
             drawn++;
           }
+          // p.push();
+          // p.resetMatrix();
+          // if(i == 0) {
+          //   p.fill(p.color(255));
+          //   p.text(self.systemAssets[i].getMousePositionInContext(self.context, p), 50, 140);
+          // }
+          // p.pop();
         }
 
         p.pop();
+
         p.fill(p.color(255));
         p.textSize(20);
-        p.text(JSON.stringify(self.context) + " | " + Math.round(p.frameRate()) + "fps", 50, 50);
-        p.text("Drawn stars: " + drawn, 50, 80);
+        p.text(JSON.stringify(self.context), 50, 50);
+        p.text("Drawn stars: " + drawn + " | " + Math.round(p.frameRate()) + "fps", 50, 80);
         p.text("isDragging: " + self.isDragging, 50, 110);
+
       };
 
       p.mouseClicked = function() {
@@ -140,8 +155,8 @@ export class StarmapComponentV2 implements OnInit {
       // };
       kanvas.onmousedown = function() {
         self.isDragging = true;
-        self.dragStartX = self.context.coordinates.x;
-        self.dragStartY = self.context.coordinates.y;
+        self.dragStartX = self.context.position.x;
+        self.dragStartY = self.context.position.y;
         self.dragDeltaX = p.mouseX;
         self.dragDeltaY = p.mouseY;
       };
@@ -157,8 +172,8 @@ export class StarmapComponentV2 implements OnInit {
       // };
       kanvas.onmousemove = function() {
         if(self.isDragging) {
-          self.context.coordinates.x = (self.dragStartX + (p.mouseX - self.dragDeltaX) * (1 / self.context.scale));
-          self.context.coordinates.y = (self.dragStartY + (p.mouseY - self.dragDeltaY) * (1 / self.context.scale));
+          self.context.position.x = Math.round((self.dragStartX + (p.mouseX - self.dragDeltaX) * (1 / self.context.scale)));
+          self.context.position.y = Math.round((self.dragStartY + (p.mouseY - self.dragDeltaY) * (1 / self.context.scale)));
 
           // TODO velocity
           // self.lastDeltaX = (p.mouseX - self.dragDeltaX);
@@ -180,11 +195,11 @@ export class StarmapComponentV2 implements OnInit {
       p.mouseWheel = function () {
         let event = arguments[0] as MouseWheelEvent;
 
-        if (event.deltaY < 0) {
-          self.context.scale -= 0.1;
+        if (event.wheelDeltaY < 0) {
+          self.context.scale -= 0.01;
         }
         else {
-          self.context.scale += 0.1;
+          self.context.scale += 0.01;
         }
       };
 
@@ -196,12 +211,13 @@ export class StarmapComponentV2 implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.p.resizeCanvas(event.target.innerWidth, event.target.innerHeight, false);
-    this.context.size.width = event.target.innerWidth;
-    this.context.size.height = event.target.innerHeight;
+    this.context.size.x = event.target.innerWidth;
+    this.context.size.y = event.target.innerHeight;
   }
 
   onNavigateToTestSystem() {
     this.router.navigate(['/system/194067']);
   }
 
+  // TEST
 }

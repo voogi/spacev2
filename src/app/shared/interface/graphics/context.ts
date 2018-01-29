@@ -1,12 +1,16 @@
 export class Context {
 
-  coordinates: { x: number, y: number } = {x: -5500, y: -5500};
-  size: {width: number, height: number} = {width: 0, height: 0};
-  scale: number = 1.0;
-  velocity: {x: number, y: number} = {x: 0, y: 0};
+  position: p5.Vector;
+  velocity: p5.Vector;
+  size: p5.Vector;
+  scale: number;
 
   constructor() {
-
+    this.position = new p5.Vector(-5500, -5500);
+    this.size = new p5.Vector(0, 0);
+    this.velocity = new p5.Vector(0, 0);
+    this.scale = 1.0;
   }
 
 }
+

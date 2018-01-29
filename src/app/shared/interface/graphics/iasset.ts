@@ -2,67 +2,91 @@ import { IDrawable } from "./idrawable";
 import { Context } from "./context";
 
 export abstract class IAsset implements IDrawable {
-  position: {x: number, y: number} = {x: 0, y: 0};
-  size: {width: number, height: number} = {width: 0, height: 0};
+  position: p5.Vector = new p5.Vector(0, 0);
+  size: p5.Vector = new p5.Vector(0, 0);
 
   isSelected: boolean = false;
 
-  drawDefault(p: p5): void {
+  drawDefault(context: Context, p: p5): void {
 
   }
 
-  drawHovered(p: p5): void {
-    this.drawDefault(p);
+  drawHovered(context: Context, p: p5): void {
+    this.drawDefault(context, p);
   }
 
-  drawSelected(p: p5): void {
-    this.drawDefault(p);
+  drawSelected(context: Context, p: p5): void {
+    this.drawDefault(context, p);
+  }
+
+  debugDraw(context, p: p5) {
+
   }
 
   draw(context: Context, p: p5): boolean {
     let r1 = {
-      left: this.position.x * context.scale + context.coordinates.x * context.scale,
-      right: this.position.x * context.scale + context.coordinates.x * context.scale + this.size.width * context.scale,
-      top: this.position.y * context.scale + context.coordinates.y * context.scale,
-      bottom: this.position.y * context.scale + context.coordinates.y * context.scale + this.size.height * context.scale
+      left: this.position.x,
+      right: this.position.x + this.size.x * (1 / context.scale),
+      top: this.position.y,
+      bottom: this.position.y + this.size.y * (1 / context.scale)
     };
 
     let r2 = {
-      left: 0,
-      right: context.size.width,
-      top: 0,
-      bottom: context.size.height
+      left: -context.position.x,
+      right: -context.position.x + context.size.x * (1 / context.scale),
+      top: -context.position.y,
+      bottom: -context.position.y + context.size.y * (1 / context.scale)
     };
 
     // Test
 
     if(this.boxIntersects(r1, r2)) {
+      p.push();
+      p.translate(this.position.x, this.position.y);
       if (this.isSelected) {
-        this.drawSelected(p);
+        this.drawSelected(context, p);
       }
       else {
         if (this.mouseIntersects(context, p)) {
-          this.drawHovered(p);
+          this.drawHovered(context, p);
         }
         else {
-          this.drawDefault(p);
+          this.drawDefault(context, p);
         }
       }
+      p.pop();
       return true;
     }
     return false;
   }
 
-  mouseIntersects(context: Context, p: p5): boolean {
-    return this.pointItersects(context, p.mouseX, p.mouseY);
+  getMousePositionInContext(context: Context, p: p5): p5.Vector {
+    return this.getPointInContext(context, new p5.Vector(p.mouseX, p.mouseY));
   }
 
-  private pointItersects(context: Context, mX: number, mY: number):boolean {
-    let x = this.position.x * context.scale + context.coordinates.x * context.scale;
-    let y = this.position.y * context.scale + context.coordinates.y * context.scale;
+  getPointInContext(context: Context, point: p5.Vector): p5.Vector {
+    let x = Math.round((-context.position.x) + point.x * (1 / context.scale));
+    let y = Math.round((-context.position.y) + point.y * (1 / context.scale));
+    return new p5.Vector(x, y);
+  }
 
-    if(x < mX && x + this.size.width * context.scale > mX &&
-      y < mY && y + this.size.height * context.scale > mY) {
+  mouseIntersects(context: Context, p: p5): boolean {
+    return this.pointItersects(context, this.getMousePositionInContext(context, p), false);
+  }
+
+  mouseIntersectsScaled(context: Context, p: p5): boolean {
+    return this.pointItersects(context, this.getMousePositionInContext(context, p), true);
+  }
+
+  private pointItersects(context: Context, point: p5.Vector, scaled: boolean):boolean {
+    let scale = scaled ? context.scale : (1 / context.scale);
+    let x1 = this.position.x - ((this.size.x / 2) * scale);
+    let y1 = this.position.y - ((this.size.y / 2) * scale);
+    let x2 = this.position.x + ((this.size.x / 2) * scale);
+    let y2 = this.position.y + ((this.size.y / 2) * scale);
+
+    if(x1 < point.x && point.x < x2 &&
+       y1 < point.y && point.y < y2) {
       return true;
     }
     return false;

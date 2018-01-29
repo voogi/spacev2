@@ -1,7 +1,8 @@
+import {Context} from "./context";
 export interface IDrawable {
 
-  drawDefault(p: p5)
-  drawHovered(p: p5)
-  drawSelected(p: p5)
+  drawDefault(context: Context, p: p5)
+  drawHovered(context: Context, p: p5)
+  drawSelected(context: Context, p: p5)
 
 }
