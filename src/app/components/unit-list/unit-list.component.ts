@@ -13,6 +13,8 @@ export class UnitListComponent implements OnInit, OnDestroy {
     @Input()
     public systemId: string;
 
+    public ships: Array<IShip> = [];
+
     private unit$ub: Subscription = new Subscription();
 
     constructor(private backendService: BackendService) {
@@ -20,7 +22,7 @@ export class UnitListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.unit$ub = this.backendService.getSystemShips(this.systemId).subscribe((ships: Array<IShip>) => {
-            console.log(ships);
+            this.ships = ships;
         });
     }
 

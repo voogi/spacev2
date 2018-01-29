@@ -1,3 +1,12 @@
 div.details-container {
     background-color: #265789;
 }
+
+div.panel-header {
+    font-size: 20px;
+    background-color: #1f4871;
+}
+
+div.panel-content {
+    background-color: #3b6897;
+}
