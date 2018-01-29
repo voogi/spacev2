@@ -45,6 +45,7 @@ import { AssetsService } from "./services/assets.service";
 import { SystemAsset } from "./shared/assets/system-asset";
 import {StarDateComponent} from "./components/stardate/stardate.component";
 import { PlanetListComponent } from './components/planet-list/planet-list.component';
+import {UnitListComponent} from './components/unit-list/unit-list.component';
 
 @NgModule({
     declarations: [
@@ -77,7 +78,8 @@ import { PlanetListComponent } from './components/planet-list/planet-list.compon
         CardItemComponent,
         FilterByBasePipe,
         StarDateComponent,
-        PlanetListComponent
+        PlanetListComponent,
+        UnitListComponent
     ],
     imports: [
         BrowserModule,

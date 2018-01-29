@@ -1,31 +1,25 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IPlanet} from '../../shared/interface/iplanet';
-import {IShip} from "../../shared/interface/iship";
 
 @Component({
-  selector: 'space-planet-details',
-  templateUrl: './planet-details.component.html',
-  styleUrls: ['./planet-details.component.css']
+    selector: 'space-planet-details',
+    templateUrl: './planet-details.component.html',
+    styleUrls: ['./planet-details.component.css']
 })
 export class PlanetDetailsComponent implements OnInit, OnDestroy {
 
-  @Input()
-  public planet: IPlanet;
+    @Input()
+    public planet: IPlanet;
 
-  @Input()
-  public ssId: string;
-
-  public ships: Array<IShip> = [];
+    @Input()
+    public ssId: string;
 
     constructor() {
-  }
+    }
 
-  ngOnInit() {
-      // this.backendService.getSystemShips(this.ssId).subscribe( (data:Array<IShip>) => {
-      //   this.ships = data.map( x => x.shipType );
-      // });
-  }
+    ngOnInit() {
+    }
 
-  ngOnDestroy(): void {
-  }
+    ngOnDestroy(): void {
+    }
 }

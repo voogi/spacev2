@@ -1,0 +1,8 @@
+<div class="row ship-container no-gutters">
+    <div class="col">
+        <div *ngFor="let ship of ships;" class="row no-gutters">
+            <div class="col-2">Name</div>
+            <div class="col-10">{{ship.shipType.name}}</div>
+        </div>
+    </div>
+</div>

@@ -1,36 +1,12 @@
-.labels {
-  position: relative;
-  width: 282px;
-  height: 20px;
-}
-
-.labels .right {
-  position: absolute;
-  right: -15px;
-  top: 0;
-}
-
-.labels .left {
-  position: absolute;
-  left: 15px;
-  top: 0;
-}
 
 .progress-bar-comp {
-  -webkit-transition: width 1.3s ease-out;
   transition: width 1.3s ease-out;
-  background-image: url("../../../assets/imgs/SliderFiller.png");
-  background-size: 278px 11px;
-  background-position-x: 4px;
-  background-repeat: no-repeat;
   width: 282px;
   height: 11px;
+  background-color: #71bfe6;
 }
 
 .progress-comp {
-  background-image: url("../../../assets/imgs/SliderBack.png");
-  background-size: 282px 11px;
-  background-repeat: no-repeat;
-  width: 282px;
   height: 11px;
+  background-color: #3b6897;
 }

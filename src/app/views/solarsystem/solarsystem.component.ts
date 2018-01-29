@@ -38,31 +38,23 @@ export class SolarSystemComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
         this.route.params.subscribe((params: Params) => {
             this.systemId = params['id'];
             this.onRefresh();
         });
-
-        // when any queue completed data is a IBuilder obj
         this.progressServiceSubscription = this.progressService.onComplete().subscribe((construction: IConstruction) => {
             this.onRefresh();
         });
-
         this.refreshSubscription = this.builder.refresh().subscribe((data: any) => this.onRefresh());
-
     }
 
     onRefresh() {
         this.planetInfoSubscription = this.backendService.getPlanetBySystemId(this.systemId).subscribe(data => {
             data.forEach(d => {
                 d.img = '/assets/imgs/planet_2.png';
-                d.name = 'unknown';
-                d.size = 120;
             });
             this.planets = data;
             this.activePlanet = data[0];
-            // this.addConstructions(this.activePlanet.constructions);
         });
     }
 
