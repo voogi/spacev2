@@ -1,4 +1,5 @@
-<div class="row" *ngFor="let planet of planets;">
+<div class="row planet-container mb-2" *ngFor="let planet of _planets;" (click)="onSelectPlanet(planet)"
+     [class.active]="activePlanet == planet">
   <div class="col-4">
     image
   </div>
@@ -18,5 +19,10 @@
         {{planet.slots}}
       </div>
     </div>
+      <div class="row">
+          <div class="col">
+              {{planet.isColonized}}
+          </div>
+      </div>
   </div>
 </div>

@@ -1,15 +1,19 @@
-<div class="row details-container mb-1 mt-1">
+<div class="row details-container">
   <div class="col">
-    <div class="row details-body">
-        <div *ngIf="planet" class="col">
-          Buildings
-          <space-building-slots [planet]="planet"></space-building-slots>
-      </div>
-    </div>
     <div class="row">
-      <div class="col">
+      <div class="col-6">
+        Units
+        <space-unit-list [systemId]="ssId"></space-unit-list>
+      </div>
+      <div class="col-6">
         Progress stack
         <space-progress-queue [constructions]="planet.constructions"></space-progress-queue>
+      </div>
+    </div>
+    <div class="row mt-2 mb-2">
+      <div *ngIf="planet" class="col">
+        Buildings
+        <space-building-slots [planet]="planet"></space-building-slots>
       </div>
     </div>
   </div>

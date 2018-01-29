@@ -1,0 +1,7 @@
+div.planet-container {
+    background-color: #3b6897;
+}
+
+div.planet-container.active {
+    outline: 2px solid #71bfe6;
+}

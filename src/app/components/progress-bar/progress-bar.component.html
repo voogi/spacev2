@@ -1,15 +1,13 @@
 <div class="row">
-  <div class="labels">
-    <div class="left">
-      {{type}}
-    </div>
-    <div class="right">
-      {{currentWidth}}%
-    </div>
+  <div class="col text-left">
+    {{type}}
+  </div>
+  <div class="col text-right">
+    {{currentWidth}}%
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-10 d-flex align-items-center">
+  <div class="col">
     <div class="progress-comp">
       <div class="progress-bar-comp" role="progressbar" [style.width]="currentWidth + '%'"></div>
     </div>
