@@ -9,6 +9,7 @@ import {Log, Level} from 'ng2-logger';
 import { AssetsService } from "../../services/assets.service";
 import { IAsset } from "../../shared/interface/graphics/iasset";
 import { Context } from "../../shared/interface/graphics/context";
+import { MinimapUIElement } from "../../shared/uielements/minimap-uielement";
 
 declare var p: p5;
 
@@ -37,6 +38,7 @@ export class StarmapComponentV2 implements OnInit {
   private p: p5;
 
   private systemAssets: Array<IAsset> = [];
+  private minimapUIElement: MinimapUIElement;
 
   private isDragging: boolean = false;
   private dragStartX: number = 0;
@@ -45,6 +47,8 @@ export class StarmapComponentV2 implements OnInit {
   private dragDeltaY: number = 0;
   private lastDeltaX: number = 0;
   private lastDeltaY: number = 0;
+
+  private headerHeight: number = 50;
 
   constructor(private elementRef: ElementRef,
               private router: Router,
@@ -59,6 +63,8 @@ export class StarmapComponentV2 implements OnInit {
     // this.resourceLoader.loadResources(this.initStarMap.bind(this));
 
     this.initStarMap();
+
+    this.minimapUIElement = new MinimapUIElement();
   }
 
   initStarMap() {
@@ -73,9 +79,11 @@ export class StarmapComponentV2 implements OnInit {
         p.angleMode(p.DEGREES);
 
         self.context.size.x = p.windowWidth;
-        self.context.size.y = p.windowHeight;
+        self.context.size.y = p.windowHeight - self.headerHeight;
+        self.minimapUIElement.position.y = self.context.size.y - self.minimapUIElement.size.y;
 
         self.assetsService.setP5(p);
+        self.minimapUIElement.setP5(p);
 
         // self.backendService.getDiscoveredSystemByUser('3f22ac02-243a-46d3-a0ff-cb6284f1f97e')
         //   .subscribe((systems: Array<ISystem>) => {
@@ -89,6 +97,7 @@ export class StarmapComponentV2 implements OnInit {
             for(let i = 0; i < systems.length; i++) {
               self.systemAssets.push(self.assetsService.system(systems[i]));
             }
+            self.minimapUIElement.setSystems(systems);
           });
       };
 
@@ -98,6 +107,8 @@ export class StarmapComponentV2 implements OnInit {
         self.context.position.x += self.context.velocity.x;
         self.context.position.y += self.context.velocity.y;
 
+        self.zoomToPoint();
+
         p.push();
         p.scale(self.context.scale);
         p.translate(self.context.position.x, self.context.position.y);
@@ -105,9 +116,6 @@ export class StarmapComponentV2 implements OnInit {
         // Draw systems
         let drawn = 0;
         for(let i = 0; i < self.systemAssets.length; i++) {
-          if (i == self.systemAssets.length - 2) {
-            self.systemAssets[i].debugDraw(self.context, p);
-          }
           if(self.systemAssets[i].draw(self.context, p)) {
             drawn++;
           }
@@ -119,8 +127,11 @@ export class StarmapComponentV2 implements OnInit {
           // }
           // p.pop();
         }
-
         p.pop();
+
+        if(self.minimapUIElement != null) {
+          self.minimapUIElement.draw(p);
+        }
 
         p.fill(p.color(255));
         p.textSize(20);
@@ -131,12 +142,22 @@ export class StarmapComponentV2 implements OnInit {
       };
 
       p.mouseClicked = function() {
-        for(let i = 0; i < self.systemAssets.length; i++) {
-          if (self.systemAssets[i].mouseIntersects(self.context, p)) {
-            self.systemAssets[i].isSelected = true;
-          }
-          else {
-            self.systemAssets[i].isSelected = false;
+        if(self.minimapUIElement.isHovered) {
+          let position: p5.Vector = self.minimapUIElement.getContextCoordinates(p);
+
+          self.context.position.x = -(position.x - (self.context.size.x * (1 / self.context.scale) / 2));
+          self.context.position.y = -(position.y - (self.context.size.y * (1 / self.context.scale) / 2));
+
+          self.minimapUIElement.refreshContext(self.context);
+        }
+        else {
+          for(let i = 0; i < self.systemAssets.length; i++) {
+            if (self.systemAssets[i].isHovered) {
+              self.systemAssets[i].isSelected = true;
+            }
+            else {
+              self.systemAssets[i].isSelected = false;
+            }
           }
         }
       };
@@ -155,10 +176,15 @@ export class StarmapComponentV2 implements OnInit {
       // };
       kanvas.onmousedown = function() {
         self.isDragging = true;
-        self.dragStartX = self.context.position.x;
-        self.dragStartY = self.context.position.y;
-        self.dragDeltaX = p.mouseX;
-        self.dragDeltaY = p.mouseY;
+        if(self.minimapUIElement.isHovered) {
+
+        }
+        else {
+          self.dragStartX = self.context.position.x;
+          self.dragStartY = self.context.position.y;
+          self.dragDeltaX = p.mouseX;
+          self.dragDeltaY = p.mouseY;
+        }
       };
 
       // p.mouseMoved = function() {
@@ -172,12 +198,36 @@ export class StarmapComponentV2 implements OnInit {
       // };
       kanvas.onmousemove = function() {
         if(self.isDragging) {
-          self.context.position.x = Math.round((self.dragStartX + (p.mouseX - self.dragDeltaX) * (1 / self.context.scale)));
-          self.context.position.y = Math.round((self.dragStartY + (p.mouseY - self.dragDeltaY) * (1 / self.context.scale)));
+          if(self.minimapUIElement.isHovered) {
+            let position: p5.Vector = self.minimapUIElement.getContextCoordinates(p);
 
-          // TODO velocity
-          // self.lastDeltaX = (p.mouseX - self.dragDeltaX);
-          // self.lastDeltaY = (p.mouseY - self.dragDeltaY);
+            self.context.position.x = -(position.x - (self.context.size.x * (1 / self.context.scale) / 2));
+            self.context.position.y = -(position.y - (self.context.size.y * (1 / self.context.scale) / 2));
+
+            self.minimapUIElement.refreshContext(self.context);
+          }
+          else {
+            self.context.position.x = Math.round((self.dragStartX + (p.mouseX - self.dragDeltaX) * (1 / self.context.scale)));
+            self.context.position.y = Math.round((self.dragStartY + (p.mouseY - self.dragDeltaY) * (1 / self.context.scale)));
+
+            self.minimapUIElement.refreshContext(self.context);
+            // TODO velocity
+            // self.lastDeltaX = (p.mouseX - self.dragDeltaX);
+            // self.lastDeltaY = (p.mouseY - self.dragDeltaY);
+          }
+        }
+      };
+
+      kanvas.ondblclick = function() {
+        if(self.minimapUIElement.isHovered) {
+          // let position: p5.Vector = self.minimapUIElement.getContextCoordinates(p);
+          //
+          // self.context.targetScale = 3.0;
+          // self.context.targetPoint = position;
+        }
+        else {
+          self.context.targetScale = 3.0;
+          self.context.targetPoint = new p5.Vector(p.mouseX, p.mouseY);
         }
       };
 
@@ -196,11 +246,26 @@ export class StarmapComponentV2 implements OnInit {
         let event = arguments[0] as MouseWheelEvent;
 
         if (event.wheelDeltaY < 0) {
-          self.context.scale -= 0.01;
+          self.context.targetScale = self.context.scale - (self.context.scale * 0.1);
         }
         else {
-          self.context.scale += 0.01;
+          self.context.targetScale = self.context.scale + (self.context.scale * 0.1);
         }
+
+        self.context.targetPoint = new p5.Vector(p.mouseX, p.mouseY);
+      };
+
+      p.keyPressed = function() {
+        let event = arguments[0] as KeyboardEvent;
+
+        if(event.keyCode == 109) { // -
+          self.context.targetScale = self.context.scale - (self.context.scale * 0.1);
+        }
+        else if(event.keyCode == 107) { // +
+          self.context.targetScale = self.context.scale + (self.context.scale * 0.1);
+        }
+
+        self.context.targetPoint = new p5.Vector(p.mouseX, p.mouseY);
       };
 
     };
@@ -208,16 +273,53 @@ export class StarmapComponentV2 implements OnInit {
     this.p = new p5(s, this.elementRef.nativeElement.querySelector("#kanvas"));
   }
 
+  zoomToPoint() {
+    if(this.context.scale != this.context.targetScale) {
+      let oldSizeX = this.context.size.x * (1 / this.context.scale),
+        oldSizeY = this.context.size.y * (1 / this.context.scale);
+
+      if(this.context.targetScale > this.context.scale) {
+        this.context.scale += 0.1;
+      }
+      else if(this.context.targetScale < this.context.scale) {
+        this.context.scale -= 0.1;
+      }
+
+      if(Math.abs(this.context.scale - this.context.targetScale) < 0.1) {
+        this.context.scale = this.context.targetScale;
+      }
+
+      this.context.scale = Math.round(this.context.scale * 100) / 100;
+      this.context.scale = Math.min(5, Math.max(0.3, this.context.scale));
+
+      let newSizeX = this.context.size.x * (1 / this.context.scale),
+        newSizeY = this.context.size.y * (1 / this.context.scale);
+
+      let translateX = this.context.size.x * (1 / this.context.scale) * (1 - (oldSizeX / newSizeX)),
+        translateY = this.context.size.y * (1 / this.context.scale) * (1 - (oldSizeY / newSizeY));
+
+      let ratioX = this.context.targetPoint.x / this.context.size.x,
+        ratioY = this.context.targetPoint.y / this.context.size.y;
+
+      this.context.position.x += (translateX * ratioX);
+      this.context.position.y += (translateY * ratioY);
+
+      this.minimapUIElement.refreshContext(this.context);
+    }
+
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.p.resizeCanvas(event.target.innerWidth, event.target.innerHeight, false);
     this.context.size.x = event.target.innerWidth;
-    this.context.size.y = event.target.innerHeight;
+    this.context.size.y = event.target.innerHeight - this.headerHeight;
+    this.minimapUIElement.position.y = this.context.size.y - this.minimapUIElement.size.y;
+    this.minimapUIElement.refreshContext(this.context);
   }
 
   onNavigateToTestSystem() {
     this.router.navigate(['/system/194067']);
   }
 
-  // TEST
 }

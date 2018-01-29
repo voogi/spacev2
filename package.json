@@ -7,6 +7,7 @@
     "start": "ng serve",
     "starp": "ng serve -e=prod",
     "start-hosted": "ng serve -e=prod --host 0.0.0.0 --public-host http://torma.no-ip.org",
+    "start-hosted-local": "ng serve -e=prod --host 0.0.0.0",
     "build": "ng build",
     "lint": "ng lint"
   },

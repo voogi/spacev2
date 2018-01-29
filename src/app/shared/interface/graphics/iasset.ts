@@ -6,6 +6,7 @@ export abstract class IAsset implements IDrawable {
   size: p5.Vector = new p5.Vector(0, 0);
 
   isSelected: boolean = false;
+  isHovered: boolean = false;
 
   drawDefault(context: Context, p: p5): void {
 
@@ -17,10 +18,6 @@ export abstract class IAsset implements IDrawable {
 
   drawSelected(context: Context, p: p5): void {
     this.drawDefault(context, p);
-  }
-
-  debugDraw(context, p: p5) {
-
   }
 
   draw(context: Context, p: p5): boolean {
@@ -38,16 +35,15 @@ export abstract class IAsset implements IDrawable {
       bottom: -context.position.y + context.size.y * (1 / context.scale)
     };
 
-    // Test
-
     if(this.boxIntersects(r1, r2)) {
+      this.isHovered = this.mouseIntersects(context, p);
       p.push();
       p.translate(this.position.x, this.position.y);
       if (this.isSelected) {
         this.drawSelected(context, p);
       }
       else {
-        if (this.mouseIntersects(context, p)) {
+        if (this.isHovered) {
           this.drawHovered(context, p);
         }
         else {
