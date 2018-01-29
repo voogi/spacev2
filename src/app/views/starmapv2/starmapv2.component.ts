@@ -84,6 +84,7 @@ export class StarmapComponentV2 implements OnInit {
 
         self.assetsService.setP5(p);
         self.minimapUIElement.setP5(p);
+        self.minimapUIElement.refreshContext(self.context);
 
         // self.backendService.getDiscoveredSystemByUser('3f22ac02-243a-46d3-a0ff-cb6284f1f97e')
         //   .subscribe((systems: Array<ISystem>) => {
@@ -127,7 +128,13 @@ export class StarmapComponentV2 implements OnInit {
           // }
           // p.pop();
         }
+
+        for(let i = 0; i < self.systemAssets.length; i++) {
+          self.systemAssets[i].draw2ndPass(self.context, p);
+        }
         p.pop();
+
+
 
         if(self.minimapUIElement != null) {
           self.minimapUIElement.draw(p);

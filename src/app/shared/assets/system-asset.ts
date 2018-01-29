@@ -14,6 +14,8 @@ export class SystemAsset extends IAsset {
   private targetOpacity: number = 0.0;
   private opacity: number = 0.0;
 
+  private shouldBeExtended:boolean = false;
+
   constructor(system: ISystem, image: p5.Image) {
     super();
     this.image = image;
@@ -36,13 +38,23 @@ export class SystemAsset extends IAsset {
     p.rotate((p.frameCount / this.randomRotationSpeedDivider) % 360 + this.randomOffset);
     p.image(this.image, 0, 0);
     p.pop();
-
-    this.drawData(context, p,false);
   }
 
   drawHovered(context: Context, p: p5) {
     this.drawDefault(context, p);
+  }
 
+  drawSelected(context: Context, p: p5) {
+    this.drawDefault(context, p);
+  }
+
+  drawDefault2ndPass(context: Context, p: p5):void {
+    if(!this.isSelected) {
+      this.drawData(context, p,false);
+    }
+  }
+
+  drawHovered2ndPass(context: Context, p: p5):void {
     let div = Math.min(1, Math.max(0.25, context.scale));
     p.push();
     p.noFill();
@@ -52,12 +64,12 @@ export class SystemAsset extends IAsset {
     p.ellipse(0, 0, this.size.x * div, this.size.y * div);
     p.pop();
 
-    this.drawData(context,p,true);
+    if(!this.isSelected) {
+      this.drawData(context,p,true);
+    }
   }
 
-  drawSelected(context: Context, p: p5) {
-    this.drawDefault(context, p);
-
+  drawSelected2ndPass(context: Context, p: p5):void {
     let div = Math.min(1, Math.max(0.25, context.scale));
     p.push();
     p.noFill();
@@ -72,6 +84,7 @@ export class SystemAsset extends IAsset {
 
   private drawData(context: Context, p: p5, extended: boolean, forced: boolean = false) {
     if(forced == true || context.scale >= 3.0) {
+      this.shouldBeExtended = extended;
       this.targetOpacity = 255;
     }
     else {
@@ -89,6 +102,7 @@ export class SystemAsset extends IAsset {
 
         if(this.opacity <= 0) {
           this.opacity = 0;
+          this.shouldBeExtended = false;
         }
         else if(this.opacity >= 255) {
           this.opacity = 255;
@@ -102,10 +116,12 @@ export class SystemAsset extends IAsset {
       p.stroke(col);
       p.fill(col);
       p.scale(1 / context.scale);
-      if(extended) {
+      if(this.shouldBeExtended) {
+        p.text("Name: " + this.system.name, r + 10, -r + 15);
         p.text("Type: " + this.system.type, r + 10, -r + 40);
         p.text("Coordinates: " + this.system.positionX + ":" + this.system.positionY, r + 10, -r + 65);
-        p.line(r, -r + 20, r, -r + 65);
+        p.line(0, 0, r, -r);
+        p.line(r, -r, r, -r + 65);
       }
       else {
         p.text("Name: " + this.system.name, r + 10, -r + 15);

@@ -20,6 +20,18 @@ export abstract class IAsset implements IDrawable {
     this.drawDefault(context, p);
   }
 
+  drawDefault2ndPass(context: Context, p: p5): void {
+
+  }
+
+  drawHovered2ndPass(context: Context, p: p5): void {
+
+  }
+
+  drawSelected2ndPass(context: Context, p: p5): void {
+
+  }
+
   draw(context: Context, p: p5): boolean {
     let r1 = {
       left: this.position.x,
@@ -48,6 +60,42 @@ export abstract class IAsset implements IDrawable {
         }
         else {
           this.drawDefault(context, p);
+        }
+      }
+      p.pop();
+      return true;
+    }
+    return false;
+  }
+
+  draw2ndPass(context: Context, p: p5): boolean {
+    let r1 = {
+      left: this.position.x,
+      right: this.position.x + this.size.x * (1 / context.scale),
+      top: this.position.y,
+      bottom: this.position.y + this.size.y * (1 / context.scale)
+    };
+
+    let r2 = {
+      left: -context.position.x,
+      right: -context.position.x + context.size.x * (1 / context.scale),
+      top: -context.position.y,
+      bottom: -context.position.y + context.size.y * (1 / context.scale)
+    };
+
+    if(this.boxIntersects(r1, r2)) {
+      this.isHovered = this.mouseIntersects(context, p);
+      p.push();
+      p.translate(this.position.x, this.position.y);
+      if (this.isSelected) {
+        this.drawSelected2ndPass(context, p);
+      }
+      else {
+        if (this.isHovered) {
+          this.drawHovered2ndPass(context, p);
+        }
+        else {
+          this.drawDefault2ndPass(context, p);
         }
       }
       p.pop();
